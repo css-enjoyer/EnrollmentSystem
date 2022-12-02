@@ -31,7 +31,6 @@
     </div>
     <div class="mainsection">
         <h1>School Enrollment System</h1>
-
     </div>
 </body>
 </html>
