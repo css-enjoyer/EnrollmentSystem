@@ -13,8 +13,6 @@ $LNAME = $_REQUEST["LNAME"];
 
 $sql = "INSERT INTO schoolenrollment.Students VALUES (Null, '$FNAME', '$MI', '$LNAME', 2, 'CS', 'A', True, 'Regular')";
 
-// $sql = "INSERT INTO schoolenrollment.Students VALUES (1, 'Post', 'P', 'Malone', 2, 'CS', 'A', True, 'Regular')";
-
 if (mysqli_query($conn, $sql) ) 
 {
     echo "Data stored successfully";
