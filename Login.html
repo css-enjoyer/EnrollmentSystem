@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <form action="StudentEnrollment.php" method="POST">
-        <label>Username: <input type="text" /></label>
-        <label>Password: <input type="password"/></label>
-        <input type="submit">
-    </form>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+    </head>
+    <script>
+    function EvaluateForm() {
+        if(document.getElementById('userName').value == 'staff' && document.getElementById('passWord').value == 'staff') {
+            document.myForm.action = "StaffManagement.php";
+        }
+        else if(document.getElementById('userName').value == 'admin' && document.getElementById('passWord').value == 'admin') {
+            document.myForm.action = "DatabaseAdministration.php";
+        }
+        document.forms["myForm"].submit();
 
-    Click here to enroll instead:
-    <a href="StudentEnrollment.php" method="POST">Enroll Now</a>
-</body>
+        return false;
+    }
+    </script>
+    <body>
+        <form action="" method="POST" name="myForm">
+            <h2>Staff Login</h2>
+            <label>Username: <input type="text" id="userName" name="userName"/></label>
+            <label>Password: <input type="password" id="passWord" name="userName"/></label>
+            <input type="submit" onClick="return EvaluateForm();">
+        </form>
+
+        Click here to enroll instead:
+        <a href="StudentEnrollment.php" method="POST">Enroll Now</a>
+    </body>
 </html>
