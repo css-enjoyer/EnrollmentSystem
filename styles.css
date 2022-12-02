@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+html {
+    height: 100%;
+    width: 100vw;
+}
+body {
+    background-color: black;
+    background: url(images/ustbg-edit.jpg) no-repeat fixed center;
+    background-size: cover;
+    backdrop-filter: blur(3px);
+    overflow-x: hidden;
+    padding: 100px;
+    overflow: overlay;
+}
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: rgb(255, 238, 0);
+}
+fieldset {
+    padding: 20px;
+    margin-bottom: 50px;
+    background-color: rgba(0, 0, 0, .5);
+    border: 3px solid rgb(255, 238, 0);
+    display: flex;
+    flex-direction: column;
+}
+fieldset legend {
+    color: white;
+    font-weight: 500;
+    padding: 0 20px;
+}
+fieldset input, fieldset label{
+    outline: 0;
+    margin: 0 20px 5px 20px;
+    color: white;
+}
+fieldset select {
+    outline: 0;
+    margin: 0 20px 5px 20px;
+}
+fieldset label {
+    font-weight: 300;
+}
+fieldset input[type="text"], input[type="date"], select {
+    float: right;
+    width: 80%;
+}
+fieldset input, select, input[type="submit"] {
+    color: black;
+}
+form input[type="submit"] {
+    float: right;
+}
+
+/* Styling Table */
+table, td, th {
+    border: 1px solid;
+    border-collapse: collapse;
+    padding: 10px;
+    color: white;
+    margin: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+table tbody tr:hover {
+    font-weight: 500;
+    background-color: rgba(255, 238, 0, .1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+	width: 5px;
+	background-color: transparent;
+}
+::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background: rgb(200, 200, 200);
+}
