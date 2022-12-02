@@ -10,32 +10,28 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dashboard</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navsection">
+        <div class="logo-container"></div>
+        <ul>
+            <li>Notifications</li>
+            <li>Messages</li>
+            <li>Logout</li>
+        </ul>
+    </div>
+    <div class="mainsection">
+        <h1>Welcome Back User!</h1>
 
-        <div class="main">
-
-            <div class="navsection">
-                <div class="logo-container"></div>
-                <ul>
-                    <li>Notifications</li>
-                    <li>Messages</li>
-                    <li>Logout</li>
-                </ul>
-            </div>
-            
-            <div class="mainsection">
-                <h1>Welcome Back User!</h1>
-
-            </div>
-
-        </div>
-        
-    </body>
+    </div>
+</body>
 </html>
