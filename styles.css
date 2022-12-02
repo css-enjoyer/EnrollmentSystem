@@ -6,16 +6,37 @@
 }
 html {
     height: 100%;
-    width: 100vw;
+    width: 100%;
 }
 body {
     background-color: black;
-    background: url(images/ustbg-edit.jpg) no-repeat fixed center;
+    background: url(images/bgblurred.jpg) no-repeat fixed center;
     background-size: cover;
-    backdrop-filter: blur(3px);
     overflow-x: hidden;
-    padding: 100px;
     overflow: overlay;
+}
+.navsection {
+    position: fixed;
+    top: 0;
+    color: white;
+    background-color: rgb(26, 26, 26);
+    width: 100vw;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 100px;
+}
+.navsection ul {
+    display: flex;
+    gap: 20px;
+}
+.navsection li {
+    list-style-type: none;
+}
+.mainsection {
+    padding: 100px 150px;
+    width: 100vw;
 }
 h1 {
     font-size: 2.5rem;

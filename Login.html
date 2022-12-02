@@ -7,7 +7,7 @@
         <title>Login</title>
     </head>
     <script>
-    function EvaluateForm() {
+    function EvaluateForm() {   
         if(document.getElementById('userName').value == 'staff' && document.getElementById('passWord').value == 'staff') {
             document.myForm.action = "StaffManagement.php";
         }
@@ -15,7 +15,6 @@
             document.myForm.action = "DatabaseAdministration.php";
         }
         document.forms["myForm"].submit();
-
         return false;
     }
     </script>
