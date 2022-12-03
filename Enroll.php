@@ -7,19 +7,21 @@ $sql = "SELECT * FROM schoolenrollment.Courses";
 $result = $conn -> query($sql);
 
 // ID Automatically Generated in SQL 
-$FNAME = $_REQUEST["FNAME"];
-$MI = $_REQUEST["MI"];
-$LNAME = $_REQUEST["LNAME"];
+$STU_FNAME = $_REQUEST["FNAME"];
+$STU_MI = $_REQUEST["MI"];
+$STU_LNAME = $_REQUEST["LNAME"];
+$STU_GENDER = $_REQUEST['GENDER'];
+$STU_BDAY = $_REQUEST['BDAY'];
+$DEPT_ID = $_REQUEST['DEPTID'];
 
-$sql = "INSERT INTO schoolenrollment.Students VALUES (Null, '$FNAME', '$MI', '$LNAME', 2, 'CS', 'A', True, 'Regular')";
 
-if (mysqli_query($conn, $sql) ) 
-{
-    echo "Data stored successfully";
+if (mysqli_query($conn, $sql) ) {
+    echo "Data fetched successfully";
+    // $sql = "INSERT INTO schoolenrollment.Students VALUES (Null, '$FNAME', '$MI', '$LNAME', 2, 'CS', 'A', True, 'Regular')";
+    // echo "$STU_FNAME $STU_MI $STU_LNAME $STU_GENDER $STU_BDAY $DEPT_ID";
 } 
-else 
-{
-    echo "Data storage failed";
+else {
+    echo "Data fetch failed";
 }
 
 $conn -> close();

@@ -36,23 +36,22 @@
             <form action="Enroll.php" method="POST">
                 <fieldset>
                 <legend>Student Information</legend>
-                    <label>First Name: <input type="text" name="FNAME"></label>
-                    <label>Middle Initial: <input type="text" name="MI"></label>
-                    <label>Last Name: <input type="text" name="LNAME"></label>
-                    <label>Age: <input type="text"></label>
-                    <label>Date of Birth: <input type="date"></label>
-                    <label>Gender: <select>
+                    <label>First Name: <input type="text" name="FNAME" required></label>
+                    <label>Middle Initial: <input type="text" name="MI" required></label>
+                    <label>Last Name: <input type="text" name="LNAME" required></label>
+                    <label>Gender: <select name="GENDER" required>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select></label>
+                    <label>Date of Birth: <input type="date" name="BDAY" required></label>
                 </fieldset>
 
                 <fieldset>
                 <legend>Department Selection</legend>
-                    <label>Department of: <select>
-                        <option value="cs">Computer Science</option>
-                        <option value="it">Information Technology</option>
-                        <option value="is">Information Systems</option>
+                    <label>Department of: <select name="DEPTID">
+                        <option value="CS">Computer Science</option>
+                        <option value="IT">Information Technology</option>
+                        <option value="IS">Information Systems</option>
                     </select></label>
                 </fieldset>
 
