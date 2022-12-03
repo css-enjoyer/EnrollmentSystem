@@ -1,12 +1,14 @@
 <?php
-    $conn = new mysqli("localhost:3310", "root", "0413", "schoolenrollment");
+    $conn = new mysqli("localhost:3310", "root", "0413", "school");
     if($conn -> connect_error) {
         die ("Connect Error (".$conn->connect_Errorno.") ".$conn->connect_error);
     }
-    $sql = "SELECT * FROM schoolenrollment.Courses";
+    $sql = "SELECT * FROM school.student";
     $result = $conn -> query($sql);
+    
     $conn -> close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,7 +24,7 @@
     <body>
         <div class="navsection">
             <div class="logo-container">
-                <img href="images/ustseal.png">
+                <img src="images/ustseal.png" width="50px">
             </div>
             <ul>
                 <li>Notifications</li>
@@ -32,21 +34,21 @@
         </div>
         <div class="mainsection">
             <h1>Become a Thomasian!</h1>
-            <form action="" method="POST">
+            <form action="Signup.php" method="POST">
                 <fieldset>
                 <legend>Student Information</legend>
                     <label>First Name: <input type="text" name="FNAME"></label>
                     <label>Middle Initial: <input type="text" name="MI"></label>
                     <label>Last Name: <input type="text" name="LNAME"></label>
-                    <label>Gender: <select>
+                    <label>Gender: <select name="GENDER">
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select></label>
-                    <label>Date of Birth: <input type="date"></label>
-                    <label>Desired Department: <select>
-                        <option value="cs">Computer Science</option>
-                        <option value="it">Information Technology</option>
-                        <option value="is">Information Systems</option>
+                    <label>Date of Birth: <input type="date" name="BDAY"></label>
+                    <label>Desired Department: <select name="DEPTID">
+                        <option value="CS">Computer Science</option>
+                        <option value="IT">Information Technology</option>
+                        <option value="IS">Information Systems</option>
                     </select></label>
                 </fieldset>
                 <input type="submit" value="Proceed" />

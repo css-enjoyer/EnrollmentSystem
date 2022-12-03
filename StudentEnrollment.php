@@ -23,7 +23,7 @@
     <body>
         <div class="navsection">
             <div class="logo-container">
-                <img href="images/ustseal.png">
+                <img src="images/ustseal.png" width="50px">
             </div>
             <ul>
                 <li>Notifications</li>
