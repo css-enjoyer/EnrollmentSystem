@@ -21,24 +21,35 @@
         document.forms["myForm"].submit();
         return false;
     }
+    function openForm() {
+        document.getElementById("loginform").style.display = "flex";
+    }
+    function closeForm() {
+        document.getElementById("loginform").style.display = "none";
+    }
     </script>
     <body>
         <div class="navsection">
-            <div class="logo-container"></div>
+            <div class="logo-container">
+                <img src="images/ustseal.png" width="50px">
+            </div>
             <ul>
                 <li>Notifications</li>
                 <li>Messages</li>
-                <li>Login</li>
+                <li><button onclick="openForm()">Login</button></li>
             </ul>
         </div>
         <div class="mainsection">
-            <form action="" method="POST" name="myForm">
-                <h2>Staff Login</h2>
+            <form action="" method="POST" name="myForm" id="loginform">
+                <h2>Welcome</h2>
                 <label>Username: <input type="text" id="userName" name="userName"/></label>
                 <label>Password: <input type="password" id="passWord" name="userName"/></label>
-                <input type="submit" onClick="return EvaluateForm();">
+                <div class="formBtns">
+                    <button onClick="closeForm()">Cancel</button>
+                    <input type="submit" onClick="return EvaluateForm();">
+                </div>
             </form>
-            Click here to enroll instead:
+            <p>Start Enrollment:</p>
             <a href="StudentEnrollment.php" method="POST">Enroll Now</a>
         </div>
     </body>

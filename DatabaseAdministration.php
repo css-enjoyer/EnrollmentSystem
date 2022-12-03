@@ -22,11 +22,13 @@
 </head>
 <body>
     <div class="navsection">
-        <div class="logo-container"></div>
+        <div class="logo-container">
+            <img src="images/ustseal.png" width="50px">
+        </div>
         <ul>
             <li>Notifications</li>
             <li>Messages</li>
-            <li>Logout</li>
+            <li><a href="Login.html">Logout</a></li>
         </ul>
     </div>
     <div class="mainsection">
