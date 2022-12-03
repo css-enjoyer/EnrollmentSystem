@@ -107,7 +107,7 @@ fieldset label {
 }
 fieldset input[type="text"], input[type="date"], select {
     float: right;
-    width: 80%;
+    width: 75%;
 }
 fieldset input, select, input[type="submit"] {
     color: black;
