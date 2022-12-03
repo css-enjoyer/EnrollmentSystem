@@ -1,9 +1,9 @@
 <?php
-    $conn = new mysqli("localhost:3310", "root", "0413", "schoolenrollment");
+    $conn = new mysqli("localhost:3310", "root", "mysql", "school2");
     if($conn -> connect_error) {
         die ("Connect Error (".$conn->connect_Errorno.") ".$conn->connect_error);
     }
-    $sql = "SELECT * FROM schoolenrollment.Courses";
+    $sql = "SELECT * FROM school2.course";
     $result = $conn -> query($sql);
     $conn -> close();
 ?>
@@ -48,10 +48,10 @@
 
                 <fieldset>
                 <legend>Department Selection</legend>
-                    <label>Department of: <select name="DEPTID">
-                        <option value="CS">Computer Science</option>
-                        <option value="IT">Information Technology</option>
-                        <option value="IS">Information Systems</option>
+                    <label>Department of: <select name="DEPT_ID">
+                        <option value="1">Computer Science</option>
+                        <option value="2">Information Technology</option>
+                        <option value="3">Information Systems</option>
                     </select></label>
                 </fieldset>
 
@@ -60,21 +60,19 @@
                     <table>
                         <tr>
                             <th>+</th>
-                            <th>Course ID</th>
+                            <th>Course Name</th>
                             <th>Course Description</th>
-                            <th>Course Instructor</th>
-                            <th>Course Class</th>
+                            <th>Course Level</th>
                             <th>Course Units</th>
                         </tr>
                         <!-- Update this section to use new tables -->
                 <?php   while($row=$result->fetch_assoc()) {            ?>
                         <tr>
-                            <td><input name="Courses[]" type="checkbox" value="<?php $row["CRS_ID"]?>"></td>
-                            <td><?php echo $row["CRS_ID"];?></td>
+                            <td><input name="Courses[]" type="checkbox" value="<?php echo $row["CRS_ID"]?>"></td>
+                            <td><?php echo $row["CRS_NAME"];?></td>
                             <td><?php echo $row["CRS_DESC"];?></td>
-                            <td><?php echo $row["CRS_INSTR"];?></td>
-                            <td><?php echo $row["CRS_CLASS"];?></td>
-                            <td><?php echo $row["CRS_UNITS"];?></td>
+                            <td><?php echo $row["CRS_LEVEL"];?></td>
+                            <td><?php echo $row["CRS_UNIT"];?></td>
                         </tr>        
                 <?php   }                                               ?>
                         
