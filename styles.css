@@ -134,6 +134,14 @@ table tbody tr:hover {
     font-weight: 500;
     background-color: rgba(255, 238, 0, .1);
 }
+.loginbtn {
+    background-color: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: white;
+    cursor: pointer;
+}
 .btn {
     display: inline-block;
     background: rgb(255, 238, 0);
@@ -145,6 +153,23 @@ table tbody tr:hover {
 }
 .btn:hover {
     transform: translateX(10%);
+}
+.enroll-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+    font-size: 5rem;
+
+    box-shadow: inset 0 0 0 0 rgb(255, 238, 0);
+    color: rgb(255, 238, 0);  
+    margin: 0 -.25rem;
+    padding: 0 .25rem;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+.enroll-btn:hover {
+    box-shadow: inset 500px 0 0 0 rgb(255, 238, 0);
+    color: black;
 }
 
 /* Custom Scrollbar */
