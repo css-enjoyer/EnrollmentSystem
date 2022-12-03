@@ -28,7 +28,7 @@
         <ul>
             <li>Notifications</li>
             <li>Messages</li>
-            <li><a href="Login.html">Logout</a></li>
+            <li><a href="Landing.html">Logout</a></li>
         </ul>
     </div>
     <div class="mainsection">

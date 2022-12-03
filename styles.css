@@ -172,6 +172,18 @@ table tbody tr:hover {
     color: black;
 }
 
+
+/* Staff Management Elements */
+.dashboard-container {
+    height: 100%;
+}
+
+
+
+
+
+
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
 	width: 5px;
