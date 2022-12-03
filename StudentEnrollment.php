@@ -28,7 +28,7 @@
             <ul>
                 <li>Notifications</li>
                 <li>Messages</li>
-                <li>Logout</li>
+                <li><a href="Landing.html">Logout</a></li>
             </ul>
         </div>
         <div class="mainsection">
@@ -66,7 +66,7 @@
                             <th>Course Class</th>
                             <th>Course Units</th>
                         </tr>
-                        
+                        <!-- Update this section to use new tables -->
                 <?php   while($row=$result->fetch_assoc()) {            ?>
                         <tr>
                             <td><input name="Courses[]" type="checkbox" value="<?php $row["CRS_ID"]?>"></td>
@@ -80,7 +80,7 @@
                         
                     </table>
                 </fieldset>
-                <input type="submit" value="Proceed" />
+                <input type="submit" value="Proceed &#8594" class="btn">
             </form>
         </div>
     </body>
