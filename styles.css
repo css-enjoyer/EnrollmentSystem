@@ -27,6 +27,11 @@ body {
     justify-content: flex-end;
     padding: 0 100px;
 }
+.logo-container {
+    position: absolute;
+    left: 100px;
+    top: 5px;
+}
 .navsection ul {
     display: flex;
     gap: 20px;
@@ -34,9 +39,41 @@ body {
 .navsection li {
     list-style-type: none;
 }
+#loginform {
+    position: fixed;
+    width: 30vw;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 20vh;
+    
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    padding: 60px;
+    z-index: 1;
+    
+    background-color: rgba(125, 125, 125, .5);
+    backdrop-filter: blur( 5px );
+    border: 1px solid rgba(255, 255, 255, .3);
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, .5);
+}
+#loginform input[type="text"], #loginform input[type="password"] {
+    width: 100%;
+    padding-left: 10px;
+}
+#loginform .formBtns {
+    display: flex;
+    justify-content: space-between;
+}
+.formBtns input[type="submit"], .formBtns button {
+    width: 60px;
+    margin: 30px 0 20px 0;
+}
 .mainsection {
     padding: 100px 150px;
     width: 100vw;
+    color: white;
 }
 h1 {
     font-size: 2.5rem;
