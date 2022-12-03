@@ -1,9 +1,9 @@
 <?php
-$conn = new mysqli("localhost:3310", "root", "mysql", "school2");
+$conn = new mysqli("localhost:3310", "root", "0413", "school");
 if($conn -> connect_error) {
     die ("Connect Error (".$conn->connect_Errorno.") ".$conn->connect_error);
 }
-$sql = "SELECT * FROM school2.course";
+$sql = "SELECT * FROM school.course";
 $result = $conn -> query($sql);
 
 // ID Automatically Generated in SQL 
