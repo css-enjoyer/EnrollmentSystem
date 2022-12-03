@@ -23,17 +23,4 @@ else
 }
 
 $conn -> close();
-
-
-// if(!empty($addons)) {
-//     foreach($addons as $check) {
-//         if($check == "cheese") {
-//             $baseTotal += 15;
-//         } if($check == "vegetables") {
-//             $baseTotal += 35;
-//         } if($check == "meat") {
-//             $baseTotal += 50;
-//         }
-//     }
-// }
 ?>
