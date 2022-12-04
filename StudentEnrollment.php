@@ -32,31 +32,27 @@
             </ul>
         </div>
         <div class="mainsection">
-            <h1>Your journey starts here!</h1>
+            <h1>Student Information</h1>
             <form action="Enroll.php" method="POST">
                 <fieldset>
-                <legend>Student Information</legend>
-                    <label>First Name: <input type="text" name="FNAME" required></label>
-                    <label>Middle Initial: <input type="text" name="MI" required></label>
-                    <label>Last Name: <input type="text" name="LNAME" required></label>
-                    <label>Gender: <select name="GENDER" required>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select></label>
-                    <label>Date of Birth: <input type="date" name="BDAY" required></label>
+                    <table>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Department</th>
+                            <th>Specialization</th>
+                            <th>Birthday</th>
+                            <th>Gender</th>
+                            <th>Student Type</th>
+                            <th>Actions</th>
+                        </tr>
+                        <!-- php to print while value of table exists -->
+                        <tr></tr>
+                    </table>
                 </fieldset>
-
                 <fieldset>
-                <legend>Department Selection</legend>
-                    <label>Department of: <select name="DEPTID">
-                        <option value="CS">Computer Science</option>
-                        <option value="IT">Information Technology</option>
-                        <option value="IS">Information Systems</option>
-                    </select></label>
-                </fieldset>
-
-                <fieldset>
-                <legend>Available Courses</legend>
+                <legend>Enrolled Courses</legend>
                     <table>
                         <tr>
                             <th>+</th>
@@ -67,7 +63,7 @@
                             <th>Course Units</th>
                         </tr>
                         <!-- Update this section to use new tables -->
-                <?php   while($row=$result->fetch_assoc()) {            ?>
+                <!-- <?php   while($row=$result->fetch_assoc()) {            ?>
                         <tr>
                             <td><input name="Courses[]" type="checkbox" value="<?php $row["CRS_ID"]?>"></td>
                             <td><?php echo $row["CRS_ID"];?></td>
@@ -76,9 +72,9 @@
                             <td><?php echo $row["CRS_CLASS"];?></td>
                             <td><?php echo $row["CRS_UNITS"];?></td>
                         </tr>        
-                <?php   }                                               ?>
-                        
+                <?php   }                                               ?> -->
                     </table>
+                    <input type="submit" value="Enroll New Course +" class="enrollcrs-btn">
                 </fieldset>
                 <input type="submit" value="Proceed &#8594" class="btn">
             </form>
