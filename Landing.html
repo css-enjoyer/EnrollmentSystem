@@ -11,23 +11,17 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     </head>
     <script>
-    function EvaluateForm() {  
-        if(document.getElementById('userName').value !== "" && document.getElementById('passWord').value !== "") {
-            if(document.getElementById('userName').value == 'staff' && document.getElementById('passWord').value == 'staff') {
-            document.myForm.action = "StaffManagement.php";
-            }
-            else if(document.getElementById('userName').value == 'admin' && document.getElementById('passWord').value == 'admin') {
-                document.myForm.action = "DatabaseAdministration.php";
-            }
-            document.forms["myForm"].submit();
-            return false;
-        } 
+    function openStudentForm() {
+        document.getElementById("stuform").style.display = "flex";
     }
-    function openForm() {
-        document.getElementById("loginform").style.display = "flex";
+    function closeStudentForm() {
+        document.getElementById("stuform").style.display = "none";
     }
-    function closeForm() {
-        document.getElementById("loginform").style.display = "none";
+    function openStaffForm() {
+        document.getElementById("stafform").style.display = "flex";
+    }
+    function closeStaffForm() {
+        document.getElementById("stafform").style.display = "none";
     }
     </script>
     <body>
@@ -38,20 +32,35 @@
             <ul>
                 <li>Notifications</li>
                 <li>Messages</li>
-                <li><button onclick="openForm()" class="loginbtn">Login</button></li>
+                <li><button onclick="openStudentForm()" class="loginbtn">Student Login</button></li>
+                <li><button onclick="openStaffForm()" class="loginbtn">Staff Login</button></li>
             </ul>
         </div>
         <div class="mainsection">
-            <form action="StudentHomepage.php" method="POST" name="myForm" id="loginform">
-                <h2>Welcome</h2>
+
+            <a href="StudentAccountCreation.php" class="enroll-btn">Enroll_Now</a>
+            <p class="staffcrt-btn">Staff member? Click <a href="StaffAccountCreation.php">here</a> for the staff portal.</p>
+
+            <form method="POST" name="myForm" id="stuform" class="loginform">
+                <h2>Student Login</h2>
                 <label>Username: <input type="number" id="userName" name="userName" required></label>
                 <label>Password: <input type="password" id="passWord" name="passWord" required></label>
                 <div class="formBtns">
-                    <button onClick="closeForm()">Cancel</button>
-                    <input type="submit" onClick="return EvaluateForm();">
+                    <button onClick="closeStudentForm()">Cancel</button>
+                    <input formaction="StudentHomepage.php" type="submit">
                 </div>
             </form>
-            <a href="StudentAccountCreation.php" class="enroll-btn">Enroll_Now</a>
+
+            <form method="POST" name="myForm" id="stafform" class="loginform">
+                <h2>Staff Login</h2>
+                <label>Username: <input type="number" id="userName" name="userName" required></label>
+                <label>Password: <input type="password" id="passWord" name="passWord" required></label>
+                <div class="formBtns">
+                    <button onClick="closeStaffForm()">Cancel</button>
+                    <input formaction="StaffManagement.php" type="submit">
+                </div>
+            </form>
+            
         </div>
     </body>
 </html>
