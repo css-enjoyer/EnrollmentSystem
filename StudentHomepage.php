@@ -7,7 +7,13 @@ if ($conn->connect_error) {
 
 $STU_ID = substr($_REQUEST["userName"], 4);
 $ENRL_YEAR = substr($_REQUEST["userName"], 0, 4);
-$sql = "SELECT * FROM school.course";
+$sql = "SELECT * FROM course; 
+-- as co
+-- INNER JOIN class as cl
+-- on co.CRS_ID = cl.CRS_ID
+-- INNER JOIN student as s
+-- on cl.STU_ID = s.STU_ID
+--     WHERE s.STU_ID = $STU_ID";
 $result = $conn->query($sql);
 
 $student_info_query = "SELECT * FROM student AS s
@@ -48,16 +54,6 @@ $info_query_result = $conn->query($info_query);
 
 $conn->close();
 
-// UPDATE FUNCTION
-function updateStudentInfo()
-{
-    echo "
-            <script>
-              alert('Hellow World');
-            </script>
-        ";
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +71,7 @@ function updateStudentInfo()
 </head>
 <script>
     // console.log("========== LOG ==========")
-    // console.log(<?php echo $ENRL_YEAR . " " . $STU_ID ?>);
+    // console.log();
 
     function openInfoForm() {
         document.getElementById("updateinfoform").style.display = "flex";
@@ -158,7 +154,7 @@ function updateStudentInfo()
                         <td><?php echo $info_query_row["DEPT_NAME"]; ?></td>
                         <td><?php echo $info_query_row["CLASS_SECTION"]; ?></td>
                         <td><?php echo $info_query_row["CRS_UNIT"]; ?></td>
-                        <td><?php echo $info_query_row["INSTR_FNAME"]; ?></td>
+                        <td><?php echo $info_query_row["INSTR_FNAME"] . " " . $info_query_row["INSTR_LNAME"]; ?></td>
                         <td><button action="" class="removecrs-btn">Drop</button></td>
                     </tr>
                 <?php   }                                               ?>
@@ -169,7 +165,7 @@ function updateStudentInfo()
 
 
         <!-- Enroll Course Form Popup [Add form action to update student enrolled courses] -->
-        <form action="" method="POST" id="enrollform">
+        <form action="StudentFunction.php" method="POST" id="enrollform">
             <fieldset>
                 <legend>Available Courses</legend>
                 <table>
@@ -183,18 +179,20 @@ function updateStudentInfo()
                     </tr>
                     <?php while ($row = $result->fetch_assoc()) {            ?>
                         <tr>
-                            <td><input name="Courses[]" type="checkbox" value="<?php $row["CRS_ID"] ?>"></td>
+                            <td><input name="Courses[]" type="checkbox" value="<?php echo $row["CRS_ID"] ?>"></td>
                             <td><?php echo $row["CRS_ID"]; ?></td>
                             <td><?php echo $row["CRS_NAME"]; ?></td>
                             <td><?php echo $row["CRS_DESC"]; ?></td>
                             <td><?php echo $row["CRS_LEVEL"]; ?></td>
                             <td><?php echo $row["CRS_UNIT"]; ?></td>
+                            <!-- hidden form field for the session of STU_ID and ENRL_YEAR -->
+                            <input type="hidden" name="STU_ID" value="<?= $ENRL_YEAR . $STU_ID ?>">
                         </tr>
                     <?php   }                                               ?>
                 </table>
                 <div class="formBtns">
                     <button onclick="closeEnrollForm()" class="enrollcrs-btn cancel">Close</button>
-                    <input type="submit" value="Enroll +" class="enrollcrs-btn" formaction="">
+                    <input type="submit" name="addCourse" value="Enroll +" class="enrollcrs-btn">
                 </div>
             </fieldset>
         </form>
@@ -224,4 +222,29 @@ function updateStudentInfo()
 
     </div>
 </body>
+
 </html>
+
+
+
+
+<?php
+// if (isset($_POST['addCourse'])) {
+//     $CRS_IDs = $_POST['Courses'];
+//     foreach ($CRS_IDs as $CRS_ID) {
+//         $add_enrollment_query = "INSERT INTO enrollment(STU_ID, ENRL_YEAR, CLASS_ID) VALUES ($STU_ID, $ENRL_YEAR, $CRS_ID + 1000)";
+//         mysqli_query($conn, $add_enrollment_query);
+//         // echo $add_enrollment_query . "<br><br><br>";
+//     }
+// }
+
+// elseif (isset($_POST['updateStudentInfo'])) {
+//     // echo "Update";
+//     echo "<script> alert('Hellow World'); </script> ";
+
+//     $origin = "SELECT * FROM student WHERE STU_ID = $STU_ID AND ENRL_YEAR = $ENRL_YEAR";
+//     $result = $conn->query($sql);
+//     $rows = $result->fetch_assoc();
+// }
+?>
+
