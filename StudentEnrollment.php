@@ -80,15 +80,23 @@
             <legend>Enrolled Courses</legend>
                 <table>
                     <tr>
-                        <th>+</th>
                         <th>Course ID</th>
+                        <th>Course Name</th>
                         <th>Course Description</th>
-                        <th>Course Instructor</th>
-                        <th>Course Class</th>
+                        <th>Course Level</th>
                         <th>Course Units</th>
+                        <th>Actions</th>
                     </tr>
+                    <!-- Update button to delete course from student courses -->
                     <!-- Update this section to print enrolled courses with php -->
-                    <tr></tr>
+                    <tr>
+                        <th>1</th>
+                        <th>ICS2602</th>
+                        <th>Computer Programming 1</th>
+                        <th>1</th>
+                        <th>5</th>
+                        <th><button action="" class="removecrs-btn">Drop</button></th>
+                    </tr>
                     <!--  -->
                 </table>
                 <button onclick="openEnrollForm()" class="enrollcrs-btn">Enroll New Course +</button>

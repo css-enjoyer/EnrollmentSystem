@@ -188,6 +188,19 @@ table tbody tr:hover {
 #CS-Tracks, #IS-Tracks, #IT-Tracks {
     display: none;
 }
+.removecrs-btn {
+    width: 100%;
+    border: none;
+    font-size: 1rem;
+    background-color: rgb(224, 18, 18);
+    transition: .3s ease-in-out;
+}
+.removecrs-btn:hover { 
+    transform: scale(1.1);
+    transform: translateY(-3px);
+    box-shadow: 0 3px 1px 0 black;
+    cursor: pointer;
+}
 /* update info form popup */
 .updateinfo-btn {
     background-color: transparent;
