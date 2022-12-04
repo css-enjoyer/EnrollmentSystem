@@ -107,6 +107,12 @@ if (isset($_POST['addCourse'])) {
     }
 }
 
+// Delete course
+// DELETE FROM `school`.`ENROLLMENT` WHERE (`ENRL_ID` = '10014');
+if (isset($_POST['deleteCourse'])) {
+    echo $_POST['deleteCourse'];
+}
+
 $conn->close();
 
 ?>

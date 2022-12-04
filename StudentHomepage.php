@@ -52,6 +52,17 @@ $info_query = "SELECT * FROM student AS s
 $info_query_result = $conn->query($info_query);
 // $info_query_row = $info_query_result->fetch_assoc();
 
+function deleteEnrollment($ENRL_ID)
+{
+    $conn = new mysqli("localhost:3310", "root", "mysql", "school");
+
+    if ($conn->connect_error) {
+        die("Connect Error (" . $conn->connect_Errorno . ") " . $conn->connect_error);
+    }
+    mysqli_query($conn, "DELETE FROM `school`.`ENROLLMENT` WHERE (`ENRL_ID` = $ENRL_ID);");
+
+}
+
 $conn->close();
 
 ?>
@@ -155,7 +166,7 @@ $conn->close();
                         <td><?php echo $info_query_row["CLASS_SECTION"]; ?></td>
                         <td><?php echo $info_query_row["CRS_UNIT"]; ?></td>
                         <td><?php echo $info_query_row["INSTR_FNAME"] . " " . $info_query_row["INSTR_LNAME"]; ?></td>
-                        <td><button action="" class="removecrs-btn">Drop</button></td>
+                        <th><button action="<?php deleteEnrollment($info_query_row["ENRL_ID"])?>" class="removecrs-btn" name="deleteCourse">Drop</button></th>
                     </tr>
                 <?php   }                                               ?>
                 <!--  -->
@@ -165,7 +176,7 @@ $conn->close();
 
 
         <!-- Enroll Course Form Popup [Add form action to update student enrolled courses] -->
-        <form action="StudentFunction.php" method="POST" id="enrollform">
+        <form action="StudentFunction.php" method="POST" id="enrollform" name="enrollform">
             <fieldset>
                 <legend>Available Courses</legend>
                 <table>
@@ -249,4 +260,3 @@ $conn->close();
 //     $rows = $result->fetch_assoc();
 // }
 ?>
-
