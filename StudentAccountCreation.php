@@ -34,7 +34,7 @@
             document.getElementById('CS-Tracks').style.display = "none";
             document.getElementById('IS-Tracks').style.display = "none";
             document.getElementById('IT-Tracks').style.display = "block";
-        } else if(select.value == "None") {
+        } else if(select.value == "") {
             document.getElementById('CS-Tracks').style.display = "none";
             document.getElementById('IS-Tracks').style.display = "none";
             document.getElementById('IT-Tracks').style.display = "none";
@@ -64,8 +64,8 @@
                 </fieldset>
                 <fieldset>
                     <legend>Choose a department: </legend>
-                    <label>Department of: <select name="DEPT_ID" onchange="showDiv(this)">
-                        <option value="None">--Choose--</option>
+                    <label>Department of: <select name="DEPT_ID" onchange="showDiv(this)" required>
+                        <option value="">--Choose--</option>
                         <option id="CS" value="CS">Computer Science</option>
                         <option id="IT" value="IT">Information Technology</option>
                         <option id="IS" value="IS">Information Systems</option>
@@ -97,7 +97,6 @@
                 <fieldset>
                     <legend>Enter your desired password:</legend>
                     <label>Password: <input type="password" name="PASSWORD" required></label>
-                    <label>Re-enter Password: <input type="password" name="PASSWORD" required></label>
                 </fieldset>
                 <input type="submit" value="Proceed &#8594" class="btn">
             </form>
