@@ -1,5 +1,5 @@
 <?php
-    $conn = new mysqli("localhost:3310", "root", "0413", "school");
+    $conn = new mysqli("localhost:3310", "root", "mysql", "school");
     if($conn -> connect_error) {
         die ("Connect Error (".$conn->connect_Errorno.") ".$conn->connect_error);
     }
@@ -22,15 +22,15 @@
     </head>
     <script>
     function showDiv(select) {
-        if(select.value == "CS") {
+        if(select.value == "1") {
             document.getElementById('CS-Tracks').style.display = "block";
             document.getElementById('IS-Tracks').style.display = "none";
             document.getElementById('IT-Tracks').style.display = "none";
-        } else if(select.value == "IS") {
+        } else if(select.value == "2") {
             document.getElementById('CS-Tracks').style.display = "none";
             document.getElementById('IS-Tracks').style.display = "block";
             document.getElementById('IT-Tracks').style.display = "none";
-        } else if(select.value == "IT") {
+        } else if(select.value == "3") {
             document.getElementById('CS-Tracks').style.display = "none";
             document.getElementById('IS-Tracks').style.display = "none";
             document.getElementById('IT-Tracks').style.display = "block";
@@ -49,7 +49,7 @@
         </div>
         <div class="mainsection">
             <h1>Your journey starts here!</h1>
-            <form action="StudentEnrollment.php">
+            <form action="StudentEnrollment.php" method="POST">
                 <fieldset>
                     <legend>Enter your personal information: </legend>
                     <label>Personal Email: <input type="email" name="EMAIL" required></label>
@@ -64,33 +64,33 @@
                 </fieldset>
                 <fieldset>
                     <legend>Choose a department: </legend>
-                    <label>Department of: <select name="DEPT_ID" onchange="showDiv(this)" required>
+                    <label>Department of: <select type="number" name="DEPT_ID" onchange="showDiv(this)" required>
                         <option value="">--Choose--</option>
-                        <option id="CS" value="CS">Computer Science</option>
-                        <option id="IT" value="IT">Information Technology</option>
-                        <option id="IS" value="IS">Information Systems</option>
+                        <option id="CS" value="1">Computer Science</option>
+                        <option id="IT" value="2">Information Technology</option>
+                        <option id="IS" value="3">Information Systems</option>
                     </select></label>
                 </fieldset>
                 <fieldset>
                     <legend>Choose a specialization track: </legend>
                     <div id="CS-Tracks">
-                        <label>Specialize in: <select name="SPEC_ID">
-                            <option value="1">Core Computer Science</option>
-                            <option value="2">Game Development</option>
-                            <option value="3">Data Science</option>
+                        <label>Specialize in: <select type="number" name="SPEC_ID">
+                            <option value="50">Core Computer Science</option>
+                            <option value="51">Game Development</option>
+                            <option value="52">Data Science</option>
                         </select></label>
                     </div>
                     <div id="IS-Tracks">
-                        <label>Specialize in: <select name="SPEC_ID">
-                            <option value="1">Business Analytics</option>
-                            <option value="2">Service Management</option>
+                        <label>Specialize in: <select type="number" name="SPEC_ID">
+                            <option value="53">Business Analytics</option>
+                            <option value="54">Service Management</option>
                         </select></label>
                     </div>
                     <div id="IT-Tracks">
-                        <label>Specialize in: <select name="SPEC_ID">
-                            <option value="1">Network and Security</option>
-                            <option value="2">Web and Mobile App Development</option>
-                            <option value="3">IT Automation</option>
+                        <label>Specialize in: <select type="number" name="SPEC_ID">
+                            <option value="55">Network and Security</option>
+                            <option value="56">Web and Mobile App Development</option>
+                            <option value="57">IT Automation</option>
                         </select></label>
                     </div>
                 </fieldset>
