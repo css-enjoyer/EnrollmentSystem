@@ -1,8 +1,10 @@
 <?php
-$conn = new mysqli("localhost:3310", "root", "mysql", "school");
+$conn = new mysqli("localhost:3306", "root", "mysql123", "school");
+
 if ($conn->connect_error) {
     die("Connect Error (" . $conn->connect_Errorno . ") " . $conn->connect_error);
 }
+
 $STU_ID = substr($_REQUEST["userName"], 4);
 $ENRL_YEAR = substr($_REQUEST["userName"], 0, 4);
 $sql = "SELECT * FROM course; 
@@ -199,6 +201,10 @@ $conn->close();
         <form action="StudentFunction.php" method="POST" name="myForm" id="updateinfoform">
             <fieldset>
                 <legend>Enter your personal information: </legend>
+
+                <input type="hidden" id="stuID" name="stuID" value="<?php echo $STU_ID; ?>">
+                <input type="hidden" id="enrlYear" name="enrlYear" value="<?php echo $ENRL_YEAR; ?>">
+
                 <label>First Name: <input type="text" name="FNAME" required></label>
                 <label>Middle Initial: <input type="text" name="MI" required></label>
                 <label>Last Name: <input type="text" name="LNAME" required></label>
@@ -209,7 +215,7 @@ $conn->close();
                 <label>Date of Birth: <input type="date" name="BDAY" required></label>
                 <div class="formBtns">
                     <button onclick="closeInfoForm()" class="update-btn cancel">Close</button>
-                    <input type="submit" name="updateStudentInfo" value="Update" class="update-btn">
+                    <input type="submit" name="UPDATE-STU" value="Update" class="update-btn">
                 </div>
             </fieldset>
         </form>
@@ -218,6 +224,8 @@ $conn->close();
 </body>
 
 </html>
+
+
 
 
 <?php
@@ -239,3 +247,4 @@ $conn->close();
 //     $rows = $result->fetch_assoc();
 // }
 ?>
+
