@@ -44,7 +44,7 @@ body {
 .navsection li {
     list-style-type: none;
 }
-#loginform {
+.loginform {
     position: fixed;
     width: 30vw;
     left: 0;
@@ -63,11 +63,17 @@ body {
     border: 1px solid rgba(255, 255, 255, .3);
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, .5);
 }
-#loginform input[type="text"], #loginform input[type="password"] {
-    width: 100%;
+.loginform input[type="number"], .loginform input[type="password"] {
+    width: 100%;    
     padding-left: 10px;
 }
-#loginform .formBtns {
+.loginform h2 {
+    text-align: center;
+    text-decoration: overline;
+    color: rgb(255, 238, 0);
+    text-shadow: -3px 0 3px 3px black;
+}
+.loginform .formBtns {
     display: flex;
     justify-content: space-between;
 }
@@ -115,7 +121,7 @@ input[type="password"], select {
     float: right;
     width: 75%;
 }
-#loginform input[type="number"] {
+.loginform input[type="number"], .loginform input[type="password"] {
     width: 100%;
 }
 fieldset input, select, input[type="submit"] {
@@ -173,6 +179,17 @@ table tbody tr:hover {
 .enroll-btn:hover {
     box-shadow: inset 500px 0 0 0 rgb(255, 238, 0);
     color: black;
+}
+.staffcrt-btn {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+    font-size: 1rem;
+    text-shadow: 0 2px 3px black;
+}
+.staffcrt-btn a{
+    color: rgb(255, 238, 0);
 }
 .enrollcrs-btn {
     width: 150px;
