@@ -115,6 +115,9 @@ input[type="password"], select {
     float: right;
     width: 75%;
 }
+#loginform input[type="number"] {
+    width: 100%;
+}
 fieldset input, select, input[type="submit"] {
     color: black;
 }

@@ -11,15 +11,17 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     </head>
     <script>
-    function EvaluateForm() {   
-        if(document.getElementById('userName').value == 'staff' && document.getElementById('passWord').value == 'staff') {
+    function EvaluateForm() {  
+        if(document.getElementById('userName').value !== "" && document.getElementById('passWord').value !== "") {
+            if(document.getElementById('userName').value == 'staff' && document.getElementById('passWord').value == 'staff') {
             document.myForm.action = "StaffManagement.php";
-        }
-        else if(document.getElementById('userName').value == 'admin' && document.getElementById('passWord').value == 'admin') {
-            document.myForm.action = "DatabaseAdministration.php";
-        }
-        document.forms["myForm"].submit();
-        return false;
+            }
+            else if(document.getElementById('userName').value == 'admin' && document.getElementById('passWord').value == 'admin') {
+                document.myForm.action = "DatabaseAdministration.php";
+            }
+            document.forms["myForm"].submit();
+            return false;
+        } 
     }
     function openForm() {
         document.getElementById("loginform").style.display = "flex";
@@ -42,8 +44,8 @@
         <div class="mainsection">
             <form action="StudentHomepage.php" method="POST" name="myForm" id="loginform">
                 <h2>Welcome</h2>
-                <label>Username: <input type="number" id="userName" name="userName"/></label>
-                <label>Password: <input type="password" id="passWord" name="passWord"/></label>
+                <label>Username: <input type="number" id="userName" name="userName" required></label>
+                <label>Password: <input type="password" id="passWord" name="passWord" required></label>
                 <div class="formBtns">
                     <button onClick="closeForm()">Cancel</button>
                     <input type="submit" onClick="return EvaluateForm();">
