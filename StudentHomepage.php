@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli("localhost:3306", "root", "mysql123", "school");
+$conn = new mysqli("localhost:3310", "root", "mysql", "school");
 
 if ($conn->connect_error) {
     die("Connect Error (" . $conn->connect_Errorno . ") " . $conn->connect_error);
@@ -86,7 +86,7 @@ $conn->close();
     }
 
     function closeEnrollForm() {
-        document.getElementById("enrollform").style.display = "none";
+        document.getElementById("enrollform").style.display = "hidden";
     }
 </script>
 
@@ -204,6 +204,8 @@ $conn->close();
 
                 <input type="hidden" id="stuID" name="stuID" value="<?php echo $STU_ID; ?>">
                 <input type="hidden" id="enrlYear" name="enrlYear" value="<?php echo $ENRL_YEAR; ?>">
+                <!-- hidden form field for the session of STU_ID and ENRL_YEAR -->
+                <input type="hidden" name="STU_ID" value="<?= $ENRL_YEAR . $STU_ID ?>">
 
                 <label>First Name: <input type="text" name="FNAME" required></label>
                 <label>Middle Initial: <input type="text" name="MI" required></label>
