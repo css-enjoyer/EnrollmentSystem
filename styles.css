@@ -172,12 +172,9 @@ table tbody tr:hover {
     color: black;
 }
 
-
-/* Staff Management Elements */
-.dashboard-container {
-    height: 100%;
+#CS-Tracks, #IS-Tracks, #IT-Tracks {
+    display: none;
 }
-
 
 
 
