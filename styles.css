@@ -110,7 +110,8 @@ fieldset select {
 fieldset label {
     font-weight: 300;
 }
-fieldset input[type="text"], input[type="date"], select {
+fieldset input[type="text"], input[type="date"], input[type="email"], 
+input[type="password"], select {
     float: right;
     width: 75%;
 }

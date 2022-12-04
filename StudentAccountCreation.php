@@ -52,6 +52,7 @@
             <form action="StudentEnrollment.php">
                 <fieldset>
                     <legend>Enter your personal information: </legend>
+                    <label>Personal Email: <input type="email" name="EMAIL" required></label>
                     <label>First Name: <input type="text" name="FNAME" required></label>
                     <label>Middle Initial: <input type="text" name="MI" required></label>
                     <label>Last Name: <input type="text" name="LNAME" required></label>
@@ -92,7 +93,11 @@
                             <option value="3">IT Automation</option>
                         </select></label>
                     </div>
-                    
+                </fieldset>
+                <fieldset>
+                    <legend>Enter your desired password:</legend>
+                    <label>Password: <input type="password" name="PASSWORD" required></label>
+                    <label>Re-enter Password: <input type="password" name="PASSWORD" required></label>
                 </fieldset>
                 <input type="submit" value="Proceed &#8594" class="btn">
             </form>
