@@ -21,12 +21,12 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     </head>
     <script>
-    // function openForm() {
-    //     document.getElementById("updateinfoform").style.display = "flex";
-    // }
-    // function closeForm() {
-    //     document.getElementById("updateinfoform").style.display = "none";
-    // }
+    function openInfoForm() {
+        document.getElementById("updateinfoform").style.display = "flex";
+    }
+    function closeInfoForm() {
+        document.getElementById("updateinfoform").style.display = "none";
+    }
     function openEnrollForm() {
         document.getElementById("enrollform").style.display = "flex";
     }
@@ -57,11 +57,22 @@
                         <th>Specialization</th>
                         <th>Birthday</th>
                         <th>Gender</th>
-                        <th>Student Type</th>
                         <th>Actions</th>
                     </tr>
-                    <!-- php to print while value of table exists -->
-                    <tr></tr>
+                    <!-- Update this section to print student information from table with php -->
+                    <tr>
+                        <td>2022100</td>
+                        <td>Lil Drake</td>
+                        <td>lil.d@ust.edu.ph</td>
+                        <td>CS</td>
+                        <td>Core</td>
+                        <td>Jan 1, 2002</td>
+                        <td>Male</td>
+                        <td>
+                            <button onclick="openInfoForm()" class="updateinfo-btn">Update</button>
+                        </td>
+                    <!--  -->
+                    </tr>        
                 </table>
             </fieldset>
 
@@ -76,13 +87,15 @@
                         <th>Course Class</th>
                         <th>Course Units</th>
                     </tr>
-                    <!-- Update this section to print enrolled courses -->
-            
+                    <!-- Update this section to print enrolled courses with php -->
+                    <tr></tr>
+                    <!--  -->
                 </table>
                 <button onclick="openEnrollForm()" class="enrollcrs-btn">Enroll New Course +</button>
             </fieldset>
 
-            <!-- Enroll Course Form Popup -->
+            
+            <!-- Enroll Course Form Popup [Add form action to update student enrolled courses] -->
             <form action="" method="POST" id="enrollform">
                 <fieldset>
                 <legend>Available Courses</legend>
@@ -113,16 +126,24 @@
                 </fieldset>
             </form>
 
-            <!-- Update Info Form Popup -->
-            <!-- <form action="" method="POST" name="myForm" id="updateinfoform">
-                <h2>Choose Course</h2>
-                <label>Username: <input type="text" id="userName" name="userName"/></label>
-                <label>Password: <input type="password" id="passWord" name="userName"/></label>
-                <div class="formBtns">
-                    <button onClick="closeForm()">Cancel</button>
-                    <input type="submit" onClick="return EvaluateForm();">
-                </div>
-            </form> -->
+            <!-- Update Info Form Popup [Add form action to update student information]--> 
+            <form action="" method="POST" name="myForm" id="updateinfoform">
+                <fieldset>
+                    <legend>Enter your personal information: </legend>
+                    <label>First Name: <input type="text" name="FNAME" required></label>
+                    <label>Middle Initial: <input type="text" name="MI" required></label>
+                    <label>Last Name: <input type="text" name="LNAME" required></label>
+                    <label>Gender: <select name="GENDER" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select></label>
+                    <label>Date of Birth: <input type="date" name="BDAY" required></label>
+                    <div class="formBtns">
+                        <button onclick="closeInfoForm()" class="update-btn cancel">Close</button>
+                        <input type="submit" value="Update" class="update-btn" formaction="">
+                    </div>
+                </fieldset>
+            </form>
 
         </div>
     </body>

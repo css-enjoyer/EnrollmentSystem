@@ -188,33 +188,52 @@ table tbody tr:hover {
     display: none;
 }
 /* update info form popup */
-/* #updateinfoform {
+.updateinfo-btn {
+    background-color: transparent;
+    border: none;
+    background-color: greenyellow;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+}
+#updateinfoform {
     position: fixed;
-    width: 30vw;
+    width: 60%;
     left: 0;
     right: 0;
     margin: auto;
     top: 20vh;
-    
     display: none;
     flex-direction: column;
     gap: 20px;
-    padding: 60px;
     z-index: 1;
-    
+}
+#updateinfoform fieldset {
+    padding: 30px 20px;
     background-color: rgba(125, 125, 125, .5);
     backdrop-filter: blur( 5px );
-    border: 1px solid rgba(255, 255, 255, .3);
-    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, .5);
-}
-#updateinfoform input[type="text"], #updateinfoform input[type="password"] {
-    width: 100%;
-    padding-left: 10px;
 }
 #updateinfoform .formBtns {
-    display: flex;
-    justify-content: space-between;
-} */
+    margin: 0 30px;
+}
+#updateinfoform .update-btn {
+    width: 100px;
+    height: 30px;
+    border: none;
+    background-color: rgb(255, 238, 0);
+    transition: .3s ease-in-out;
+}
+#updateinfoform .cancel {
+    background-color: black;
+    color: white;
+}
+#updateinfoform .update-btn:hover { 
+    transform: scale(1.1);
+    transform: translateY(-3px);
+    box-shadow: 0 3px 1px 0 black;
+    cursor: pointer;
+}
+
 
 /* enroll form popup */
 #enrollform {
