@@ -48,6 +48,7 @@
             </div>
         </div>
         <div class="mainsection">
+            <h1>Your journey starts here!</h1>
             <form action="StudentEnrollment.php">
                 <fieldset>
                     <legend>Enter your personal information: </legend>
