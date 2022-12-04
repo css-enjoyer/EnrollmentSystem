@@ -1,9 +1,9 @@
 <?php
-    $conn = new mysqli("localhost:3310", "root", "0413", "schoolenrollment");
+    $conn = new mysqli("localhost:3310", "root", "0413", "school");
     if($conn -> connect_error) {
         die ("Connect Error (".$conn->connect_Errorno.") ".$conn->connect_error);
     }
-    $sql = "SELECT * FROM schoolenrollment.Students";
+    $sql = "SELECT * FROM school.student";
     $result = $conn -> query($sql);
     $conn -> close();
 ?>
@@ -33,6 +33,46 @@
     </div>
     <div class="mainsection">
         <h1>School Enrollment System</h1>
+            <fieldset>
+			<legend>Students</legend>
+                <table>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Enrollment Year</th>
+                        <th>First Name</th>
+                        <th>Middle Initial</th>
+                        <th>Last Name</th>
+                        <th>Birthday</th>
+                        <th>Gender</th>
+                        <th>Department ID</th>
+						<th>Email</th>
+						<th>Student Type</th>
+						<th>Actions</th>
+                    </tr>
+					<?php
+					while ($row=$result->fetch_assoc()) 
+					{
+					?>
+
+                    <tr>
+                        <td><?php echo $row['STU_ID'];?></td>
+						<td><?php echo $row['ENRL_YEAR'];?></td>
+                        <td><?php echo $row['STU_FNAME'];?></td>
+						<td><?php echo $row['STU_MI'];?></td>
+						<td><?php echo $row['STU_LNAME'];?></td>
+                        <td><?php echo $row['STU_BDAY'];?></td>
+                        <td><?php echo $row['STU_GENDER'];?></td>
+                        <td><?php echo $row['DEPT_ID'];?></td>
+                        <td><?php echo $row['STU_EMAIL'];?></td>
+                        <td><?php echo $row['STU_TYPE'];?></td>								
+                        <td>
+                            <button onclick="openInfoForm()" class="updateinfo-btn">Update</button>
+                        </td>
+						</tr>
+						<?php
+					}
+						?>
+
     </div>
 </body>
 </html>
