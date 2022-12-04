@@ -1,19 +1,25 @@
 <?php
+	// Connecting to mySQL Server
     $conn = new mysqli("localhost:3310", "root", "0413", "school");
     if($conn -> connect_error) {
         die ("Connect Error (".$conn->connect_Errorno.") ".$conn->connect_error);
     }
+	// Select school.course table
     $sql = "SELECT * FROM school.course";
     $result = $conn -> query($sql);
+	// Close the database connection
     $conn -> close();
 ?>
 
+<!-- HTML -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
+		<!-- Metadata, dimension and scaling-->
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Sign up -->
         <title>Sign up</title>
         <link rel="stylesheet" href="styles.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,6 +27,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     </head>
     <script>
+	<!-- Functions to showDiv(select) -->
     function showDiv(select) {
         if(select.value == "1") {
             document.getElementById('CS-Tracks').style.display = "block";
@@ -42,15 +49,20 @@
     } 
     </script>
     <body>
+		<!-- Navigation section -->
         <div class="navsection">
             <div class="logo-container">
+				<!-- Embedded the image ustseal.png -->
                 <img src="images/ustseal.png" width="50px">
             </div>
         </div>
+		<!-- Main section -->
         <div class="mainsection">
             <h1>Join the thomasian team!</h1>
+			<!-- Form -->
             <form action="StaffManagement.php" method="POST">
                 <fieldset>
+					<!-- Personal Information -->
                     <legend>Enter your personal information: </legend>
                     <label>Personal Email: <input type="email" name="EMAIL" required></label>
                     <label>First Name: <input type="text" name="FNAME" required></label>
@@ -63,6 +75,7 @@
                     <label>Date of Birth: <input type="date" name="BDAY" required></label>
                 </fieldset>
                 <fieldset>
+					<!-- Assigned department -->
                     <legend>Select your assigned department: </legend>
                     <label>Department of: <select type="number" name="DEPT_ID" onchange="showDiv(this)" required>
                         <option value="">--Choose--</option>
@@ -72,10 +85,13 @@
                     </select></label>
                 </fieldset>
                 <fieldset>
+					<!-- Desired password -->
                     <legend>Enter your desired password:</legend>
                     <label>Password: <input type="password" name="PASSWORD" required></label>
                 </fieldset>
+				<!-- Message -->
                 <p class="staff-notif">After registration, kindly wait for our system administrators to validate your account.</p>
+				<!-- Proceed -->
                 <input type="submit" value="Proceed &#8594" class="btn">
             </form>
         </div>

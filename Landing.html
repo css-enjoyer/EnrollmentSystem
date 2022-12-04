@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+		<!-- Metadata, dimension and scaling -->
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Welcome -->
         <title>Welcome</title>
+		<!-- Link to external style sheet -->
         <link rel="stylesheet" href="styles.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     </head>
     <script>
+	<!-- Functions to open/closeStudentForm() and open/closeStaffForm() -->
     function openStudentForm() {
         document.getElementById("stuform").style.display = "flex";
     }
@@ -25,42 +29,56 @@
     }
     </script>
     <body>
+	<!-- Navigation section -->
         <div class="navsection">
             <div class="logo-container">
+				<!-- Embedded the image ustseal.png  -->
                 <img src="images/ustseal.png" width="50px">
             </div>
             <ul>
                 <li>Notifications</li>
                 <li>Messages</li>
+				<!-- Student login button -->
                 <li><button onclick="openStudentForm()" class="loginbtn">Student Login</button></li>
+				<!-- Staff login button -->
                 <li><button onclick="openStaffForm()" class="loginbtn">Staff Login</button></li>
             </ul>
         </div>
         <div class="mainsection">
-
+			<!-- Hyperlink to StudentAccountCreation.php -->
             <a href="StudentAccountCreation.php" class="enroll-btn">Enroll_Now</a>
+			<!-- Hyperlink to StaffAccountCreation.php -->
             <p class="staffcrt-btn">Staff member? Click <a href="StaffAccountCreation.php">here</a> for the staff portal.</p>
 
+			<!-- Student login form (Popup function) -->
             <form method="POST" name="myForm" id="stuform" class="loginform">
                 <h2>Student Login</h2>
+				<!-- Student username -->
                 <label>Username: <input type="number" id="userName" name="userName" required></label>
+				<!-- Student password -->
                 <label>Password: <input type="password" id="passWord" name="passWord" required></label>
                 <div class="formBtns">
+				<!-- Cancel button | closeStudentForm() function -->
                     <button onClick="closeStudentForm()">Cancel</button>
+					<!-- Redirects the user to StudentHomePage.php, if the Student username and password is correct -->
                     <input formaction="StudentHomepage.php" type="submit">
                 </div>
             </form>
-
+			
+			<!-- Staff login form (Popup function) -->
             <form method="POST" name="myForm" id="stafform" class="loginform">
                 <h2>Staff Login</h2>
+				<!-- Staff username -->
                 <label>Username: <input type="number" id="userName" name="userName" required></label>
+				<!-- Staff password -->
                 <label>Password: <input type="password" id="passWord" name="passWord" required></label>
                 <div class="formBtns">
+				<!-- Cancel button | closeStaffForm() function -->
                     <button onClick="closeStaffForm()">Cancel</button>
+					<!-- Redirects the user to StaffManagement.php, if the Staff username and password is correct -->
                     <input formaction="StaffManagement.php" type="submit">
                 </div>
             </form>
-            
         </div>
     </body>
 </html>

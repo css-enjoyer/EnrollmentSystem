@@ -1,12 +1,14 @@
 <?php
-$conn = new mysqli("localhost:3310", "root", "mysql", "school");
-if($conn -> connect_error) {
-    die ("Connect Error (".$conn->connect_Errorno.") ".$conn->connect_error);
-}
-$sql = "SELECT * FROM school.course";
-$result = $conn -> query($sql);
+	// Connecting to mySQL Server
+	$conn = new mysqli("localhost:3310", "root", "mysql", "school");
+	if($conn -> connect_error) {
+		die ("Connect Error (".$conn->connect_Errorno.") ".$conn->connect_error);
+	}
+	// Select school.course table
+	$sql = "SELECT * FROM school.course";
+	$result = $conn -> query($sql);
 
-// ID Automatically Generated in SQL 
+// Variable Instantiation | ID Automatically Generated in SQL
 $STU_FNAME = $_REQUEST["FNAME"];
 $STU_MI = $_REQUEST["MI"];
 $STU_LNAME = $_REQUEST["LNAME"];
@@ -15,21 +17,20 @@ $STU_BDAY = $_REQUEST['BDAY'];
 $DEPT_ID = $_REQUEST['DEPT_ID'];
 $CRS_IDs = $_POST['Courses'];
 
-// TO FIX: Hardcoded values
 $STU_ID = 106;
 $ENRL_YEAR = 2022;
 
 $CLASS_SEC = "A"; // kailangan ata makuha specialization
-$CLASS_LOCATION = "Laboratory"; // ito specific lng for prog and info man.
+$CLASS_LOCATION = "Laboratory";
 
 $INSTR_ID = 500; // ito kapag 2 or more prof per course ex. prog maam. sideno at maam. alberto. rand func nlng
 $EMPL_YEAR = 2010;
 
+//Query: Insert student information values into the student table
 $add_student_query = "INSERT INTO student(ENRL_YEAR, STU_FNAME, STU_MI, STU_LNAME, STU_BDAY, STU_GENDER, DEPT_ID)
 VALUES ($ENRL_YEAR, '$STU_FNAME', '$STU_MI', '$STU_LNAME', '$STU_BDAY', '$STU_GENDER', $DEPT_ID)";
 
-
-
+// if true | print "Data fetched successfully", and insert values into enrollment and class table
 if (mysqli_query($conn, $sql) ) {
     echo "Data fetched successfully";
     mysqli_query($conn, $add_student_query);
@@ -42,10 +43,12 @@ if (mysqli_query($conn, $sql) ) {
         // echo $add_enrollment_query . "<br><br><br>" . $add_class_query . "<br><hr>";
     }
 } 
+// else false | print "Data fetch failed"
 else {
     echo "Data fetch failed";
 }
 
+// Query: Select course informartion from student table (INNER JOIN)
 $enrollement_info_query = "SELECT CRS_LEVEL ,d.DEPT_NAME ,CLASS_SEC, CLASS_LOC, CRS_NAME, CRS_DESC, CRS_UNIT, INSTR_FNAME
 FROM student AS s
 	INNER JOIN enrollment AS e
@@ -62,36 +65,46 @@ WHERE s.STU_ID = $STU_ID;";
 
 $enrollment_info_result = $conn -> query($enrollement_info_query);
 
+// Close the database connection
 $conn -> close();
 ?>
 
+<!-- HTML -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
+		<!-- Metadata, dimension and scaling -->
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Enrollment -->
         <title>Enrollment</title>
+		<!-- Link to external style sheet -->
         <link rel="stylesheet" href="styles.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     </head>
     <body>
+		<!-- Navigation section -->
         <div class="navsection">
             <div class="logo-container">
+				<!-- Embedded the image ustseal/png -->
                 <img src="images/ustseal.png" width="50px">
             </div>
             <ul>
                 <li>Notifications</li>
                 <li>Messages</li>
+				<!-- Log out -->
                 <li><a href="Landing.html">Logout</a></li>
             </ul>
         </div>
+		<!-- Main section-->
         <div class="mainsection">
             <h1>You have successfully enrolled!</h1>
             <h2><?php echo $STU_FNAME ?></h2>
             <table>
+				<!-- Prints the column attributes -->
                 <tr>
                     <!-- TODO CONCAT TO SECTION -->
                     <th>Course Level</th>
@@ -105,6 +118,7 @@ $conn -> close();
                 </tr>
                 
         <?php   while($row = $enrollment_info_result -> fetch_assoc()) {            ?>
+				<!-- Prints the course information from table  -->
                 <tr>
                     <td><?php echo $row["CRS_LEVEL"];?></td>
                     <td><?php echo $row["DEPT_NAME"];?></td>
@@ -118,6 +132,7 @@ $conn -> close();
         <?php   }                                               ?>
                         
             </table>
+			<!-- Return | Redirects the user to StudentEnrollment.php  -->
             <a href="StudentEnrollment.php" class="btn">Return</a>
         </div>
     </body>
