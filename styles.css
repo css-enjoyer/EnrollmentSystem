@@ -191,6 +191,11 @@ table tbody tr:hover {
 .staffcrt-btn a{
     color: rgb(255, 238, 0);
 }
+.staff-notif {
+    margin: -30px 0 0 10px;
+    color: rgb(255, 238, 0);
+    text-shadow: 0 2px 3px black;
+}
 .enrollcrs-btn {
     width: 150px;
     height: 40px;
