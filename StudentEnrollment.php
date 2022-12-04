@@ -1,10 +1,31 @@
 <?php
-    $conn = new mysqli("localhost:3310", "root", "0413", "school");
+    $conn = new mysqli("localhost:3310", "root", "mysql", "school");
     if($conn -> connect_error) {
         die ("Connect Error (".$conn->connect_Errorno.") ".$conn->connect_error);
     }
     $sql = "SELECT * FROM school.course";
     $result = $conn -> query($sql);
+    
+
+    $ENRL_YEAR = date("Y");
+    $STU_ACCT_PASSWORD = $_REQUEST["PASSWORD"];
+    $add_stu_acct_query = "INSERT INTO student_account(ENRL_YEAR, STU_ACCT_PASSWORD) VALUES ($ENRL_YEAR, '$STU_ACCT_PASSWORD');";
+    mysqli_query($conn, $add_stu_acct_query);
+    $STU_ID = $conn->insert_id;
+
+    $STU_EMAIL = $_REQUEST["EMAIL"];
+    $STU_FNAME = $_REQUEST["FNAME"];
+    $STU_MI = $_REQUEST["MI"];
+    $STU_LNAME = $_REQUEST["LNAME"];
+    $STU_GENDER = $_REQUEST["GENDER"];
+    $STU_BDAY = $_REQUEST["BDAY"];
+    $DEPT_ID = $_REQUEST["DEPT_ID"];
+    $SPEC_ID = $_REQUEST["SPEC_ID"];
+
+    $add_stu_query = "INSERT INTO student(STU_ID, ENRL_YEAR, STU_FNAME, STU_MI, STU_LNAME, STU_BDAY, STU_GENDER, DEPT_ID, SPEC_ID, STU_EMAIL)
+	VALUES ($STU_ID, $ENRL_YEAR, '$STU_FNAME', '$STU_MI', '$STU_LNAME', '$STU_BDAY', '$STU_GENDER', $DEPT_ID, $SPEC_ID, '$STU_EMAIL');";
+    mysqli_query($conn, $add_stu_query);
+
     $conn -> close();
 ?>
 
@@ -21,6 +42,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
     </head>
     <script>
+        console.log("========== LOG ==========")
+        console.log(<?php echo $ENRL_YEAR ?>);
     function openInfoForm() {
         document.getElementById("updateinfoform").style.display = "flex";
     }
@@ -46,7 +69,7 @@
             </ul>
         </div>
         <div class="mainsection">
-            <h1>[Student Name]'s Profile</h1>
+            <h1><?= $STU_FNAME ?>'s Profile</h1>
             <fieldset>
                 <table>
                     <tr>
@@ -61,13 +84,13 @@
                     </tr>
                     <!-- Update this section to print student information from table with php -->
                     <tr>
-                        <td>2022100</td>
-                        <td>Lil Drake</td>
-                        <td>lil.d@ust.edu.ph</td>
-                        <td>CS</td>
-                        <td>Core</td>
-                        <td>Jan 1, 2002</td>
-                        <td>Male</td>
+                        <td><?= $ENRL_YEAR . $STU_ID ?></td>
+                        <td><?= $STU_FNAME . $STU_FNAME ?></td>
+                        <td><?= $STU_EMAIL ?></td>
+                        <td><?= $DEPT_ID ?></td>
+                        <td><?= $SPEC_ID ?></td>
+                        <td><?= $STU_BDAY ?></td>
+                        <td><?= $STU_GENDER ?></td>
                         <td>
                             <button onclick="openInfoForm()" class="updateinfo-btn">Update</button>
                         </td>
