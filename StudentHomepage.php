@@ -198,7 +198,7 @@ function updateStudentInfo()
         </form>
 
         <!-- Update Info Form Popup [Add form action to update student information]-->
-        <form action="updateStudentInfo()" method="POST" name="myForm" id="updateinfoform">
+        <form action="StudentFunction.php" method="POST" name="myForm" id="updateinfoform">
             <fieldset>
                 <legend>Enter your personal information: </legend>
                 <label>First Name: <input type="text" name="FNAME" required></label>
@@ -211,7 +211,7 @@ function updateStudentInfo()
                 <label>Date of Birth: <input type="date" name="BDAY" required></label>
                 <div class="formBtns">
                     <button onclick="closeInfoForm()" class="update-btn cancel">Close</button>
-                    <input type="submit" value="Update" class="update-btn">
+                    <input type="submit" name="updateStudentInfo" value="Update" class="update-btn">
                 </div>
             </fieldset>
         </form>
@@ -220,3 +220,27 @@ function updateStudentInfo()
 </body>
 
 </html>
+
+// TO MOVE TO STUDENTFUNCTION PAGE
+<?php
+if (isset($_POST['ADD'])) {
+    // echo "Add";
+    $sql = "INSERT INTO bank.teller VALUES ('$TELL_ID', '$TELL_NAME', $TELL_SALARY, '$TELL_EMPDATE')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "data stored in a database successfully";
+    } else {
+        echo mysqli_error($conn);
+    }
+
+}
+
+elseif (isset($_POST['updateStudentInfo'])) {
+    // echo "Update";
+    echo "<script> alert('Hellow World'); </script> ";
+
+    $origin = "SELECT * FROM student WHERE STU_ID = $STU_ID AND ENRL_YEAR = $ENRL_YEAR";
+    $result = $conn->query($sql);
+    $rows = $result->fetch_assoc();
+}
+?>
