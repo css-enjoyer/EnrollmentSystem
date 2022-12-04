@@ -8,7 +8,12 @@ $ENRL_YEAR = substr($_REQUEST["userName"], 0, 4);
 $sql = "SELECT * FROM school.course";
 $result = $conn->query($sql);
 
-$student_info_query = "SELECT * FROM student WHERE STU_ID = $STU_ID AND ENRL_YEAR = $ENRL_YEAR;";
+$student_info_query = "SELECT * FROM student AS s
+INNER JOIN department AS d
+    ON s.DEPT_ID = d.DEPT_ID
+INNER JOIN specialization AS sp
+    ON s.SPEC_ID = sp.SPEC_ID
+        WHERE s.STU_ID = $STU_ID AND s.ENRL_YEAR = $ENRL_YEAR;";
 $student_info_result = $conn->query($student_info_query);
 $student_info_row = $student_info_result->fetch_assoc();
 
@@ -18,8 +23,8 @@ $STU_MI = $student_info_row["STU_MI"];
 $STU_LNAME = $student_info_row["STU_LNAME"];
 $STU_GENDER = $student_info_row["STU_GENDER"];
 $STU_BDAY = $student_info_row["STU_BDAY"];
-$DEPT_ID = $student_info_row["DEPT_ID"];
-$SPEC_ID = $student_info_row["SPEC_ID"];
+$DEPT_NAME = $student_info_row["DEPT_NAME"];
+$SPEC_NAME = $student_info_row["SPEC_NAME"];
 
 $info_query = "SELECT * FROM student AS s
 	INNER JOIN enrollment AS e
@@ -40,6 +45,17 @@ $info_query_result = $conn->query($info_query);
 // $info_query_row = $info_query_result->fetch_assoc();
 
 $conn->close();
+
+// UPDATE FUNCTION
+function updateStudentInfo()
+{
+    echo "
+            <script>
+              alert('Hellow World');
+            </script>
+        ";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -56,8 +72,8 @@ $conn->close();
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
 </head>
 <script>
-    console.log("========== LOG ==========")
-    console.log(<?php echo $ENRL_YEAR . " " . $STU_ID ?>);
+    // console.log("========== LOG ==========")
+    // console.log(<?php echo $ENRL_YEAR . " " . $STU_ID ?>);
 
     function openInfoForm() {
         document.getElementById("updateinfoform").style.display = "flex";
@@ -106,8 +122,8 @@ $conn->close();
                     <td><?= $ENRL_YEAR . $STU_ID ?></td>
                     <td><?= $STU_FNAME . " " . $STU_LNAME ?></td>
                     <td><?= $STU_EMAIL ?></td>
-                    <td><?= $DEPT_ID ?></td>
-                    <td><?= $SPEC_ID ?></td>
+                    <td><?= $DEPT_NAME ?></td>
+                    <td><?= $SPEC_NAME ?></td>
                     <td><?= $STU_BDAY ?></td>
                     <td><?= $STU_GENDER ?></td>
                     <td>
@@ -131,13 +147,13 @@ $conn->close();
                     <th>Class Instructor</th>
                     <th>Actions</th>
                 </tr>
-                
+
                 <?php while ($info_query_row = $info_query_result->fetch_assoc()) {            ?>
                     <tr>
                         <td><?php echo $info_query_row["CRS_NAME"]; ?></td>
                         <td><?php echo $info_query_row["CRS_DESC"]; ?></td>
                         <td><?php echo $info_query_row["CRS_LEVEL"]; ?></td>
-                        <td><?php echo $info_query_row["DEPT_ID"]; ?></td>
+                        <td><?php echo $info_query_row["DEPT_NAME"]; ?></td>
                         <td><?php echo $info_query_row["CLASS_SECTION"]; ?></td>
                         <td><?php echo $info_query_row["CRS_UNIT"]; ?></td>
                         <td><?php echo $info_query_row["INSTR_FNAME"]; ?></td>
@@ -182,7 +198,7 @@ $conn->close();
         </form>
 
         <!-- Update Info Form Popup [Add form action to update student information]-->
-        <form action="" method="POST" name="myForm" id="updateinfoform">
+        <form action="StudentFunction.php" method="POST" name="myForm" id="updateinfoform">
             <fieldset>
                 <legend>Enter your personal information: </legend>
                 <label>First Name: <input type="text" name="FNAME" required></label>
@@ -195,7 +211,7 @@ $conn->close();
                 <label>Date of Birth: <input type="date" name="BDAY" required></label>
                 <div class="formBtns">
                     <button onclick="closeInfoForm()" class="update-btn cancel">Close</button>
-                    <input type="submit" value="Update" class="update-btn" formaction="">
+                    <input type="submit" name="updateStudentInfo" value="Update" class="update-btn">
                 </div>
             </fieldset>
         </form>
@@ -204,3 +220,27 @@ $conn->close();
 </body>
 
 </html>
+
+// TO MOVE TO STUDENTFUNCTION PAGE
+<?php
+if (isset($_POST['ADD'])) {
+    // echo "Add";
+    $sql = "INSERT INTO bank.teller VALUES ('$TELL_ID', '$TELL_NAME', $TELL_SALARY, '$TELL_EMPDATE')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "data stored in a database successfully";
+    } else {
+        echo mysqli_error($conn);
+    }
+
+}
+
+elseif (isset($_POST['updateStudentInfo'])) {
+    // echo "Update";
+    echo "<script> alert('Hellow World'); </script> ";
+
+    $origin = "SELECT * FROM student WHERE STU_ID = $STU_ID AND ENRL_YEAR = $ENRL_YEAR";
+    $result = $conn->query($sql);
+    $rows = $result->fetch_assoc();
+}
+?>
