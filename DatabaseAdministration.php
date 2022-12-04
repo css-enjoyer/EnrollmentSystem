@@ -1,9 +1,9 @@
 <?php
-    $conn = new mysqli("localhost:3310", "root", "0413", "schoolenrollment");
+    $conn = new mysqli("localhost:3306", "root", "mysql123", "school");
     if($conn -> connect_error) {
         die ("Connect Error (".$conn->connect_Errorno.") ".$conn->connect_error);
     }
-    $sql = "SELECT * FROM schoolenrollment.Students";
+    $sql = "SELECT * FROM school.student";
     $result = $conn -> query($sql);
     $conn -> close();
 ?>

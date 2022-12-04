@@ -141,7 +141,7 @@
                     </tr>
             <?php   while($row=$result->fetch_assoc()) {            ?>
                     <tr>
-                        <td><input name="Courses[]" type="checkbox" value="<?php $row["CRS_ID"]?>"></td>
+                        <td><input name="Courses[]" type="checkbox" value="<?php echo $row["CRS_ID"]?>"></td>
                         <td><?php echo $row["CRS_ID"];?></td>
                         <td><?php echo $row["CRS_NAME"];?></td>
                         <td><?php echo $row["CRS_DESC"];?></td>
