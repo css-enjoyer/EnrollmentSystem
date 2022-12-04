@@ -28,7 +28,13 @@ $info_query = "SELECT * FROM student AS s
 $info_query_result = $conn->query($info_query);
 $info_query_row = $info_query_result->fetch_assoc();
 
+$INSTR_EMAIL = $info_query_row["INSTR_EMAIL"];
 $INSTR_FNAME = $info_query_row["INSTR_FNAME"];
+$INSTR_MI = $info_query_row["INSTR_MI"];
+$INSTR_LNAME = $info_query_row["INSTR_LNAME"];
+$INSTR_GENDER = $info_query_row["INSTR_GENDER"];
+$INSTR_BDAY = $info_query_row["INSTR_BDAY"];
+$DEPT_NAME = $info_query_row["DEPT_NAME"];
 
 $conn->close();
 ?>
@@ -61,6 +67,32 @@ $conn->close();
     <div class="mainsection">
         <h1>System Dashboard</h1>
         <h1><?= $INSTR_FNAME ?>'s Profile</h1>
+        <fieldset>
+            <table>
+                <tr>
+                    <th>Instructor ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Birthday</th>
+                    <th>Gender</th>
+                    <th>Actions</th>
+                </tr>
+                <!-- Update this section to print student information from table with php -->
+                <tr>
+                    <td><?= $EMPL_YEAR . $INSTR_ID ?></td>
+                    <td><?= $INSTR_FNAME . " " . $INSTR_LNAME ?></td>
+                    <td><?= $INSTR_EMAIL ?></td>
+                    <td><?= $DEPT_NAME ?></td>
+                    <td><?= $INSTR_BDAY ?></td>
+                    <td><?= $INSTR_GENDER ?></td>
+                    <td>
+                        <button onclick="" class="updateinfo-btn">Update</button>
+                    </td>
+                    <!--  -->
+                </tr>
+            </table>
+        </fieldset>
     </div>
 </body>
 
