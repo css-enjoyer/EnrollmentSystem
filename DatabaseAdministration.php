@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
+    $conn = new mysqli("localhost:3306", "root", "mysql", "school");
+=======
     $conn = new mysqli("localhost:3310", "root", "0413", "school");
+>>>>>>> 495963a94d43a0795df09d496dd7c91335abaa20
     if($conn -> connect_error) {
         die ("Connect Error (".$conn->connect_Errorno.") ".$conn->connect_error);
     }
