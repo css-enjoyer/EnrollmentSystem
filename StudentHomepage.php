@@ -1,8 +1,10 @@
 <?php
-$conn = new mysqli("localhost:3310", "root", "mysql", "school");
+$conn = new mysqli("localhost:3306", "root", "mysql123", "school");
+
 if ($conn->connect_error) {
     die("Connect Error (" . $conn->connect_Errorno . ") " . $conn->connect_error);
 }
+
 $STU_ID = substr($_REQUEST["userName"], 4);
 $ENRL_YEAR = substr($_REQUEST["userName"], 0, 4);
 $sql = "SELECT * FROM school.course";
@@ -201,6 +203,10 @@ function updateStudentInfo()
         <form action="StudentFunction.php" method="POST" name="myForm" id="updateinfoform">
             <fieldset>
                 <legend>Enter your personal information: </legend>
+
+                <input type="hidden" id="stuID" name="stuID" value="<?php echo $STU_ID; ?>">
+                <input type="hidden" id="enrlYear" name="enrlYear" value="<?php echo $ENRL_YEAR; ?>">
+
                 <label>First Name: <input type="text" name="FNAME" required></label>
                 <label>Middle Initial: <input type="text" name="MI" required></label>
                 <label>Last Name: <input type="text" name="LNAME" required></label>
@@ -211,36 +217,11 @@ function updateStudentInfo()
                 <label>Date of Birth: <input type="date" name="BDAY" required></label>
                 <div class="formBtns">
                     <button onclick="closeInfoForm()" class="update-btn cancel">Close</button>
-                    <input type="submit" name="updateStudentInfo" value="Update" class="update-btn">
+                    <input type="submit" name="UPDATE-STU" value="Update" class="update-btn">
                 </div>
             </fieldset>
         </form>
 
     </div>
 </body>
-
 </html>
-
-// TO MOVE TO STUDENTFUNCTION PAGE
-<?php
-if (isset($_POST['ADD'])) {
-    // echo "Add";
-    $sql = "INSERT INTO bank.teller VALUES ('$TELL_ID', '$TELL_NAME', $TELL_SALARY, '$TELL_EMPDATE')";
-
-    if (mysqli_query($conn, $sql)) {
-        echo "data stored in a database successfully";
-    } else {
-        echo mysqli_error($conn);
-    }
-
-}
-
-elseif (isset($_POST['updateStudentInfo'])) {
-    // echo "Update";
-    echo "<script> alert('Hellow World'); </script> ";
-
-    $origin = "SELECT * FROM student WHERE STU_ID = $STU_ID AND ENRL_YEAR = $ENRL_YEAR";
-    $result = $conn->query($sql);
-    $rows = $result->fetch_assoc();
-}
-?>
