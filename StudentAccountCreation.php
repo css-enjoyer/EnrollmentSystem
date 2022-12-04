@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="mainsection">
-            <form action="CreateAccount.php">
+            <form action="StudentEnrollment.php">
                 <fieldset>
                     <legend>Enter your personal information: </legend>
                     <label>First Name: <input type="text" name="FNAME" required></label>
@@ -93,7 +93,7 @@
                     </div>
                     
                 </fieldset>
-                
+                <input type="submit" value="Proceed &#8594" class="btn">
             </form>
         </div>
     </body>
