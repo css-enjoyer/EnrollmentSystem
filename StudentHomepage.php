@@ -8,21 +8,18 @@
     $sql = "SELECT * FROM school.course";
     $result = $conn -> query($sql);
     
+    $student_info_query = "SELECT * FROM student WHERE STU_ID = $STU_ID AND ENRL_YEAR = $ENRL_YEAR;";
+    $student_info_result = $conn -> query($student_info_query);
+    $student_info_row = $student_info_result -> fetch_assoc();
 
-    // $ENRL_YEAR = date("Y");
-    // $STU_ACCT_PASSWORD = $_REQUEST["PASSWORD"];
-    // $add_stu_acct_query = "INSERT INTO student_account(ENRL_YEAR, STU_ACCT_PASSWORD) VALUES ($ENRL_YEAR, '$STU_ACCT_PASSWORD');";
-    // mysqli_query($conn, $add_stu_acct_query);
-    // $STU_ID = $conn->insert_id;
-
-    // $STU_EMAIL = $_REQUEST["EMAIL"];
-    // $STU_FNAME = $_REQUEST["FNAME"];
-    // $STU_MI = $_REQUEST["MI"];
-    // $STU_LNAME = $_REQUEST["LNAME"];
-    // $STU_GENDER = $_REQUEST["GENDER"];
-    // $STU_BDAY = $_REQUEST["BDAY"];
-    // $DEPT_ID = $_REQUEST["DEPT_ID"];
-    // $SPEC_ID = $_REQUEST["SPEC_ID"];
+    $STU_EMAIL = $student_info_row["STU_EMAIL"];
+    $STU_FNAME = $student_info_row["STU_FNAME"];
+    $STU_MI = $student_info_row["STU_MI"];
+    $STU_LNAME = $student_info_row["STU_LNAME"];
+    $STU_GENDER = $student_info_row["STU_GENDER"];
+    $STU_BDAY = $student_info_row["STU_BDAY"];
+    $DEPT_ID = $student_info_row["DEPT_ID"];
+    $SPEC_ID = $student_info_row["SPEC_ID"];
 
     // $add_stu_query = "INSERT INTO student(STU_ID, ENRL_YEAR, STU_FNAME, STU_MI, STU_LNAME, STU_BDAY, STU_GENDER, DEPT_ID, SPEC_ID, STU_EMAIL)
 	// VALUES ($STU_ID, $ENRL_YEAR, '$STU_FNAME', '$STU_MI', '$STU_LNAME', '$STU_BDAY', '$STU_GENDER', $DEPT_ID, $SPEC_ID, '$STU_EMAIL');";
@@ -87,7 +84,7 @@
                     <!-- Update this section to print student information from table with php -->
                     <tr>
                         <td><?= $ENRL_YEAR . $STU_ID ?></td>
-                        <td><?= $STU_FNAME . $STU_FNAME ?></td>
+                        <td><?= $STU_FNAME . " " . $STU_LNAME ?></td>
                         <td><?= $STU_EMAIL ?></td>
                         <td><?= $DEPT_ID ?></td>
                         <td><?= $SPEC_ID ?></td>
