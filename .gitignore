@@ -1,1 +1,2 @@
 # Ignore individual settings for database connection
+/config.php
