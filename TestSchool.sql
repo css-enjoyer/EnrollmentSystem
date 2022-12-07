@@ -202,7 +202,10 @@ SELECT
     s.STU_ADDRESS AS "ADDRESS",
     s.STU_TYPE AS "STUDENT TYPE"
 FROM 
-	student AS s;
+	student AS s
+WHERE
+	-- REPLACE W/ $STU_ID
+	s.STU_ID = 1000;
 
 
 -- ENROLLED COURSES
@@ -218,7 +221,10 @@ FROM enrollment AS e
 	INNER JOIN
 		instructor AS i
 	ON
-		c.INSTR_ID = i.INSTR_ID;
+		c.INSTR_ID = i.INSTR_ID
+WHERE 
+	-- REPLACE W/ $STU_ID
+	STU_ID = 1000;
         
         
 -- INSTRUCTOR VIEW --
