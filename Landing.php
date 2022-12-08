@@ -1,4 +1,4 @@
-<?php include_once 'config.php'; ?>
+<?php require 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -44,21 +44,21 @@
 
             <form method="POST" name="myForm" id="stuform" class="loginform">
                 <h2>Student Login</h2>
-                <label>Username: <input type="number" id="userName" name="userName" required></label>
+                <label>Username: <input type="text" id="userName" name="userName" required></label>
                 <label>Password: <input type="password" id="passWord" name="passWord" required></label>
                 <div class="formBtns">
                     <button onClick="closeStudentForm()">Cancel</button>
-                    <input formaction="StudentHomepage.php" type="submit">
+                    <input formaction="student/StudentHomepage.php" type="submit">
                 </div>
             </form>
 
             <form method="POST" name="myForm" id="stafform" class="loginform">
                 <h2>Staff Login</h2>
-                <label>Username: <input type="number" id="userName" name="userName" required></label>
+                <label>Username: <input type="text" id="userName" name="userName" required></label>
                 <label>Password: <input type="password" id="passWord" name="passWord" required></label>
                 <div class="formBtns">
                     <button onClick="closeStaffForm()">Cancel</button>
-                    <input formaction="StaffManagement.php" type="submit">
+                    <input formaction="staff/StaffManagement.php" type="submit">
                 </div>
             </form>
             
