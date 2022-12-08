@@ -54,4 +54,20 @@ if (isset($_POST['reg_stu'])) {
 }
 
 // ----------- LOGIN STUDENT ----------
+if (isset($_POST['login_stu'])) {
+    $STU_EMAIL = mysqli_real_escape_string($db, $_POST['STU_EMAIL']);
+    $STU_PASSWORD = mysqli_real_escape_string($db, $_POST['STU_PASSWORD']);
 
+    if (count($errors) == 0) {
+        // $STU_PASSWORD = md5($STU_PASSWORD); // for encryption
+        $query = "SELECT * FROM student WHERE STU_EMAIL='$STU_EMAIL' AND STU_PASSWORD='$STU_PASSWORD'";
+        $results = mysqli_query($db, $query);
+        if (mysqli_num_rows($results) == 1) {
+            $_SESSION['STU_EMAIL'] = $STU_EMAIL;
+            $_SESSION['success'] = "You are now logged in";
+            header('location: StudentHomepage.php');
+        } else {
+            array_push($errors, "Wrong username/password combination");
+        }
+    }
+}

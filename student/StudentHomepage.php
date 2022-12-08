@@ -1,6 +1,17 @@
 <?php
 require ('./../config.php');
+include('StudentServer.php');
 session_start();
+if (!isset($_SESSION['STU_EMAIL'])) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: ./../Landing.php');
+}
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['STU_EMAIL']);
+    header("location: ./../Landing.php");
+}
+
 $conn = new mysqli(DB_HOST, DB_USER, DB_PWD, DB_NAME);
 
 if ($conn->connect_error) {
@@ -133,7 +144,7 @@ $conn->close();
         <ul>
             <li>Notifications</li>
             <li>Messages</li>
-            <li><a href="Landing.html">Logout</a></li>
+            <li><a href="StudentHomepage.php?logout=1">Logout</a></li>
         </ul>
     </div>
 
