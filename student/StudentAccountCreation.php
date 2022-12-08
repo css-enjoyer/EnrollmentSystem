@@ -1,5 +1,6 @@
 <?php
-require ('./../config.php');
+require('./../config.php');
+include('StudentServer.php');
 $conn = new mysqli(DB_HOST, DB_USER, DB_PWD, DB_NAME);
 
 if ($conn->connect_error) {
@@ -23,7 +24,7 @@ $conn->close();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
 </head>
-<script>
+<!-- <script>
     function showDiv(select) {
         if (select.value == "1") {
             document.getElementById('CS-Tracks').style.display = "block";
@@ -43,30 +44,33 @@ $conn->close();
             document.getElementById('IT-Tracks').style.display = "none";
         }
     }
-</script>
+</script> -->
 
 <body>
     <div class="navsection">
         <div class="logo-container">
-            <img src="images/ustseal.png" width="50px">
+            <img src="./../images/ustseal.png" width="50px">
         </div>
     </div>
     <div class="mainsection">
         <h1>Your journey starts here!</h1>
-        <form action="StudentEnrollment.php" method="POST">
+        <form action="StudentAccountCreation.php" method="POST">
+            <?php //include('StudentErrors.php'); ?>
             <fieldset>
                 <legend>Enter your personal information: </legend>
-                <label>Personal Email: <input type="email" name="EMAIL" required></label>
-                <label>First Name: <input type="text" name="FNAME" required></label>
-                <label>Middle Initial: <input type="text" name="MI" required></label>
-                <label>Last Name: <input type="text" name="LNAME" required></label>
-                <label>Gender: <select name="GENDER" required>
+                <label>Personal Email: <input type="email" name="STU_EMAIL" required></label>
+                <label>First Name: <input type="text" name="STU_FNAME" required></label>
+                <label>Middle Initial: <input type="text" name="STU_MI" required></label>
+                <label>Last Name: <input type="text" name="STU_LNAME" required></label>
+                <label>Gender: <select name="STU_GENDER" required>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select></label>
-                <label>Date of Birth: <input type="date" name="BDAY" required></label>
+                <label>Date of Birth: <input type="date" name="STU_BDAY" required></label>
+                <label>Address: <input type="text" name="STU_ADDRESS" required></label>
+                <label>Contact: <input type="number" name="STU_CONTACT" required></label>
             </fieldset>
-            <fieldset>
+            <!-- <fieldset>
                 <legend>Choose a department: </legend>
                 <label>Department of: <select type="number" name="DEPT_ID" onchange="showDiv(this)" required>
                         <option value="">--Choose--</option>
@@ -97,10 +101,11 @@ $conn->close();
                             <option value="57">IT Automation</option>
                         </select></label>
                 </div>
-            </fieldset>
+            </fieldset> -->
             <fieldset>
                 <legend>Enter your desired password:</legend>
-                <label>Password: <input type="password" name="PASSWORD" required></label>
+                <label>Password: <input type="password" name="STU_PASSWORD" required></label>
+                <label>Confirm Password: <input type="password" name="STU_PASSWORD_2" required></label>
             </fieldset>
             <input type="submit" value="Proceed &#8594" class="btn">
         </form>
