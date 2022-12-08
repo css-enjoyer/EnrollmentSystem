@@ -148,7 +148,7 @@ function deleteEnrollment($ENRL_ID)
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enrollment</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./../styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
@@ -174,12 +174,12 @@ function deleteEnrollment($ENRL_ID)
 <body>
     <div class="navsection">
         <div class="logo-container">
-            <img src="images/ustseal.png" width="50px">
+            <img src="./../images/ustseal.png" width="50px">
         </div>
         <ul>
             <li>Notifications</li>
             <li>Messages</li>
-            <li><a href="Landing.html">Logout</a></li>
+            <li><a href="./../Landing.php">Logout</a></li>
         </ul>
     </div>
 
