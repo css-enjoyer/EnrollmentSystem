@@ -1,6 +1,6 @@
 <?php
-require('./../config.php');
-include('StudentServer.php');
+// require('./../config.php');
+require_once('StudentServer.php');
 $conn = new mysqli(DB_HOST, DB_USER, DB_PWD, DB_NAME);
 
 if ($conn->connect_error) {
