@@ -12,12 +12,14 @@ CREATE TABLE student (
     STU_LNAME VARCHAR(50) NOT NULL, 
     STU_GENDER VARCHAR(10) NOT NULL,
     STU_BDAY DATE NOT NULL,
+    STU_PASSWORD VARCHAR(255) NOT NULL,
 
     -- EDITABLE DETAILS
     STU_ADDRESS VARCHAR(255) NOT NULL,
-    STU_CONTACT VARCHAR(11),
-    STU_EMAIL VARCHAR(255) NOT NULL,
-    STU_TYPE VARCHAR(10),
+    STU_CONTACT VARCHAR(11) DEFAULT "N/A",
+    STU_TYPE VARCHAR(10) DEFAULT "N/A",
+
+    STU_EMAIL VARCHAR(255) NOT NULL UNIQUE,
 
     -- KEYS
     PRIMARY KEY (STU_ID)
@@ -31,12 +33,14 @@ CREATE TABLE instructor (
     INSTR_MI VARCHAR(10) DEFAULT "N/A", 
     INSTR_LNAME VARCHAR(50) NOT NULL, 
     INSTR_GENDER VARCHAR(10) NOT NULL, 
-    INSTR_BDAY DATE NOT NULL, 
+    INSTR_BDAY DATE NOT NULL,
+    INSTR_PASSWORD VARCHAR(255) NOT NULL,
 
     -- EDITABLE DETAILS
     INSTR_ADDRESS VARCHAR(255) NOT NULL,
-    INSTR_CONTACT VARCHAR(11),
-    INSTR_EMAIL VARCHAR(255) NOT NULL,
+    INSTR_CONTACT VARCHAR(11) DEFAULT "N/A",
+
+    INSTR_EMAIL VARCHAR(255) NOT NULL UNIQUE,
 
     -- KEYS
     PRIMARY KEY (INSTR_ID)
@@ -77,46 +81,46 @@ CREATE TABLE enrollment (
 
 
 INSERT INTO 
-    student (STU_FNAME, STU_MI, STU_LNAME, STU_GENDER, STU_BDAY,
+    student (STU_FNAME, STU_MI, STU_LNAME, STU_GENDER, STU_BDAY, STU_PASSWORD,
              STU_ADDRESS, STU_CONTACT, STU_EMAIL)
 	VALUES 
-		("Harvey", "C", "Normanbloom", "Male", "1995-04-12",
+		("Harvey", "C", "Normanbloom", "Male", "1995-04-12", "pw",
 		 "17 Charming St", "09991678012", "harvey@gmail.com"),
-		("Rosalita", "B", "Diaz", "Female", "1990-08-25",
+		("Rosalita", "B", "Diaz", "Female", "1990-08-25", "pw",
 		 "99 Washington St", "09214678912", "rosa@gmail.com"),
-		("Speed", "J", "Yeet", "Male", "2007-12-25",
+		("Speed", "J", "Yeet", "Male", "2007-12-25", "pw",
 		 "30 Novuhley St", "09153288011", "speed@gmail.com"),
-		("Raymond", "J", "Holt", "Male", "2000-10-17",
+		("Raymond", "J", "Holt", "Male", "2000-10-17", "pw",
 		 "10 Stoic St", "09178985343", "raymond@gmail.com"),
-		("Shego", "G", "Xavier", "Female", "2002-07-08",
+		("Shego", "G", "Xavier", "Female", "2002-07-08", "pw",
 		 "21 Goth St", "09186661324", "shego@gmail.com");
     
 
 INSERT INTO 
-    instructor (INSTR_FNAME, INSTR_MI, INSTR_LNAME, INSTR_GENDER, INSTR_BDAY, 
+    instructor (INSTR_FNAME, INSTR_MI, INSTR_LNAME, INSTR_GENDER, INSTR_BDAY, INSTR_PASSWORD,
                INSTR_ADDRESS, INSTR_CONTACT, INSTR_EMAIL)
 	VALUES 
-		("Janette", "Z", "Sideno", "Female", "1973-07-15", 
+		("Janette", "Z", "Sideno", "Female", "1973-07-15", "pw",
 		 "101 John St.", "09108700012", "janette.sideno.cics@ust.edu.ph"),
-		("Perla", "Y", "Cosme", "Female", "1970-05-23", 
+		("Perla", "Y", "Cosme", "Female", "1970-05-23", "pw",
 		 "201 Paul St.", "09108710112", "perla.cosme.cics@ust.edu.ph"),
-		("Darlene", "W", "Alberto", "Female", "1971-11-03", 
+		("Darlene", "W", "Alberto", "Female", "1971-11-03", "pw",
 		 "301 Peter St.", "09108812312", "darlene.alberto.cics@ust.edu.ph"),
-		("Francis", "X", "Alarcon", "Male", "1990-03-11", 
+		("Francis", "X", "Alarcon", "Male", "1990-03-11", "pw",
 		 "401 Miami St.", "09104412312", "francis.alarcon.cics@ust.edu.ph"),
-		("Lawrence", "G", "Decamora", "Male", "1975-10-19", 
+		("Lawrence", "G", "Decamora", "Male", "1975-10-19", "pw",
 		 "501 Chicago St.", "09105512312", "lawrence.decamora.cics@ust.edu.ph"),
-		("Jonathan", "A", "Cabero", "Male", "1970-01-30", 
+		("Jonathan", "A", "Cabero", "Male", "1970-01-30", "pw",
 		 "601 Angeles St.", "09125512312", "jonathan.cabero.cics@ust.edu.ph"),
-		("Cecil", "B", "Delfinado", "Male", "1978-08-17", 
+		("Cecil", "B", "Delfinado", "Male", "1978-08-17", "pw",
 		 "701 Tekken St.", "09155512312", "cecil.delfinado.cics@ust.edu.ph"),
-		("Sarah", "C", "Ortiz", "Female", "1975-07-08", 
+		("Sarah", "C", "Ortiz", "Female", "1975-07-08", "pw",
 		 "801 Genesis St.", "09161123123", "sarah.ortiz.cics@ust.edu.ph"),
-		("Resty", "D", "Oliveros", "Male", "1993-05-11", 
+		("Resty", "D", "Oliveros", "Male", "1993-05-11", "pw",
 		 "901 Stallone St.", "09871312312", "resty.oliveros.cics@ust.edu.ph"),
-		("Sarah", "E", "Zamudio", "Female", "1980-12-10", 
+		("Sarah", "E", "Zamudio", "Female", "1980-12-10", "pw",
 		 "1001 Enearth St.", "09191312312", "sarah.zamudio.cics@ust.edu.ph"),
-		("Lawdenmarc", "F", "Decamora", "Male", "1981-07-09", 
+		("Lawdenmarc", "F", "Decamora", "Male", "1981-07-09", "pw",
 		 "2001 Baker St.", "09281312312", "lawdenmarc.decamora.cics@ust.edu.ph");
 
 
