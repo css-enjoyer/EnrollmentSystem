@@ -1,5 +1,5 @@
 <?php
-require ('./../config.php');
+require('./../config.php');
 include('StudentServer.php');
 session_start();
 if (!isset($_SESSION['STU_EMAIL'])) {
@@ -19,24 +19,9 @@ if ($conn->connect_error) {
 }
 
 $STU_EMAIL = $_SESSION['STU_EMAIL'];
-$stu_info_result = mysqli_query($conn, "SELECT * FROM student WHERE STU_EMAIL ='$STU_EMAIL';"); 
+$stu_info_result = mysqli_query($conn, "SELECT * FROM student WHERE STU_EMAIL ='$STU_EMAIL';");
 $stu_info_row = mysqli_fetch_assoc($stu_info_result);
 $STU_ID = $stu_info_row['STU_ID'];
-
-// RETRIEVING STU_ID
-// $STU_ID = $_REQUEST['userName'];
-// testing
-// $STU_ID = 1000;
-
-/* TO UPDATE: Check if STU_ID input is valid.
-if ($STU_ID != 1000 || $STU_ID != 1001 || $STU_ID != 1002 || 
-    $STU_ID != 1003 || $STU_ID != 1004) {
-
-    echo "<script> location.href='Landing.html'; </script>";
-    exit;
-
-}
-*/
 
 
 // QUERIES FOR DATA RETRIEVAL //
@@ -75,7 +60,28 @@ $stu_enrolled_sql = "SELECT
                         STU_ID = $STU_ID";
 
 // Available Courses
-$crs_sql = "SELECT * FROM course";
+$crs_sql = "SELECT DISTINCT c.CRS_NAME, c.CRS_UNIT,
+-- c.CRS_NAME AS 'COURSE NAME', 
+-- c.CRS_UNIT AS 'UNITS', 
+CONCAT(i.INSTR_LNAME, ', ', i.INSTR_FNAME, ' ', i.INSTR_MI) AS 'INSTR_NAME'
+FROM course AS c
+INNER JOIN 
+    enrollment AS e
+ON 
+    c.CRS_ID = e.CRS_ID
+INNER JOIN
+    instructor AS i
+ON c.INSTR_ID = i.INSTR_ID
+INNER JOIN
+    student AS s
+ON e.STU_ID = s.STU_ID
+WHERE 
+c.CRS_ID NOT IN (SELECT c.CRS_ID FROM course AS c 
+INNER JOIN enrollment AS e 
+ON c.CRS_ID = e.CRS_ID 
+INNER JOIN student AS s 
+ON e.STU_ID = s.STU_ID
+WHERE s.STU_ID = $STU_ID);";
 
 
 // ROW INIT //
@@ -83,10 +89,10 @@ $stu_profile_result = $conn->query($stu_profile_sql);
 $stu_profile_row = $stu_profile_result->fetch_assoc();
 
 $stu_enrolled_result = $conn->query($stu_enrolled_sql);
-$stu_enrolled_row = $stu_enrolled_result->fetch_assoc();
+// $stu_enrolled_row = $stu_enrolled_result->fetch_assoc();
 
 $crs_sql_result = $conn->query($crs_sql);
-$crs_sql_row = $crs_sql_result->fetch_assoc();
+// $crs_sql_row = $crs_sql_result->fetch_assoc();
 
 
 // INIT STUDENT DETAILS //
@@ -209,30 +215,28 @@ $conn->close();
 
 
         <!-- Enroll Course Form Popup -->
-        <form action="StudentFunction.php" method="POST" id="enrollform" name="enrollform">
+        <form action="" method="POST" id="enrollform" name="enrollform">
             <fieldset>
                 <legend>Available Courses</legend>
                 <table>
                     <tr>
                         <th>+</th>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Level</th>
-                        <th>Units</th>
+                        <th>Course Name</th>
+                        <th>Course Units</th>
+                        <th>Instructor</th>
                     </tr>
                     <!-- UPDATE: ONLY VIEW NON-DUPLICATE COURSES -->
                     <!-- UPDATE: RESPECTIVE VARIABLES FOR ROW, RESULT, ETC. -->
-                    <?php while ($row = $result->fetch_assoc()) {            ?>
+                    <?php while ($crs_sql_row = $crs_sql_result->fetch_assoc()) {            ?>
                         <tr>
                             <td><input name="Courses[]" type="checkbox" value="<?php echo $row["CRS_ID"] ?>"></td>
-                            <td><?php echo $row["CRS_ID"]; ?></td>
-                            <td><?php echo $row["CRS_NAME"]; ?></td>
-                            <td><?php echo $row["CRS_UNIT"]; ?></td>
+                            <td><?php echo $crs_sql_row["CRS_NAME"]; ?></td>
+                            <td><?php echo $crs_sql_row["CRS_UNIT"]; ?></td>
+                            <td><?php echo $crs_sql_row["INSTR_NAME"]; ?></td>
                             <!-- ADD INSTRUCTOR (?) -->
 
                             <!-- SESSION: Student ID -->
-                            <input type="hidden" name="STU_ID" value="<?= $STU_ID ?>">
+                            <!-- <input type="hidden" name="STU_ID" value="<?= $STU_ID ?>"> -->
                         </tr>
                     <?php   }                                               ?>
                 </table>
