@@ -162,6 +162,30 @@ $conn->close();
 
             <button class="enrollcrs-btn">Add New Course +</button>
         </fieldset>
+
+        <!-- ENROLLMENT TABLE -->
+        <fieldset>
+            <legend>Current Enrollments</legend>
+            <table class="staff-table">
+                <tr>
+                    <th>Enrollment ID</th>
+                    <th>Student ID</th>
+                    <th>Course ID</th>
+                </tr>
+                <?php while ($enrl_sql_row = $enrl_sql_result->fetch_assoc()) {            ?>
+                    <tr>
+                        <td><?php echo $enrl_sql_row['ENRL_ID']; ?></td>
+                        <td><?php echo $enrl_sql_row['STU_ID']; ?></td>
+                        <td><?php echo $enrl_sql_row['CRS_ID']; ?></td>
+                        <!-- TODO: BUTTON NOT FUNCTIONAL -->
+                        <td><button action="" class="removecrs-btn">Delete Enrollment</button></td>
+                    </tr>
+                <?php   }                                               ?>
+            </table>
+
+            <button class="enrollcrs-btn">Enroll Student +</button>
+        </fieldset>
+
     </div>
 </body>
 
