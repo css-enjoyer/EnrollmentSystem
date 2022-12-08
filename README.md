@@ -1,6 +1,9 @@
 # EnrollmentSystem
 2607 Course Project
 
+## NOTE:
+- **Only** change the `config.php` for sql connection
+
 ## TODO:
 - [x] Finish sql
 - [x] Finish frontend
