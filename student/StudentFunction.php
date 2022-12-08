@@ -1,10 +1,9 @@
 <?php
-
-// Port, UName, Password, Database
-$conn = new mysqli("localhost:3306", "root", "mysql123", "school");
+require('./../config.php');
+$conn = new mysqli(DB_HOST, DB_USER, DB_PWD, DB_NAME);
 
 if ($conn->connect_error) {
-    die('Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error);
+    die('Connect Error (' . $conn->connect_Errorno . ') ' . $conn->connect_error);
 }
 
 $sql = "SELECT * FROM school.student";

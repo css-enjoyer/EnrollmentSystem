@@ -1,8 +1,6 @@
 <?php
-$conn = new mysqli("localhost:3306", 
-                   "root", 
-                   "mysql123", 
-                   "school");
+require ('./../config.php');
+$conn = new mysqli(DB_HOST, DB_USER, DB_PWD, DB_NAME);
 
 if ($conn->connect_error) {
     die("Connect Error (" . $conn->connect_Errorno . ") " . $conn->connect_error);
@@ -291,7 +289,7 @@ function deleteEnrollment($ENRL_ID)
                 <label>Address: <input type="text" name="FNAME" required></label>
                 <label>Contact Number: <input type="text" name="MI" required></label>
                 <label>Personal Email: <input type="text" name="LNAME" required></label>
-                
+
                 <!-- SUBMIT && CLOSE -->
                 <div class="formBtns">
                     <button onclick="closeInfoForm()" class="update-btn cancel">Close</button>
@@ -302,4 +300,5 @@ function deleteEnrollment($ENRL_ID)
 
     </div>
 </body>
+
 </html>
