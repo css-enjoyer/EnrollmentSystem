@@ -241,11 +241,15 @@ SELECT
     i.INSTR_ADDRESS AS "ADDRESS"
     -- Add DEPARTMENT table (?)
 FROM
-	instructor AS i;
+	instructor AS i
+WHERE 
+	-- REPLACE W/ $INSTR_ID
+	i.INSTR_ID = 6000;
 
 -- CURRENT STUDENTS
 SELECT 
-	CONCAT(s.STU_FNAME, ", ", s.STU_FNAME, " ", s.STU_MI) AS "STUDENT NAME",
+	e.STU_ID AS "STUDENT ID",
+	CONCAT(s.STU_LNAME, ", ", s.STU_FNAME, " ", s.STU_MI) AS "STUDENT NAME",
 	c.CRS_NAME AS "COURSE NAME",
     c.CRS_UNIT AS "UNITS"
 FROM enrollment AS e
@@ -259,7 +263,7 @@ FROM enrollment AS e
 		e.CRS_ID = c.CRS_ID
 WHERE 
 	-- REPLACE WITH $INSTR_ID.
-	INSTR_ID = 6006;
+	INSTR_ID = 6004;
     
     
 -- ADMIN VIEW -- 
