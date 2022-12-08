@@ -18,7 +18,6 @@ CREATE TABLE student (
     STU_ADDRESS VARCHAR(255) NOT NULL,
     STU_CONTACT VARCHAR(11) DEFAULT "N/A",
     STU_TYPE VARCHAR(10) DEFAULT "N/A",
-
     STU_EMAIL VARCHAR(255) NOT NULL UNIQUE,
 
     -- KEYS
@@ -39,7 +38,6 @@ CREATE TABLE instructor (
     -- EDITABLE DETAILS
     INSTR_ADDRESS VARCHAR(255) NOT NULL,
     INSTR_CONTACT VARCHAR(11) DEFAULT "N/A",
-
     INSTR_EMAIL VARCHAR(255) NOT NULL UNIQUE,
 
     -- KEYS
@@ -245,7 +243,10 @@ SELECT
     i.INSTR_ADDRESS AS "ADDRESS"
     -- Add DEPARTMENT table (?)
 FROM
-	instructor AS i;
+	instructor AS i
+WHERE 
+	-- REPLACE WITH $INSTR_ID.
+	INSTR_ID = 6006;
 
 -- CURRENT STUDENTS
 SELECT 
@@ -276,7 +277,7 @@ SELECT * FROM student;
 SELECT * FROM instructor;
 
 -- Course Table
-SELECT * FROM course;
+SELECT * FROM school.course;
 
 -- Enrollment Table
 SELECT * FROM enrollment;
