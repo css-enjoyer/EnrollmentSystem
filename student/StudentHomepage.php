@@ -1,15 +1,21 @@
 <?php
 require ('./../config.php');
+session_start();
 $conn = new mysqli(DB_HOST, DB_USER, DB_PWD, DB_NAME);
 
 if ($conn->connect_error) {
     die("Connect Error (" . $conn->connect_Errorno . ") " . $conn->connect_error);
 }
 
+$STU_EMAIL = $_SESSION['STU_EMAIL'];
+$stu_info_result = mysqli_query($conn, "SELECT * FROM student WHERE STU_EMAIL ='$STU_EMAIL';"); 
+$stu_info_row = mysqli_fetch_assoc($stu_info_result);
+$STU_ID = $stu_info_row['STU_ID'];
+
 // RETRIEVING STU_ID
 // $STU_ID = $_REQUEST['userName'];
 // testing
-$STU_ID = 1000;
+// $STU_ID = 1000;
 
 /* TO UPDATE: Check if STU_ID input is valid.
 if ($STU_ID != 1000 || $STU_ID != 1001 || $STU_ID != 1002 || 
