@@ -1,4 +1,4 @@
-<?php include_once 'config.php'; ?>
+<?php require 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -39,26 +39,26 @@
         </div>
         <div class="mainsection">
 
-            <a href="StudentAccountCreation.php" class="enroll-btn">Enroll_Now</a>
-            <p class="staffcrt-btn">Staff member? Click <a href="StaffAccountCreation.php">here</a> for the staff portal.</p>
+            <a href="student/StudentAccountCreation.php" class="enroll-btn">Enroll_Now</a>
+            <p class="staffcrt-btn">Staff member? Click <a href="staff/StaffAccountCreation.php">here</a> for the staff portal.</p>
 
             <form method="POST" name="myForm" id="stuform" class="loginform">
                 <h2>Student Login</h2>
-                <label>Username: <input type="number" id="userName" name="userName" required></label>
+                <label>Username: <input type="text" id="userName" name="userName" required></label>
                 <label>Password: <input type="password" id="passWord" name="passWord" required></label>
                 <div class="formBtns">
                     <button onClick="closeStudentForm()">Cancel</button>
-                    <input formaction="StudentHomepage.php" type="submit">
+                    <input formaction="student/StudentHomepage.php" type="submit">
                 </div>
             </form>
 
             <form method="POST" name="myForm" id="stafform" class="loginform">
                 <h2>Staff Login</h2>
-                <label>Username: <input type="number" id="userName" name="userName" required></label>
+                <label>Username: <input type="text" id="userName" name="userName" required></label>
                 <label>Password: <input type="password" id="passWord" name="passWord" required></label>
                 <div class="formBtns">
                     <button onClick="closeStaffForm()">Cancel</button>
-                    <input formaction="StaffManagement.php" type="submit">
+                    <input formaction="staff/StaffManagement.php" type="submit">
                 </div>
             </form>
             
