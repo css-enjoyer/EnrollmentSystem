@@ -39,8 +39,8 @@
         </div>
         <div class="mainsection">
 
-            <a href="StudentAccountCreation.php" class="enroll-btn">Enroll_Now</a>
-            <p class="staffcrt-btn">Staff member? Click <a href="StaffAccountCreation.php">here</a> for the staff portal.</p>
+            <a href="student/StudentAccountCreation.php" class="enroll-btn">Enroll_Now</a>
+            <p class="staffcrt-btn">Staff member? Click <a href="staff/StaffAccountCreation.php">here</a> for the staff portal.</p>
 
             <form method="POST" name="myForm" id="stuform" class="loginform">
                 <h2>Student Login</h2>
