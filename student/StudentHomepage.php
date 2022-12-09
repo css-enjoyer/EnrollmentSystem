@@ -137,10 +137,13 @@ $conn->close();
     }
 
     function openEnrollForm() {
+        // event.preventDefault();
         document.getElementById("enrollform").style.display = "flex";
     }
 
     function closeEnrollForm() {
+        // prevents button from sending a postback that resets the page, idk ung update stu info di kailangan ng ganito?!
+        event.preventDefault();
         document.getElementById("enrollform").style.display = "none";
     }
 </script>
@@ -214,17 +217,17 @@ $conn->close();
                             <td><?php echo $stu_enrolled_row['UNITS']; ?></td>
                             <td><?php echo $stu_enrolled_row['INSTRUCTOR']; ?></td>
 
-                            <th><button class="removecrs-btn" name="del-stu-course" value="<?php echo $stu_enrolled_row["ENRL_ID"] ?>">Drop</button></th>
+                            <th><button type="submit" class="removecrs-btn" name="del-stu-course" value="<?php echo $stu_enrolled_row["ENRL_ID"] ?>">Drop</button></th>
                         </tr>
                     <?php   }                                               ?>
                 </table>
-                <!-- <button onclick="openEnrollForm()" class="enrollcrs-btn">Enroll New Course +</button> -->
+                <!-- prevents button from sending a postback that resets the page, idk ung update stu info di kailangan ng ganito?! -->
+                <button onclick="openEnrollForm(); return false" class="enrollcrs-btn">Enroll New Course +</button>
             </fieldset>
         </form>
 
-        <!-- REMOVED course form popup since it causes a bug -->
         <!-- Enroll Course Form Popup -->
-        <form method="POST">
+        <form method="POST" id="enrollform" name="enrollform">
             <fieldset>
                 <legend>Available Courses</legend>
                 <table>
@@ -245,7 +248,7 @@ $conn->close();
                     <?php   }                                               ?>
                 </table>
                 <div class="formBtns">
-                    <!-- <button onclick="closeEnrollForm()" class="enrollcrs-btn cancel">Close</button> -->
+                    <button onclick="closeEnrollForm()" class="enrollcrs-btn cancel">Close</button>
                     <input action="StudentServer.php" type="submit" name="add-stu-course" value="Enroll +" class="enrollcrs-btn">
                 </div>
             </fieldset>
