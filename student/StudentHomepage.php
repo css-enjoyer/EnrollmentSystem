@@ -168,6 +168,7 @@ $conn->close();
     <div class="mainsection">
         <h1><?= $STU_NAME ?>'s Profile</h1>
         <fieldset>
+            <legend>Student Info</legend>
             <table>
                 <tr>
                     <th>Student ID</th>
@@ -177,7 +178,7 @@ $conn->close();
                     <th>Contact No.</th>
                     <th>Email</th>
                     <th>Address</th>
-                    <th>Student Type</th>
+                    <!-- <th>Student Type</th> -->
                     <th>Actions</th>
                 </tr>
                 <tr>
@@ -188,7 +189,7 @@ $conn->close();
                     <td><?= $STU_CONTACT ?></td>
                     <td><?= $STU_EMAIL ?></td>
                     <td><?= $STU_ADDRESS ?></td>
-                    <td><?= $STU_TYPE ?></td>
+                    <!-- <td><// ?= $STU_TYPE ? removed stu type until no logic for computing regular or irregular stu></td> -->
                     <td>
                         <button onclick="openInfoForm()" class="updateinfo-btn">Update</button>
                     </td>
@@ -197,7 +198,7 @@ $conn->close();
         </fieldset>
 
         <!-- DISPLAYING STUDENT'S ENROLLMENT DETAILS -->
-        <form action="" method="POST" name="stu-enrolled-courses">
+        <form method="POST" name="stu-enrolled-courses">
             <fieldset>
                 <legend>Enrolled Courses</legend>
                 <table>
@@ -213,17 +214,17 @@ $conn->close();
                             <td><?php echo $stu_enrolled_row['UNITS']; ?></td>
                             <td><?php echo $stu_enrolled_row['INSTRUCTOR']; ?></td>
 
-                            <th><button action="StudentServer.php" class="removecrs-btn" name="del-stu-course" value="<?php echo $stu_enrolled_row["ENRL_ID"] ?>">Drop</button></th>
+                            <th><button class="removecrs-btn" name="del-stu-course" value="<?php echo $stu_enrolled_row["ENRL_ID"] ?>">Drop</button></th>
                         </tr>
                     <?php   }                                               ?>
                 </table>
-                <button onclick="openEnrollForm()" class="enrollcrs-btn">Enroll New Course +</button>
+                <!-- <button onclick="openEnrollForm()" class="enrollcrs-btn">Enroll New Course +</button> -->
             </fieldset>
         </form>
 
-
+        <!-- REMOVED course form popup since it causes a bug -->
         <!-- Enroll Course Form Popup -->
-        <form action="StudentServer.php" method="POST" id="enrollform" name="enrollform">
+        <form method="POST">
             <fieldset>
                 <legend>Available Courses</legend>
                 <table>
@@ -244,8 +245,8 @@ $conn->close();
                     <?php   }                                               ?>
                 </table>
                 <div class="formBtns">
-                    <button onclick="closeEnrollForm()" class="enrollcrs-btn cancel">Close</button>
-                    <input type="submit" name="add-stu-course" value="Enroll +" class="enrollcrs-btn">
+                    <!-- <button onclick="closeEnrollForm()" class="enrollcrs-btn cancel">Close</button> -->
+                    <input action="StudentServer.php" type="submit" name="add-stu-course" value="Enroll +" class="enrollcrs-btn">
                 </div>
             </fieldset>
         </form>
