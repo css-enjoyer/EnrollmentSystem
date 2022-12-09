@@ -71,3 +71,46 @@ if (isset($_POST['login_stu'])) {
         }
     }
 }
+
+// ---------- UPDATE STUDENT INFO ----------
+if (isset($_POST['update-stu-info'])) {
+    // $STU_ID = $_REQUEST['stuID'];
+    // $ENRL_YEAR = $_REQUEST['enrlYear'];
+    // $STU_FNAME = $_REQUEST['FNAME'];
+    // $STU_MI = $_REQUEST['MI'];
+    // $STU_LNAME = $_REQUEST['LNAME'];
+    // $STU_GENDER = $_REQUEST['GENDER'];
+    // $STU_BDAY = $_REQUEST['BDAY'];
+    $STU_ID = $_SESSION['STU_ID'];
+    $UPDATE_STU_ADDRESS = $_POST['UPDATE_STU_ADDRESS'];
+    $UPDATE_STU_CONTACT = $_POST['UPDATE_STU_CONTACT'];
+
+    echo "<br />UPDATE";
+
+    $origin = "SELECT * FROM school.student 
+                WHERE STU_ID = $STU_ID";
+
+    $result = $db->query($origin);
+    $rows = $result->fetch_assoc();
+
+    // Update fname
+    if ($UPDATE_STU_ADDRESS != $rows['STU_ADDRESS'] and $UPDATE_STU_CONTACT != $rows['STU_CONTACT']) {
+        // Update table
+        $sql = "UPDATE school.student
+            SET 
+                STU_ADDRESS = '$UPDATE_STU_ADDRESS',
+                STU_CONTACT = '$UPDATE_STU_CONTACT'
+            WHERE 
+                STU_ID = $STU_ID";
+
+        // checker
+        if (mysqli_query($db, $sql)) {
+            echo "Data stored into database successfully...";
+        } else {
+            echo mysqli_error($db);
+        }
+    }
+
+    $_SESSION['message'] = "Address and contact updated!";
+    header('location: StudentHomepage.php');
+}

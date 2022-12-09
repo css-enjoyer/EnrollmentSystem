@@ -22,7 +22,7 @@ $STU_EMAIL = $_SESSION['STU_EMAIL'];
 $stu_info_result = mysqli_query($conn, "SELECT * FROM student WHERE STU_EMAIL ='$STU_EMAIL';");
 $stu_info_row = mysqli_fetch_assoc($stu_info_result);
 $STU_ID = $stu_info_row['STU_ID'];
-
+$_SESSION['STU_ID'] = $STU_ID;
 
 // QUERIES FOR DATA RETRIEVAL //
 
@@ -96,7 +96,7 @@ $crs_sql_result = $conn->query($crs_sql);
 
 
 // INIT STUDENT DETAILS //
-$STU_ID = $stu_profile_row['ID'];
+// $STU_ID = $stu_profile_row['ID'];
 $STU_NAME = $stu_profile_row['NAME'];
 $STU_GENDER = $stu_profile_row['GENDER'];
 $STU_BDAY = $stu_profile_row['BIRTHDAY'];
@@ -153,7 +153,14 @@ $conn->close();
             <li><a href="StudentHomepage.php?logout=1">Logout</a></li>
         </ul>
     </div>
-
+    <?php if (isset($_SESSION['message'])) : ?>
+        <div class="msg">
+            <?php
+            echo $_SESSION['message'];
+            unset($_SESSION['message']);
+            ?>
+        </div>
+    <?php endif ?>
     <!-- DISPLAYING STUDENT'S INFORMATION -->
     <div class="mainsection">
         <h1><?= $STU_NAME ?>'s Profile</h1>
@@ -225,18 +232,13 @@ $conn->close();
                         <th>Course Units</th>
                         <th>Instructor</th>
                     </tr>
-                    <!-- UPDATE: ONLY VIEW NON-DUPLICATE COURSES -->
-                    <!-- UPDATE: RESPECTIVE VARIABLES FOR ROW, RESULT, ETC. -->
+                    
                     <?php while ($crs_sql_row = $crs_sql_result->fetch_assoc()) {            ?>
                         <tr>
                             <td><input name="Courses[]" type="checkbox" value="<?php echo $row["CRS_ID"] ?>"></td>
                             <td><?php echo $crs_sql_row["CRS_NAME"]; ?></td>
                             <td><?php echo $crs_sql_row["CRS_UNIT"]; ?></td>
                             <td><?php echo $crs_sql_row["INSTR_NAME"]; ?></td>
-                            <!-- ADD INSTRUCTOR (?) -->
-
-                            <!-- SESSION: Student ID -->
-                            <!-- <input type="hidden" name="STU_ID" value="<?= $STU_ID ?>"> -->
                         </tr>
                     <?php   }                                               ?>
                 </table>
@@ -248,21 +250,20 @@ $conn->close();
         </form>
 
         <!-- Update Info Form Popup -->
-        <form action="StudentFunction.php" method="POST" name="myForm" id="updateinfoform">
+        <form action="StudentServer.php" method="POST" name="myForm" id="updateinfoform">
             <fieldset>
                 <legend>Enter your personal information: </legend>
 
                 <!-- SESSION: Student ID -->
-                <input type="hidden" id="stuID" name="stuID" value="<?= $STU_ID ?>">
+                <!-- <input type="hidden" id="stuID" name="stuID" value="<?= $STU_ID ?>"> -->
 
-                <label>Address: <input type="text" name="FNAME" required></label>
-                <label>Contact Number: <input type="text" name="MI" required></label>
-                <label>Personal Email: <input type="text" name="LNAME" required></label>
+                <label>Address: <input type="text" name="UPDATE_STU_ADDRESS" required></label>
+                <label>Contact Number: <input type="text" name="UPDATE_STU_CONTACT" required maxlength="11"></label>
 
                 <!-- SUBMIT && CLOSE -->
                 <div class="formBtns">
                     <button onclick="closeInfoForm()" class="update-btn cancel">Close</button>
-                    <input type="submit" name="UPDATE-STU" value="Update" class="update-btn">
+                    <input type="submit" name="update-stu-info" value="Update" class="update-btn">
                 </div>
             </fieldset>
         </form>
