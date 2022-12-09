@@ -119,3 +119,13 @@ if (isset($_POST['add-stu-course'])) {
     $_SESSION['message'] = "Courses enrolled!";
     header('location: StudentHomepage.php');
 }
+
+// *********** DELETE STUDENT COURSE **********
+if (isset($_POST['del-stu-course'])) {
+    $ENRL_ID = $_POST['del-stu-course'];
+    echo $ENRL_ID;
+    $del_enrollment_query = "DELETE FROM school.enrollment WHERE ENRL_ID = $ENRL_ID";
+    mysqli_query($db, $del_enrollment_query);
+    $_SESSION['message'] = "Courses dropped!";
+    header('location: StudentHomepage.php');
+}
