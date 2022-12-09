@@ -1,24 +1,28 @@
 <?php
-require ('./../config.php');
+require('./../config.php');
+include('StudentServer.php');
+session_start();
+if (!isset($_SESSION['STU_EMAIL'])) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: ./../Landing.php');
+}
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['STU_EMAIL']);
+    header("location: ./../Landing.php");
+}
+
 $conn = new mysqli(DB_HOST, DB_USER, DB_PWD, DB_NAME);
 
 if ($conn->connect_error) {
     die("Connect Error (" . $conn->connect_Errorno . ") " . $conn->connect_error);
 }
 
-// RETRIEVING STU_ID
-$STU_ID = $_REQUEST['userName'];
-
-/* TO UPDATE: Check if STU_ID input is valid.
-if ($STU_ID != 1000 || $STU_ID != 1001 || $STU_ID != 1002 || 
-    $STU_ID != 1003 || $STU_ID != 1004) {
-
-    echo "<script> location.href='Landing.html'; </script>";
-    exit;
-
-}
-*/
-
+$STU_EMAIL = $_SESSION['STU_EMAIL'];
+$stu_info_result = mysqli_query($conn, "SELECT * FROM student WHERE STU_EMAIL ='$STU_EMAIL';");
+$stu_info_row = mysqli_fetch_assoc($stu_info_result);
+$STU_ID = $stu_info_row['STU_ID'];
+$_SESSION['STU_ID'] = $STU_ID;
 
 // QUERIES FOR DATA RETRIEVAL //
 
@@ -56,7 +60,28 @@ $stu_enrolled_sql = "SELECT
                         STU_ID = $STU_ID";
 
 // Available Courses
-$crs_sql = "SELECT * FROM course";
+$crs_sql = "SELECT DISTINCT c.CRS_ID, c.CRS_NAME, c.CRS_UNIT,
+-- c.CRS_NAME AS 'COURSE NAME', 
+-- c.CRS_UNIT AS 'UNITS', 
+CONCAT(i.INSTR_LNAME, ', ', i.INSTR_FNAME, ' ', i.INSTR_MI) AS 'INSTR_NAME'
+FROM course AS c
+INNER JOIN 
+    enrollment AS e
+ON 
+    c.CRS_ID = e.CRS_ID
+INNER JOIN
+    instructor AS i
+ON c.INSTR_ID = i.INSTR_ID
+INNER JOIN
+    student AS s
+ON e.STU_ID = s.STU_ID
+WHERE 
+c.CRS_ID NOT IN (SELECT c.CRS_ID FROM course AS c 
+INNER JOIN enrollment AS e 
+ON c.CRS_ID = e.CRS_ID 
+INNER JOIN student AS s 
+ON e.STU_ID = s.STU_ID
+WHERE s.STU_ID = $STU_ID);";
 
 
 // ROW INIT //
@@ -64,14 +89,14 @@ $stu_profile_result = $conn->query($stu_profile_sql);
 $stu_profile_row = $stu_profile_result->fetch_assoc();
 
 $stu_enrolled_result = $conn->query($stu_enrolled_sql);
-$stu_enrolled_row = $stu_enrolled_result->fetch_assoc();
+// $stu_enrolled_row = $stu_enrolled_result->fetch_assoc();
 
 $crs_sql_result = $conn->query($crs_sql);
-$crs_sql_row = $crs_sql_result->fetch_assoc();
+// $crs_sql_row = $crs_sql_result->fetch_assoc();
 
 
 // INIT STUDENT DETAILS //
-$STU_ID = $stu_profile_row['ID'];
+// $STU_ID = $stu_profile_row['ID'];
 $STU_NAME = $stu_profile_row['NAME'];
 $STU_GENDER = $stu_profile_row['GENDER'];
 $STU_BDAY = $stu_profile_row['BIRTHDAY'];
@@ -84,60 +109,6 @@ $STU_TYPE = $stu_profile_row['STUDENT TYPE'];
 
 // CLOSING CONNECTION //
 $conn->close();
-
-/* OLD QUERIES
-$STU_ID = substr($_REQUEST["userName"], 4);
-$ENRL_YEAR = substr($_REQUEST["userName"], 0, 4);
-$sql = "SELECT * FROM course";
-$result = $conn->query($sql);
-
-$student_info_query = "SELECT * FROM student AS s
-INNER JOIN department AS d
-    ON s.DEPT_ID = d.DEPT_ID
-INNER JOIN specialization AS sp
-    ON s.SPEC_ID = sp.SPEC_ID
-        WHERE s.STU_ID = $STU_ID AND s.ENRL_YEAR = $ENRL_YEAR";
-$student_info_result = $conn->query($student_info_query);
-$student_info_row = $student_info_result->fetch_assoc();
-
-$STU_EMAIL = $student_info_row["STU_EMAIL"];
-$STU_FNAME = $student_info_row["STU_FNAME"];
-$STU_MI = $student_info_row["STU_MI"];
-$STU_LNAME = $student_info_row["STU_LNAME"];
-$STU_GENDER = $student_info_row["STU_GENDER"];
-$STU_BDAY = $student_info_row["STU_BDAY"];
-$DEPT_NAME = $student_info_row["DEPT_NAME"];
-$SPEC_NAME = $student_info_row["SPEC_NAME"];
-
-$info_query = "SELECT * FROM student AS s
-	INNER JOIN enrollment AS e
-		ON s.STU_ID = e.STU_ID AND s.ENRL_YEAR = e.ENRL_YEAR
-	INNER JOIN class AS c
-		ON e.CLASS_ID = c.CLASS_ID
-	INNER JOIN course AS co
-		ON c.CRS_ID = co.CRS_ID
-	INNER JOIN instructor AS i
-		ON c.INSTR_ID = i.INSTR_ID
-    INNER JOIN department AS d
-		ON s.DEPT_ID = d.DEPT_ID
-	INNER JOIN specialization AS sp
-		ON s.SPEC_ID = sp.SPEC_ID
-			WHERE s.STU_ID = $STU_ID AND e.ENRL_YEAR = $ENRL_YEAR;";
-
-$info_query_result = $conn->query($info_query);
-// $info_query_row = $info_query_result->fetch_assoc();
-
-function deleteEnrollment($ENRL_ID)
-{
-    $conn = new mysqli("localhost:3310", "root", "mysql", "school");
-
-    if ($conn->connect_error) {
-        die("Connect Error (" . $conn->connect_Errorno . ") " . $conn->connect_error);
-    }
-    mysqli_query($conn, "DELETE FROM `school`.`ENROLLMENT` WHERE (`ENRL_ID` = $ENRL_ID);");
-
-}
-*/
 ?>
 
 <!DOCTYPE html>
@@ -179,10 +150,17 @@ function deleteEnrollment($ENRL_ID)
         <ul>
             <li>Notifications</li>
             <li>Messages</li>
-            <li><a href="./../Landing.php">Logout</a></li>
+            <li><a href="StudentHomepage.php?logout=1">Logout</a></li>
         </ul>
     </div>
-
+    <?php if (isset($_SESSION['message'])) : ?>
+        <div class="msg">
+            <?php
+            echo $_SESSION['message'];
+            unset($_SESSION['message']);
+            ?>
+        </div>
+    <?php endif ?>
     <!-- DISPLAYING STUDENT'S INFORMATION -->
     <div class="mainsection">
         <h1><?= $STU_NAME ?>'s Profile</h1>
@@ -244,56 +222,48 @@ function deleteEnrollment($ENRL_ID)
 
 
         <!-- Enroll Course Form Popup -->
-        <form action="StudentFunction.php" method="POST" id="enrollform" name="enrollform">
+        <form action="StudentServer.php" method="POST" id="enrollform" name="enrollform">
             <fieldset>
                 <legend>Available Courses</legend>
                 <table>
                     <tr>
                         <th>+</th>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Level</th>
-                        <th>Units</th>
+                        <th>Course Name</th>
+                        <th>Course Units</th>
+                        <th>Instructor</th>
                     </tr>
-                    <!-- UPDATE: ONLY VIEW NON-DUPLICATE COURSES -->
-                    <!-- UPDATE: RESPECTIVE VARIABLES FOR ROW, RESULT, ETC. -->
-                    <?php while ($row = $result->fetch_assoc()) {            ?>
+                    
+                    <?php while ($crs_sql_row = $crs_sql_result->fetch_assoc()) {            ?>
                         <tr>
-                            <td><input name="Courses[]" type="checkbox" value="<?php echo $row["CRS_ID"] ?>"></td>
-                            <td><?php echo $row["CRS_ID"]; ?></td>
-                            <td><?php echo $row["CRS_NAME"]; ?></td>
-                            <td><?php echo $row["CRS_UNIT"]; ?></td>
-                            <!-- ADD INSTRUCTOR (?) -->
-
-                            <!-- SESSION: Student ID -->
-                            <input type="hidden" name="STU_ID" value="<?= $STU_ID ?>">
+                            <td><input name="Courses[]" type="checkbox" value="<?php echo $crs_sql_row["CRS_ID"] ?>"></td>
+                            <td><?php echo $crs_sql_row["CRS_NAME"]; ?></td>
+                            <td><?php echo $crs_sql_row["CRS_UNIT"]; ?></td>
+                            <td><?php echo $crs_sql_row["INSTR_NAME"]; ?></td>
                         </tr>
                     <?php   }                                               ?>
                 </table>
                 <div class="formBtns">
                     <button onclick="closeEnrollForm()" class="enrollcrs-btn cancel">Close</button>
-                    <input type="submit" name="addCourse" value="Enroll +" class="enrollcrs-btn">
+                    <input type="submit" name="add-stu-course" value="Enroll +" class="enrollcrs-btn">
                 </div>
             </fieldset>
         </form>
 
         <!-- Update Info Form Popup -->
-        <form action="StudentFunction.php" method="POST" name="myForm" id="updateinfoform">
+        <form action="StudentServer.php" method="POST" name="myForm" id="updateinfoform">
             <fieldset>
                 <legend>Enter your personal information: </legend>
 
                 <!-- SESSION: Student ID -->
-                <input type="hidden" id="stuID" name="stuID" value="<?= $STU_ID ?>">
+                <!-- <input type="hidden" id="stuID" name="stuID" value="<?= $STU_ID ?>"> -->
 
-                <label>Address: <input type="text" name="FNAME" required></label>
-                <label>Contact Number: <input type="text" name="MI" required></label>
-                <label>Personal Email: <input type="text" name="LNAME" required></label>
+                <label>Address: <input type="text" name="UPDATE_STU_ADDRESS" required></label>
+                <label>Contact Number: <input type="text" name="UPDATE_STU_CONTACT" required maxlength="11"></label>
 
                 <!-- SUBMIT && CLOSE -->
                 <div class="formBtns">
                     <button onclick="closeInfoForm()" class="update-btn cancel">Close</button>
-                    <input type="submit" name="UPDATE-STU" value="Update" class="update-btn">
+                    <input type="submit" name="update-stu-info" value="Update" class="update-btn">
                 </div>
             </fieldset>
         </form>

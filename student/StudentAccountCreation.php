@@ -1,6 +1,6 @@
 <?php
-require('./../config.php');
-include('StudentServer.php');
+// require('./../config.php');
+require_once('StudentServer.php');
 $conn = new mysqli(DB_HOST, DB_USER, DB_PWD, DB_NAME);
 
 if ($conn->connect_error) {
@@ -55,7 +55,7 @@ $conn->close();
     <div class="mainsection">
         <h1>Your journey starts here!</h1>
         <form action="StudentAccountCreation.php" method="POST">
-            <?php //include('StudentErrors.php'); ?>
+            <?php include('StudentErrors.php'); ?>
             <fieldset>
                 <legend>Enter your personal information: </legend>
                 <label>Personal Email: <input type="email" name="STU_EMAIL" required></label>
@@ -68,7 +68,7 @@ $conn->close();
                     </select></label>
                 <label>Date of Birth: <input type="date" name="STU_BDAY" required></label>
                 <label>Address: <input type="text" name="STU_ADDRESS" required></label>
-                <label>Contact: <input type="number" name="STU_CONTACT" required></label>
+                <label>Contact: <input type="text" name="STU_CONTACT" required maxlength="11"></label>
             </fieldset>
             <!-- <fieldset>
                 <legend>Choose a department: </legend>
@@ -104,10 +104,10 @@ $conn->close();
             </fieldset> -->
             <fieldset>
                 <legend>Enter your desired password:</legend>
-                <label>Password: <input type="password" name="STU_PASSWORD" required></label>
+                <label>Password: <input type="password" name="STU_PASSWORD_1" required></label>
                 <label>Confirm Password: <input type="password" name="STU_PASSWORD_2" required></label>
             </fieldset>
-            <input type="submit" value="Proceed &#8594" class="btn">
+            <input type="submit" value="Proceed &#8594" class="btn" name="reg_stu">
         </form>
     </div>
 </body>

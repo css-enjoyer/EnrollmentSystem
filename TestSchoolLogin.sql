@@ -226,8 +226,31 @@ FROM enrollment AS e
 		c.INSTR_ID = i.INSTR_ID
 WHERE 
 	-- REPLACE W/ $STU_ID
-	STU_ID = 1007;
+	STU_ID = 1002
         
+-- UNENROLLED COURSES
+SELECT DISTINCT
+    c.CRS_NAME AS "COURSE NAME", 
+    c.CRS_UNIT AS "UNITS", 
+    CONCAT(i.INSTR_LNAME, ", ", i.INSTR_FNAME, " ", i.INSTR_MI) AS "INSTRUCTOR"
+FROM course AS c
+	INNER JOIN 
+		enrollment AS e
+	ON 
+		c.CRS_ID = e.CRS_ID
+	INNER JOIN
+		instructor AS i
+	ON c.INSTR_ID = i.INSTR_ID
+    INNER JOIN
+		student AS s
+	ON e.STU_ID = s.STU_ID
+WHERE 
+	c.CRS_ID NOT IN (SELECT c.CRS_ID FROM course AS c 
+    INNER JOIN enrollment AS e 
+    ON c.CRS_ID = e.CRS_ID 
+    INNER JOIN student AS s 
+    ON e.STU_ID = s.STU_ID
+    WHERE s.STU_ID = 1002);
         
 -- INSTRUCTOR VIEW --
 
