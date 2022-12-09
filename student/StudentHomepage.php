@@ -1,7 +1,9 @@
 <?php
 require('./../config.php');
 include('StudentServer.php');
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 if (!isset($_SESSION['STU_EMAIL'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: ./../Landing.php');
@@ -139,7 +141,7 @@ $conn->close();
     }
 
     function closeEnrollForm() {
-        document.getElementById("enrollform").style.display = "hidden";
+        document.getElementById("enrollform").style.display = "none";
     }
 </script>
 
