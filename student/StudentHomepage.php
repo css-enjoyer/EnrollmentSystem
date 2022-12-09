@@ -205,15 +205,12 @@ $conn->close();
                         <th>Instructor</th>
                         <th>Actions</th>
                     </tr>
-                    <!-- CONVERT INTO FORM FOR ENROLLMENT ID SIMILAR TO ENROLLMENT POPUP (?) -->
                     <?php while ($stu_enrolled_row = $stu_enrolled_result->fetch_assoc()) {            ?>
                         <tr>
                             <td><?php echo $stu_enrolled_row['COURSE NAME']; ?></td>
                             <td><?php echo $stu_enrolled_row['UNITS']; ?></td>
                             <td><?php echo $stu_enrolled_row['INSTRUCTOR']; ?></td>
 
-                            <!-- UPDATE: BUTTON NOT FUNCTIONAL -->
-                            <!-- UPDATE: DELETE ACC. TO ENROLLMENT ID -->
                             <th><button action="StudentServer.php" class="removecrs-btn" name="del-stu-course" value="<?php echo $stu_enrolled_row["ENRL_ID"] ?>">Drop</button></th>
                         </tr>
                     <?php   }                                               ?>
@@ -255,13 +252,8 @@ $conn->close();
         <form action="StudentServer.php" method="POST" name="myForm" id="updateinfoform">
             <fieldset>
                 <legend>Enter your personal information: </legend>
-
-                <!-- SESSION: Student ID -->
-                <!-- <input type="hidden" id="stuID" name="stuID" value="<?= $STU_ID ?>"> -->
-
                 <label>Address: <input type="text" name="UPDATE_STU_ADDRESS" required></label>
                 <label>Contact Number: <input type="text" name="UPDATE_STU_CONTACT" required maxlength="11"></label>
-
                 <!-- SUBMIT && CLOSE -->
                 <div class="formBtns">
                     <button onclick="closeInfoForm()" class="update-btn cancel">Close</button>

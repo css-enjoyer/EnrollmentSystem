@@ -129,3 +129,6 @@ if (isset($_POST['del-stu-course'])) {
     $_SESSION['message'] = "Courses dropped!";
     header('location: StudentHomepage.php');
 }
+
+// add db closs maybe?
+// $db->close();
