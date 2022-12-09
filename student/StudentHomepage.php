@@ -142,7 +142,7 @@ $conn->close();
     }
 
     function closeEnrollForm() {
-        // prevents button from sending a postback that resets the page, idk ung update stu info di kailangan ng ganito?!
+        // prevents button from sending a postback that resets the page, idk ung update stu info di kailangan ng ganito?! related sa server handling...
         event.preventDefault();
         document.getElementById("enrollform").style.display = "none";
     }
@@ -221,7 +221,7 @@ $conn->close();
                         </tr>
                     <?php   }                                               ?>
                 </table>
-                <!-- prevents button from sending a postback that resets the page, idk ung update stu info di kailangan ng ganito?! -->
+                <!-- prevents button from sending a postback that resets the page, idk ung update stu info di kailangan ng ganito?!, related sa server handling... -->
                 <button onclick="openEnrollForm(); return false" class="enrollcrs-btn">Enroll New Course +</button>
             </fieldset>
         </form>
