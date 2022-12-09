@@ -60,7 +60,7 @@ $stu_enrolled_sql = "SELECT
                         STU_ID = $STU_ID";
 
 // Available Courses
-$crs_sql = "SELECT DISTINCT c.CRS_NAME, c.CRS_UNIT,
+$crs_sql = "SELECT DISTINCT c.CRS_ID, c.CRS_NAME, c.CRS_UNIT,
 -- c.CRS_NAME AS 'COURSE NAME', 
 -- c.CRS_UNIT AS 'UNITS', 
 CONCAT(i.INSTR_LNAME, ', ', i.INSTR_FNAME, ' ', i.INSTR_MI) AS 'INSTR_NAME'
@@ -222,7 +222,7 @@ $conn->close();
 
 
         <!-- Enroll Course Form Popup -->
-        <form action="" method="POST" id="enrollform" name="enrollform">
+        <form action="StudentServer.php" method="POST" id="enrollform" name="enrollform">
             <fieldset>
                 <legend>Available Courses</legend>
                 <table>
@@ -235,7 +235,7 @@ $conn->close();
                     
                     <?php while ($crs_sql_row = $crs_sql_result->fetch_assoc()) {            ?>
                         <tr>
-                            <td><input name="Courses[]" type="checkbox" value="<?php echo $row["CRS_ID"] ?>"></td>
+                            <td><input name="Courses[]" type="checkbox" value="<?php echo $crs_sql_row["CRS_ID"] ?>"></td>
                             <td><?php echo $crs_sql_row["CRS_NAME"]; ?></td>
                             <td><?php echo $crs_sql_row["CRS_UNIT"]; ?></td>
                             <td><?php echo $crs_sql_row["INSTR_NAME"]; ?></td>
@@ -244,7 +244,7 @@ $conn->close();
                 </table>
                 <div class="formBtns">
                     <button onclick="closeEnrollForm()" class="enrollcrs-btn cancel">Close</button>
-                    <input type="submit" name="addCourse" value="Enroll +" class="enrollcrs-btn">
+                    <input type="submit" name="add-stu-course" value="Enroll +" class="enrollcrs-btn">
                 </div>
             </fieldset>
         </form>
