@@ -46,15 +46,6 @@ $conn->close();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
 </head>
-<script>
-    function openStaffForm() {
-        document.getElementById("addStaffForm").style.display = "flex";
-    }
-
-    function closeStaffForm() {
-        document.getElementById("addStaffForm").style.display = "none";
-    }
-</script>
 
 <body>
     <div class="navsection">
@@ -87,11 +78,12 @@ $conn->close();
                     <th>Address</th>
                     <th>Contact No.</th>
                     <th>Email</th>
+                    <th>Actions</th>
                 </tr>
 
                 
                 <?php while ($instr_sql_row = $instr_sql_result->fetch_assoc()) {            ?>
-                    <form action="TestUpdate.php" id="InstrFunctionality" method="POST">
+                    <form action="TestFunctionality.php" id="InstrFunctionality" method="POST">
                         <tr>
                             <!-- FOR DELETE -->
                             <input type="hidden" name="INSTR_ID" value="<?= $instr_sql_row['INSTR_ID'] ?>" >
@@ -105,15 +97,15 @@ $conn->close();
                             <td><?php echo $instr_sql_row['INSTR_ADDRESS']; ?></td>
                             <td><?php echo $instr_sql_row['INSTR_CONTACT']; ?></td>
                             <td><?php echo $instr_sql_row['INSTR_EMAIL']; ?></td>
-                            <!-- TODO: REVERT TO BUTTON (?) -->
-                            <td><input type="submit" name="removeInstr" value="Fire Professor?"class=""></td>
+                            <td>
+                                <button name="removeInstr" class="removecrs-btn">Fire Professor?</button>
+                            </td>
                         </tr>
                     </form>
                 <?php   }                                               ?>
                 
             </table>
-            <!-- TODO: BUTTON NOT FUNCTIONAL -->
-            <button onclick="openStaffForm()" class="enrollcrs-btn">Authorize New Staff +</button>
+            <button form="InstrFunctionality" formaction="TestInstrUpdate.php" name="addInstr" class="enrollcrs-btn">Authorize New Staff +</button>
         </fieldset>
         
         <!-- STUDENT TABLE -->
@@ -131,27 +123,32 @@ $conn->close();
                     <th>Contact No.</th>
                     <th>Student Type</th>
                     <th>Email</th>
+                    <th>Actions</th>
                 </tr>
                 
                 <?php while ($stu_sql_row = $stu_sql_result->fetch_assoc()) {            ?>
-                    <tr>
-                        <td><?php echo $stu_sql_row['STU_ID']; ?></td>
-                        <td><?php echo $stu_sql_row['STU_FNAME']; ?></td>
-                        <td><?php echo $stu_sql_row['STU_MI']; ?></td>
-                        <td><?php echo $stu_sql_row['STU_LNAME']; ?></td>
-                        <td><?php echo $stu_sql_row['STU_GENDER']; ?></td>
-                        <td><?php echo $stu_sql_row['STU_BDAY']; ?></td>
-                        <td><?php echo $stu_sql_row['STU_ADDRESS']; ?></td>
-                        <td><?php echo $stu_sql_row['STU_CONTACT']; ?></td>
-                        <td><?php echo $stu_sql_row['STU_EMAIL']; ?></td>
-                        <td><?php echo $stu_sql_row['STU_TYPE']; ?></td>
-                        <!-- TODO: BUTTON NOT FUNCTIONAL -->
-                        <td><button action="" class="removecrs-btn">Drop Student</button></td>
-                    </tr>
+                    <form action="TestFunctionality.php" id="StuFunctionality" method="POST">
+                        <tr>
+                            <!-- FOR DELETE -->
+                            <input type="hidden" name="STU_ID" value="<?= $stu_sql_row['STU_ID'] ?>" >
+
+                            <td><?php echo $stu_sql_row['STU_ID']; ?></td>
+                            <td><?php echo $stu_sql_row['STU_FNAME']; ?></td>
+                            <td><?php echo $stu_sql_row['STU_MI']; ?></td>
+                            <td><?php echo $stu_sql_row['STU_LNAME']; ?></td>
+                            <td><?php echo $stu_sql_row['STU_GENDER']; ?></td>
+                            <td><?php echo $stu_sql_row['STU_BDAY']; ?></td>
+                            <td><?php echo $stu_sql_row['STU_ADDRESS']; ?></td>
+                            <td><?php echo $stu_sql_row['STU_CONTACT']; ?></td>
+                            <td><?php echo $stu_sql_row['STU_TYPE']; ?></td>
+                            <td><?php echo $stu_sql_row['STU_EMAIL']; ?></td>
+                            
+                            <td><button name="removeStu" class="removecrs-btn">Drop Student</button></td>
+                        </tr>
+                    </form>
                 <?php   }                                               ?>
             </table>
-            <!-- TODO: BUTTON NOT FUNCTIONAL -->
-            <button class="enrollcrs-btn">Enroll New Student +</button>
+            <button form="StuFunctionality" formaction="TestStuUpdate.php" name="addStu" class="enrollcrs-btn">Enroll New Student +</button>
         </fieldset>
 
         <!-- COURSES TABLE -->
@@ -166,18 +163,22 @@ $conn->close();
                     <th>Actions</th>
                 </tr>
                 <?php while ($crs_sql_row = $crs_sql_result->fetch_assoc()) {            ?>
-                    <tr>
-                        <td><?php echo $crs_sql_row['CRS_ID']; ?></td>
-                        <td><?php echo $crs_sql_row['CRS_NAME']; ?></td>
-                        <td><?php echo $crs_sql_row['CRS_UNIT']; ?></td>
-                        <td><?php echo $crs_sql_row['INSTR_ID']; ?></td>
-                        <!-- TODO: BUTTON NOT FUNCTIONAL -->
-                        <td><button action="" class="removecrs-btn">Delete Course Entry</button></td>
-                    </tr>
+                    <form action="TestFunctionality.php" id="CrsFunctionality" method="POST">
+                        <tr>
+                            <!-- FOR DELETE -->
+                            <input type="hidden" name="CRS_ID" value="<?= $crs_sql_row['CRS_ID'] ?>" >
+
+                            <td><?php echo $crs_sql_row['CRS_ID']; ?></td>
+                            <td><?php echo $crs_sql_row['CRS_NAME']; ?></td>
+                            <td><?php echo $crs_sql_row['CRS_UNIT']; ?></td>
+                            <td><?php echo $crs_sql_row['INSTR_ID']; ?></td>
+
+                            <td><button name="removeCrs" class="removecrs-btn">Delete Course Entry</button></td>
+                        </tr>
+                    </form>
                 <?php   }                                               ?>
             </table>
-
-            <button class="enrollcrs-btn">Add New Course +</button>
+            <button form="CrsFunctionality" formaction="TestCrsUpdate.php" name="addCrs" class="enrollcrs-btn">Add New Course +</button>
         </fieldset>
 
         <!-- ENROLLMENT TABLE -->
@@ -188,49 +189,25 @@ $conn->close();
                     <th>Enrollment ID</th>
                     <th>Student ID</th>
                     <th>Course ID</th>
+                    <th>Actions</th>
                 </tr>
                 <?php while ($enrl_sql_row = $enrl_sql_result->fetch_assoc()) {            ?>
-                    <tr>
-                        <td><?php echo $enrl_sql_row['ENRL_ID']; ?></td>
-                        <td><?php echo $enrl_sql_row['STU_ID']; ?></td>
-                        <td><?php echo $enrl_sql_row['CRS_ID']; ?></td>
-                        <!-- TODO: BUTTON NOT FUNCTIONAL -->
-                        <td><button action="" class="removecrs-btn">Delete Enrollment</button></td>
-                    </tr>
+                    <form action="TestFunctionality.php" id="EnrlFunctionality" method="POST">
+                        <tr>
+                            <!-- FOR DELETE -->
+                            <input type="hidden" name="ENRL_ID" value="<?= $enrl_sql_row['ENRL_ID'] ?>" >
+
+                            <td><?php echo $enrl_sql_row['ENRL_ID']; ?></td>
+                            <td><?php echo $enrl_sql_row['STU_ID']; ?></td>
+                            <td><?php echo $enrl_sql_row['CRS_ID']; ?></td>
+                            <!-- TODO: BUTTON NOT FUNCTIONAL -->
+                            <td><button name="removeEnrl" class="removecrs-btn">Delete Enrollment</button></td>
+                        </tr>
+                    </form>
                 <?php   }                                               ?>
             </table>
-
-            <button class="enrollcrs-btn">Enroll Student +</button>
+            <button form="EnrlFunctionality" formaction="TestEnrlUpdate.php" name="addEnrl" class="enrollcrs-btn">Enroll Student +</button>
         </fieldset>
-
-        <!-- FORMS -->
-
-        <!-- Add Staff Popup -->
-        <form method="POST" name="addStaffForm" id="addStaffForm">
-            <fieldset>
-                <legend>Enter Instructor Information: </legend>
-
-                <label>First Name: <input type="text" name="INSTR_FNAME" required></label>
-                <label>Middle Initial: <input type="text" name="INSTR_MI" required></label>
-                <label>Last Name: <input type="text" name="INSTR_LNAME" required></label>
-                <label>Gender: 
-                    <select name="INSTR_GENDER" required>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </label>
-                <label>Birthday: <input type="date" name="INSTR_BDAY" required></label>
-                <label>Address: <input type="text" name="INSTR_ADDRESS" required></label>
-                <label>Contact Number: <input type="number" name="INSTR_CONTACT" required></label>
-                <label>Email: <input type="email" name="INSTR_EMAIL" required></label>
-
-                <!-- SUBMIT && CLOSE -->
-                <div class="formBtns">
-                    <button onclick="closeStaffForm()" class="update-btn cancel">Close</button>
-                    <input formaction="TestUpdate.php" type="submit">
-                </div>
-            </fieldset>
-        </form>
 
     </div>
 </body>

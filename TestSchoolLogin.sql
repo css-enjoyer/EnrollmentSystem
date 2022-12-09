@@ -226,7 +226,7 @@ FROM enrollment AS e
 		c.INSTR_ID = i.INSTR_ID
 WHERE 
 	-- REPLACE W/ $STU_ID
-	STU_ID = 1000;
+	STU_ID = 1007;
         
         
 -- INSTRUCTOR VIEW --
