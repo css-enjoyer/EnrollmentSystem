@@ -13,9 +13,9 @@
 	- [x] Student login and sign-up
 	- [ ] Instructor login and sign-up
 - [ ] Finish student
-	- [ ] Edit student's info
-	- [ ] Add student's course
-	- [ ] Delete student's course
+	- [x] Edit student's info
+	- [x] Add student's course
+	- [x] Delete student's course
 	- [ ] Ensure no duplication and catch errors
 - [ ] Finish instructor
 	- [ ] Edit instructor's info
