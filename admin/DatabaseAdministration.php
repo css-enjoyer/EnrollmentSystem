@@ -46,6 +46,15 @@ $conn->close();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
 </head>
+<script>
+    function openStaffForm() {
+        document.getElementById("addStaffForm").style.display = "flex";
+    }
+
+    function closeStaffForm() {
+        document.getElementById("addStaffForm").style.display = "none";
+    }
+</script>
 
 <body>
     <div class="navsection">
@@ -80,23 +89,31 @@ $conn->close();
                     <th>Email</th>
                 </tr>
 
+                
                 <?php while ($instr_sql_row = $instr_sql_result->fetch_assoc()) {            ?>
-                    <tr>
-                        <td><?php echo $instr_sql_row['INSTR_ID']; ?></td>
-                        <td><?php echo $instr_sql_row['INSTR_FNAME']; ?></td>
-                        <td><?php echo $instr_sql_row['INSTR_MI']; ?></td>
-                        <td><?php echo $instr_sql_row['INSTR_LNAME']; ?></td>
-                        <td><?php echo $instr_sql_row['INSTR_GENDER']; ?></td>
-                        <td><?php echo $instr_sql_row['INSTR_BDAY']; ?></td>
-                        <td><?php echo $instr_sql_row['INSTR_ADDRESS']; ?></td>
-                        <td><?php echo $instr_sql_row['INSTR_CONTACT']; ?></td>
-                        <td><?php echo $instr_sql_row['INSTR_EMAIL']; ?></td>
-                        <!-- UPDATE: BUTTON NOT FUNCTIONAL -->
-                        <td><button action="" class="removecrs-btn">Fire Professor?</button></td>
-                    </tr>
+                    <form action="TestUpdate.php" id="InstrFunctionality" method="POST">
+                        <tr>
+                            <!-- FOR DELETE -->
+                            <input type="hidden" name="INSTR_ID" value="<?= $instr_sql_row['INSTR_ID'] ?>" >
+
+                            <td><?php echo $instr_sql_row['INSTR_ID']; ?></td>
+                            <td><?php echo $instr_sql_row['INSTR_FNAME']; ?></td>
+                            <td><?php echo $instr_sql_row['INSTR_MI']; ?></td>
+                            <td><?php echo $instr_sql_row['INSTR_LNAME']; ?></td>
+                            <td><?php echo $instr_sql_row['INSTR_GENDER']; ?></td>
+                            <td><?php echo $instr_sql_row['INSTR_BDAY']; ?></td>
+                            <td><?php echo $instr_sql_row['INSTR_ADDRESS']; ?></td>
+                            <td><?php echo $instr_sql_row['INSTR_CONTACT']; ?></td>
+                            <td><?php echo $instr_sql_row['INSTR_EMAIL']; ?></td>
+                            <!-- TODO: REVERT TO BUTTON (?) -->
+                            <td><input type="submit" name="removeInstr" value="Fire Professor?"class=""></td>
+                        </tr>
+                    </form>
                 <?php   }                                               ?>
+                
             </table>
-            <button class="enrollcrs-btn">Authorize New Staff +</button>
+            <!-- TODO: BUTTON NOT FUNCTIONAL -->
+            <button onclick="openStaffForm()" class="enrollcrs-btn">Authorize New Staff +</button>
         </fieldset>
         
         <!-- STUDENT TABLE -->
@@ -185,6 +202,35 @@ $conn->close();
 
             <button class="enrollcrs-btn">Enroll Student +</button>
         </fieldset>
+
+        <!-- FORMS -->
+
+        <!-- Add Staff Popup -->
+        <form method="POST" name="addStaffForm" id="addStaffForm">
+            <fieldset>
+                <legend>Enter Instructor Information: </legend>
+
+                <label>First Name: <input type="text" name="INSTR_FNAME" required></label>
+                <label>Middle Initial: <input type="text" name="INSTR_MI" required></label>
+                <label>Last Name: <input type="text" name="INSTR_LNAME" required></label>
+                <label>Gender: 
+                    <select name="INSTR_GENDER" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </label>
+                <label>Birthday: <input type="date" name="INSTR_BDAY" required></label>
+                <label>Address: <input type="text" name="INSTR_ADDRESS" required></label>
+                <label>Contact Number: <input type="number" name="INSTR_CONTACT" required></label>
+                <label>Email: <input type="email" name="INSTR_EMAIL" required></label>
+
+                <!-- SUBMIT && CLOSE -->
+                <div class="formBtns">
+                    <button onclick="closeStaffForm()" class="update-btn cancel">Close</button>
+                    <input formaction="TestUpdate.php" type="submit">
+                </div>
+            </fieldset>
+        </form>
 
     </div>
 </body>
