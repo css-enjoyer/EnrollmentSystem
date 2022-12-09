@@ -46,7 +46,8 @@ $stu_profile_sql = "SELECT
 $stu_enrolled_sql = "SELECT 
                         c.CRS_NAME AS 'COURSE NAME', 
                         c.CRS_UNIT AS 'UNITS', 
-                        CONCAT(i.INSTR_LNAME, ', ', i.INSTR_FNAME, ' ', i.INSTR_MI) AS 'INSTRUCTOR'
+                        CONCAT(i.INSTR_LNAME, ', ', i.INSTR_FNAME, ' ', i.INSTR_MI) AS 'INSTRUCTOR',
+                        e.ENRL_ID
                     FROM enrollment AS e
                         INNER JOIN 
                             course AS c
@@ -187,7 +188,6 @@ $conn->close();
                     <td><?= $STU_ADDRESS ?></td>
                     <td><?= $STU_TYPE ?></td>
                     <td>
-                        <!-- UPDATE: BUTTON NOT FUNCTIONAL -->
                         <button onclick="openInfoForm()" class="updateinfo-btn">Update</button>
                     </td>
                 </tr>
@@ -195,30 +195,32 @@ $conn->close();
         </fieldset>
 
         <!-- DISPLAYING STUDENT'S ENROLLMENT DETAILS -->
-        <fieldset>
-            <legend>Enrolled Courses</legend>
-            <table>
-                <tr>
-                    <th>Course Name</th>
-                    <th>Course Units</th>
-                    <th>Instructor</th>
-                    <th>Actions</th>
-                </tr>
-                <!-- CONVERT INTO FORM FOR ENROLLMENT ID SIMILAR TO ENROLLMENT POPUP (?) -->
-                <?php while ($stu_enrolled_row = $stu_enrolled_result->fetch_assoc()) {            ?>
+        <form action="" method="POST" name="stu-enrolled-courses">
+            <fieldset>
+                <legend>Enrolled Courses</legend>
+                <table>
                     <tr>
-                        <td><?php echo $stu_enrolled_row['COURSE NAME']; ?></td>
-                        <td><?php echo $stu_enrolled_row['UNITS']; ?></td>
-                        <td><?php echo $stu_enrolled_row['INSTRUCTOR']; ?></td>
-
-                        <!-- UPDATE: BUTTON NOT FUNCTIONAL -->
-                        <!-- UPDATE: DELETE ACC. TO ENROLLMENT ID -->
-                        <th><button action="Landing.html" class="removecrs-btn" name="deleteCourse">Drop</button></th>
+                        <th>Course Name</th>
+                        <th>Course Units</th>
+                        <th>Instructor</th>
+                        <th>Actions</th>
                     </tr>
-                <?php   }                                               ?>
-            </table>
-            <button onclick="openEnrollForm()" class="enrollcrs-btn">Enroll New Course +</button>
-        </fieldset>
+                    <!-- CONVERT INTO FORM FOR ENROLLMENT ID SIMILAR TO ENROLLMENT POPUP (?) -->
+                    <?php while ($stu_enrolled_row = $stu_enrolled_result->fetch_assoc()) {            ?>
+                        <tr>
+                            <td><?php echo $stu_enrolled_row['COURSE NAME']; ?></td>
+                            <td><?php echo $stu_enrolled_row['UNITS']; ?></td>
+                            <td><?php echo $stu_enrolled_row['INSTRUCTOR']; ?></td>
+
+                            <!-- UPDATE: BUTTON NOT FUNCTIONAL -->
+                            <!-- UPDATE: DELETE ACC. TO ENROLLMENT ID -->
+                            <th><button action="StudentServer.php" class="removecrs-btn" name="del-stu-course" value="<?php echo $stu_enrolled_row["ENRL_ID"] ?>">Drop</button></th>
+                        </tr>
+                    <?php   }                                               ?>
+                </table>
+                <button onclick="openEnrollForm()" class="enrollcrs-btn">Enroll New Course +</button>
+            </fieldset>
+        </form>
 
 
         <!-- Enroll Course Form Popup -->
@@ -232,7 +234,7 @@ $conn->close();
                         <th>Course Units</th>
                         <th>Instructor</th>
                     </tr>
-                    
+
                     <?php while ($crs_sql_row = $crs_sql_result->fetch_assoc()) {            ?>
                         <tr>
                             <td><input name="Courses[]" type="checkbox" value="<?php echo $crs_sql_row["CRS_ID"] ?>"></td>
