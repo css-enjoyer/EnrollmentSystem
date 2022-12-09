@@ -1,6 +1,7 @@
 <?php
 require_once('./../config.php');
 session_start();
+$STU_ID = $_SESSION['STU_ID'];
 
 // initialize variable in case of duplication
 $STU_EMAIL = "";
@@ -8,7 +9,7 @@ $errors = array();
 
 $db = new mysqli(DB_HOST, DB_USER, DB_PWD, DB_NAME);
 
-// ---------- REGISTER STUDENT ----------
+// ********** REGISTER STUDENT **********
 if (isset($_POST['reg_stu'])) {
     // Receive all inputs from form
     $STU_EMAIL = mysqli_real_escape_string($db, $_POST['STU_EMAIL']);
@@ -53,7 +54,7 @@ if (isset($_POST['reg_stu'])) {
     }
 }
 
-// ----------- LOGIN STUDENT ----------
+// ********** LOGIN STUDENT **********
 if (isset($_POST['login_stu'])) {
     $STU_EMAIL = mysqli_real_escape_string($db, $_POST['STU_EMAIL']);
     $STU_PASSWORD = mysqli_real_escape_string($db, $_POST['STU_PASSWORD']);
@@ -72,16 +73,8 @@ if (isset($_POST['login_stu'])) {
     }
 }
 
-// ---------- UPDATE STUDENT INFO ----------
+// ********** UPDATE STUDENT INFO **********
 if (isset($_POST['update-stu-info'])) {
-    // $STU_ID = $_REQUEST['stuID'];
-    // $ENRL_YEAR = $_REQUEST['enrlYear'];
-    // $STU_FNAME = $_REQUEST['FNAME'];
-    // $STU_MI = $_REQUEST['MI'];
-    // $STU_LNAME = $_REQUEST['LNAME'];
-    // $STU_GENDER = $_REQUEST['GENDER'];
-    // $STU_BDAY = $_REQUEST['BDAY'];
-    $STU_ID = $_SESSION['STU_ID'];
     $UPDATE_STU_ADDRESS = $_POST['UPDATE_STU_ADDRESS'];
     $UPDATE_STU_CONTACT = $_POST['UPDATE_STU_CONTACT'];
 
@@ -93,7 +86,7 @@ if (isset($_POST['update-stu-info'])) {
     $result = $db->query($origin);
     $rows = $result->fetch_assoc();
 
-    // Update fname
+    // Update student address and contact
     if ($UPDATE_STU_ADDRESS != $rows['STU_ADDRESS'] and $UPDATE_STU_CONTACT != $rows['STU_CONTACT']) {
         // Update table
         $sql = "UPDATE school.student
@@ -112,5 +105,17 @@ if (isset($_POST['update-stu-info'])) {
     }
 
     $_SESSION['message'] = "Address and contact updated!";
+    header('location: StudentHomepage.php');
+}
+
+// ********** ADD STUDENT COURSE **********
+if (isset($_POST['add-stu-course'])) {
+    $CRS_IDs = $_POST['Courses'];
+    foreach ($CRS_IDs as $CRS_ID) {
+        $add_enrollment_query = "INSERT INTO school.enrollment (STU_ID, CRS_ID) VALUES ($STU_ID, $CRS_ID);";
+        mysqli_query($db, $add_enrollment_query);
+        // echo $add_enrollment_query . "<br><br><br>";
+    }
+    $_SESSION['message'] = "Courses enrolled!";
     header('location: StudentHomepage.php');
 }
