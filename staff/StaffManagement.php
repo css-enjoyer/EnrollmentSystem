@@ -6,19 +6,11 @@ if ($conn->connect_error) {
     die("Connect Error (" . $conn->connect_Errorno . ") " . $conn->connect_error);
 }
 
-// RETRIEVING INSTR_ID FROM LOGIN
-$INSTR_ID = $_REQUEST['userName'];
-
-
-/* TO DO: Check if ISNTR_ID inputted is valid
-if ($INSTR_ID != 1000 || $INSTR_ID != 1001 || $INSTR_ID != 1002 || 
-    $INSTR_ID != 1003 || $INSTR_ID != 1004) {
-
-    echo "<script> location.href='Landing.html'; </script>";
-    exit;
-
-}
-*/
+$INSTR_EMAIL = $_SESSION['INSTR_EMAIL'];
+$instr_info_result = mysqli_query($conn, "SELECT * FROM instructor WHERE INSTR_EMAIL ='$INSTR_EMAIL';");
+$instr_info_row = mysqli_fetch_assoc($instr_info_result);
+$INSTR_ID = $instr_info_row['INSTR_ID'];
+$_SESSION['INSTR_ID'] = $INSTR_ID;
 
 
 // QUERIES FOR DATA RETRIEVAL //
