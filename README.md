@@ -8,7 +8,7 @@
 - [x] Finish sql
 - [x] Finish frontend
 - [x] Add `config.php` for individual sql settings
-- [ ] Create directory for student, instructor, and admin to be organized
+- [x] Create directory for student, instructor, and admin to be organized
 - [ ] Working login and sign-up
 	- [ ] Student login and sign-up
 	- [ ] Instructor login and sign-up
