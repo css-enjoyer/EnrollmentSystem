@@ -179,22 +179,15 @@ $conn->close();
                 <legend>Students Handled</legend>
                 <table>
                     <tr>
-                        <th>Student ID</th>
-                        <th>Student Name</th>
-                        <th>Course Name</th>
-                        <th>Units</th>
-                        <th>Actions</th>
-                    </tr>
                     <?php while ($instr_handled_row = $instr_handled_result->fetch_assoc()) {            ?>
-                        <tr>
-                            <td><?php echo $instr_handled_row['STUDENT ID']; ?></td>
-                            <td><?php echo $instr_handled_row['STUDENT NAME']; ?></td>
-                            <td><?php echo $instr_handled_row['COURSE NAME']; ?></td>
-                            <td><?php echo $instr_handled_row['UNITS']; ?></td>
+                        <td><?php echo $instr_handled_row['STUDENT ID']; ?></td>
+                        <td><?php echo $instr_handled_row['STUDENT NAME']; ?></td>
+                        <td><?php echo $instr_handled_row['COURSE NAME']; ?></td>
+                        <td><?php echo $instr_handled_row['UNITS']; ?></td>
 
                             <!-- TODO: BUTTON NOT FUNCTIONAL -->
                             <!-- TODO: BUTTON RESTRICTS STUDENTS DISPLAYED -->
-                            <th><button class="removecrs-btn" name="drop-handled-stu" value="<?php echo $instr_handled_row["ENRL_ID"] ?>">Drop</button></th>
+                            <th><button class="removecrs-btn" name="drop-handled-stu" value="<?php echo $instr_handled_row["ENRL_ID"] ?>">Drop Student</button></th>
                         </tr>
                     <?php   }                                               ?>
                 </table>
