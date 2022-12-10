@@ -1,7 +1,6 @@
 <?php
 require_once(__DIR__ . './../config.php');
 session_start();
-$STU_ID = $_SESSION['STU_ID'];
 
 // initialize variable in case of duplication
 $STU_EMAIL = "";
@@ -75,6 +74,7 @@ if (isset($_POST['login_stu'])) {
 
 // ********** UPDATE STUDENT INFO **********
 if (isset($_POST['update-stu-info'])) {
+    $STU_ID = $_SESSION['STU_ID'];
     $UPDATE_STU_ADDRESS = $_POST['UPDATE_STU_ADDRESS'];
     $UPDATE_STU_CONTACT = $_POST['UPDATE_STU_CONTACT'];
 
@@ -110,6 +110,7 @@ if (isset($_POST['update-stu-info'])) {
 
 // ********** ADD STUDENT COURSE **********
 if (isset($_POST['add-stu-course'])) {
+    $STU_ID = $_SESSION['STU_ID'];
     $CRS_IDs = $_POST['Courses'];
     foreach ($CRS_IDs as $CRS_ID) {
         $add_enrollment_query = "INSERT INTO school.enrollment (STU_ID, CRS_ID) VALUES ($STU_ID, $CRS_ID);";
