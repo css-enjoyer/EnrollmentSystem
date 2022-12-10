@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Record</title>
+    <title>Add Student</title>
     <link rel="stylesheet" href="./../styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,8 +19,8 @@
         </div>
     </div>
     <div class="mainsection">
-        <h1>Welcome, World Ender.</h1>
-        <form action="TestFunctionality.php" method="POST">
+        <h1>Adding a Student</h1>
+        <form action="AdminFunctionality.php" method="POST">
             <fieldset>
                 <legend>Enter Student Information: </legend>
                 <label>First Name: <input type="text" name="STU_FNAME" required></label>

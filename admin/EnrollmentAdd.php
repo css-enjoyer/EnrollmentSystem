@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Record</title>
+    <title>Add Enrollment</title>
     <link rel="stylesheet" href="./../styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,15 +19,14 @@
         </div>
     </div>
     <div class="mainsection">
-        <h1>Welcome, World Ender.</h1>
-        <form action="TestFunctionality.php" method="POST">
+        <h1>Add an Enrollment</h1>
+        <form action="AdminFunctionality.php" method="POST">
             <fieldset>
-                <legend>Enter Course Information: </legend>
-                <label>Course Name: <input type="text" name="CRS_NAME" required></label>
-                <label>Course Units: <input type="number" name="CRS_UNIT" required></label>
-                <label>Instructor ID: <input type="number" name="INSTR_ID" required></label>
+                <legend>Enter Enrollment Information: </legend>
+                <label>Student ID: <input type="number" name="STU_ID" required></label>
+                <label>Course ID: <input type="number" name="CRS_ID" required></label>
             </fieldset>
-            <input type="submit" name="addCrs" value="Proceed &#8594" class="btn">
+            <input type="submit" name="addEnrl" value="Proceed &#8594" class="btn">
         </form>
     </div>
 </html>

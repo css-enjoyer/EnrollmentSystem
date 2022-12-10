@@ -75,7 +75,7 @@
                 <label>Username: <input type="text" id="userName" name="userName" required></label>
                 <label>Password: <input type="password" id="passWord" name="passWord" required></label>
                 <div class="formBtns">
-                    <button onClick="closeStaffForm()">Cancel</button>
+                    <button onClick="closeAdminForm()">Cancel</button>
                     <input formaction="admin/DatabaseAdministration.php" type="submit">
                 </div>
             </form>
