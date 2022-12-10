@@ -108,3 +108,16 @@ if (isset($_POST['update-instr-info'])) {
     $_SESSION['message'] = "Address and contact updated!";
     header('location: StaffManagement.php');
 }
+
+
+
+
+// *********** DELETE STUDENT FROM INSTRUCTOR'S COURSE **********
+if (isset($_POST['drop-handled-stu'])) {
+    $ENRL_ID = $_POST['drop-handled-stu'];
+    // echo $ENRL_ID;
+    $del_enrollment_query = "DELETE FROM school.enrollment WHERE ENRL_ID = $ENRL_ID";
+    mysqli_query($db, $del_enrollment_query);
+    $_SESSION['message'] = "Student dropped!";
+    header('location: StaffManagement.php');
+}

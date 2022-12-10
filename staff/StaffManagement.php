@@ -49,7 +49,8 @@ $instr_handled_sql = "SELECT
                         e.STU_ID AS 'STUDENT ID',
                         CONCAT(s.STU_LNAME, ', ', s.STU_FNAME, ' ', s.STU_MI) AS 'STUDENT NAME',
                         c.CRS_NAME AS 'COURSE NAME',
-                        c.CRS_UNIT AS 'UNITS'
+                        c.CRS_UNIT AS 'UNITS',
+                        ENRL_ID
                       FROM enrollment AS e
                         INNER JOIN 
                             student AS s
@@ -173,31 +174,32 @@ $conn->close();
         </fieldset>
 
         <!-- STUDENTS HANDLED BY INSTRUCTOR -->
-        <fieldset>
-            <legend>Students Handled</legend>
-            <table>
-                <tr>
-                    <th>Student ID</th>
-                    <th>Student Name</th>
-                    <th>Course Name</th>
-                    <th>Units</th>
-                    <!--<th>Actions</th>-->
-                </tr>
-                <!-- CONVERT INTO FORM FOR ENROLLMENT ID SIMILAR TO ENROLLMENT POPUP (?) -->
-                <?php while ($instr_handled_row = $instr_handled_result->fetch_assoc()) {            ?>
+        <form action="StaffServer.php" method="POST" name="stu-of-instr">
+            <fieldset>
+                <legend>Students Handled</legend>
+                <table>
                     <tr>
-                        <td><?php echo $instr_handled_row['STUDENT ID']; ?></td>
-                        <td><?php echo $instr_handled_row['STUDENT NAME']; ?></td>
-                        <td><?php echo $instr_handled_row['COURSE NAME']; ?></td>
-                        <td><?php echo $instr_handled_row['UNITS']; ?></td>
-
-                        <!-- TODO: BUTTON NOT FUNCTIONAL -->
-                        <!-- TODO: BUTTON RESTRICTS STUDENTS DISPLAYED -->
-                        <!--<th><button action="" class="removecrs-btn" name="">Drop</button></th>-->
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Course Name</th>
+                        <th>Units</th>
+                        <th>Actions</th>
                     </tr>
-                <?php   }                                               ?>
-            </table>
-        </fieldset>
+                    <?php while ($instr_handled_row = $instr_handled_result->fetch_assoc()) {            ?>
+                        <tr>
+                            <td><?php echo $instr_handled_row['STUDENT ID']; ?></td>
+                            <td><?php echo $instr_handled_row['STUDENT NAME']; ?></td>
+                            <td><?php echo $instr_handled_row['COURSE NAME']; ?></td>
+                            <td><?php echo $instr_handled_row['UNITS']; ?></td>
+
+                            <!-- TODO: BUTTON NOT FUNCTIONAL -->
+                            <!-- TODO: BUTTON RESTRICTS STUDENTS DISPLAYED -->
+                            <th><button class="removecrs-btn" name="drop-handled-stu" value="<?php echo $instr_handled_row["ENRL_ID"] ?>">Drop</button></th>
+                        </tr>
+                    <?php   }                                               ?>
+                </table>
+            </fieldset>
+        </form>
 
     </div>
 
