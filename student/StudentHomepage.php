@@ -129,16 +129,17 @@ $conn->close();
 </head>
 <script>
     function openInfoForm() {
+        // event.preventDefault();
         document.getElementById("updateinfoform").style.display = "flex";
     }
 
     function closeInfoForm() {
-        event.preventDefault();
+        // event.preventDefault();
         document.getElementById("updateinfoform").style.display = "none";
     }
 
     function openEnrollForm() {
-        // event.preventDefault();
+        event.preventDefault();
         document.getElementById("enrollform").style.display = "flex";
     }
 
@@ -223,7 +224,7 @@ $conn->close();
                     <?php   }                                               ?>
                 </table>
                 <!-- prevents button from sending a postback that resets the page, idk ung update stu info di kailangan ng ganito?!, related sa server handling... -->
-                <button onclick="openEnrollForm(); return false" class="enrollcrs-btn">Enroll New Course +</button>
+                <button onclick="openEnrollForm(); //return false" class="enrollcrs-btn">Enroll New Course +</button>
             </fieldset>
         </form>
 
