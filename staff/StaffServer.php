@@ -66,7 +66,6 @@ if (isset($_POST['login-instr'])) {
         if (mysqli_num_rows($results) == 1) {
             $_SESSION['INSTR_EMAIL'] = $INSTR_EMAIL;
             $_SESSION['success'] = "You are now logged in";
-            echo $INSTR_EMAIL;
             header('location: StaffManagement.php');
         } else {
             array_push($errors, "Wrong username/password combination");
@@ -110,8 +109,32 @@ if (isset($_POST['update-instr-info'])) {
     header('location: StaffManagement.php');
 }
 
+// ********** ADD STUDENT TO INSTRUCTOR's COURSE **********
+if (isset($_POST['add-stu-to-instr-course'])) {
+    $INSTR_ID = $_SESSION['INSTR_ID'];
+    // if instr has multiple courses assign a random course to stu
+    $CRS_NUM_RESULTS = mysqli_query($db, "SELECT CRS_ID FROM course WHERE INSTR_ID = '$INSTR_ID'");
+    if (mysqli_num_rows($CRS_NUM_RESULTS) > 1) {
+        $CRS_ID_RESULT = mysqli_query($db, "SELECT CRS_ID FROM course WHERE INSTR_ID = '$INSTR_ID' ORDER BY RAND() LIMIT 1;");
+        $CRS_ID_ROW = mysqli_fetch_assoc($CRS_ID_RESULT);
+        $CRS_ID = $CRS_ID_ROW['CRS_ID'];
+    } else {
+        // echo "BEFORE";
+        $CRS_ID_RESULT = mysqli_query($db, "SELECT CRS_ID FROM course WHERE INSTR_ID = '$INSTR_ID';");
+        $CRS_ID_ROW = mysqli_fetch_assoc($CRS_ID_RESULT);
+        $CRS_ID = $CRS_ID_ROW['CRS_ID'];
+        // echo "AFTER" . $CRS_ID;
+    }
 
-
+    $STU_IDs = $_POST['Students'];
+    foreach ($STU_IDs as $STU_ID) {
+        $add_enrollment_query = "INSERT INTO school.enrollment (STU_ID, CRS_ID) VALUES ($STU_ID, $CRS_ID);";
+        mysqli_query($db, $add_enrollment_query);
+        // echo $add_enrollment_query . "<br><br><br>";
+    }
+    $_SESSION['message'] = "Students enrolled!";
+    header('location: StaffManagement.php');
+}
 
 // *********** DELETE STUDENT FROM INSTRUCTOR'S COURSE **********
 if (isset($_POST['drop-handled-stu'])) {

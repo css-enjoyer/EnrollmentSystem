@@ -275,7 +275,8 @@ WHERE
 SELECT 
 	CONCAT(s.STU_FNAME, ", ", s.STU_FNAME, " ", s.STU_MI) AS "STUDENT NAME",
 	c.CRS_NAME AS "COURSE NAME",
-    c.CRS_UNIT AS "UNITS"
+    c.CRS_UNIT AS "UNITS",
+    ENRL_ID
 FROM enrollment AS e
 	INNER JOIN 
 		student AS s
@@ -289,6 +290,39 @@ WHERE
 	-- REPLACE WITH $INSTR_ID.
 	INSTR_ID = 6006;
     
+-- STUDENTS NOT YET ENROLLED TO INSTR'S COURSE
+SELECT DISTINCT
+	s.STU_ID,
+	CONCAT(s.STU_FNAME, ", ", s.STU_FNAME, " ", s.STU_MI) AS "STUDENT NAME",
+    s.STU_GENDER,
+    s.STU_BDAY,
+    s.STU_CONTACT,
+    s.STU_EMAIL,
+    s.STU_ADDRESS
+FROM student AS s
+	INNER JOIN 
+		enrollment AS e
+	ON
+		s.STU_ID = e.STU_ID
+	INNER JOIN
+		course AS c
+	ON 
+		e.CRS_ID = c.CRS_ID
+WHERE 
+	s.STU_ID NOT IN (SELECT s.STU_ID
+FROM student AS s
+	INNER JOIN 
+		enrollment AS e
+	ON
+		s.STU_ID = e.STU_ID
+	INNER JOIN
+		course AS c
+	ON 
+		e.CRS_ID = c.CRS_ID
+WHERE 
+	-- REPLACE WITH $INSTR_ID.
+	INSTR_ID = 6006);
+
     
 -- ADMIN VIEW -- 
 

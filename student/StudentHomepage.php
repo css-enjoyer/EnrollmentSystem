@@ -93,6 +93,7 @@ $stu_profile_result = $conn->query($stu_profile_sql);
 $stu_profile_row = $stu_profile_result->fetch_assoc();
 
 $stu_enrolled_result = $conn->query($stu_enrolled_sql);
+// nagiging kulang to pag kinuha mo kagad dito!
 // $stu_enrolled_row = $stu_enrolled_result->fetch_assoc();
 
 $crs_sql_result = $conn->query($crs_sql);

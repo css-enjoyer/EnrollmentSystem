@@ -48,6 +48,7 @@ $instr_profile_sql = "SELECT
 $instr_handled_sql = "SELECT 
                         e.STU_ID AS 'STUDENT ID',
                         CONCAT(s.STU_LNAME, ', ', s.STU_FNAME, ' ', s.STU_MI) AS 'STUDENT NAME',
+                        s.STU_EMAIL,
                         c.CRS_NAME AS 'COURSE NAME',
                         c.CRS_UNIT AS 'UNITS',
                         ENRL_ID
@@ -63,13 +64,50 @@ $instr_handled_sql = "SELECT
                       WHERE
                         INSTR_ID = $INSTR_ID";
 
+// Students no handled by Instructor
+$instr_not_handled_sql = "SELECT DISTINCT
+s.STU_ID,
+CONCAT(s.STU_FNAME, ', ', s.STU_FNAME, ' ', s.STU_MI) AS 'STUDENT NAME',
+s.STU_GENDER,
+s.STU_BDAY,
+s.STU_CONTACT,
+s.STU_EMAIL,
+s.STU_ADDRESS
+FROM student AS s
+INNER JOIN 
+    enrollment AS e
+ON
+    s.STU_ID = e.STU_ID
+INNER JOIN
+    course AS c
+ON 
+    e.CRS_ID = c.CRS_ID
+WHERE 
+s.STU_ID NOT IN (SELECT s.STU_ID
+FROM student AS s
+INNER JOIN 
+    enrollment AS e
+ON
+    s.STU_ID = e.STU_ID
+INNER JOIN
+    course AS c
+ON 
+    e.CRS_ID = c.CRS_ID
+WHERE 
+-- REPLACE WITH $INSTR_ID.
+INSTR_ID = $INSTR_ID);";
+
 
 // ROW INIT //
 $instr_profile_result = $conn->query($instr_profile_sql);
 $instr_profile_row = $instr_profile_result->fetch_assoc();
 
 $instr_handled_result = $conn->query($instr_handled_sql);
-$instr_handled_row = $instr_handled_result->fetch_assoc();
+// nagiging kulang to pag kinuha mo kagad dito!
+// $instr_handled_row = $instr_handled_result->fetch_assoc();
+
+$instr_not_handled_result = $conn->query($instr_not_handled_sql);
+// $instr_not_handled_row = $instr_not_handled_result->fetch_assoc();
 
 
 // INIT STUDENT DETAILS //
@@ -108,12 +146,13 @@ $conn->close();
         document.getElementById("updateinfoform").style.display = "none";
     }
 
-    function openEnrollForm() {
+    function openEnrollStudentToCourseForm() {
         event.preventDefault();
+        // bruh same ung name lmao
         document.getElementById("enrollform").style.display = "flex";
     }
 
-    function closeEnrollForm() {
+    function closeEnrollStudentToCourseForm() {
         // prevents button from sending a postback that resets the page, idk ung update stu info di kailangan ng ganito?! related sa server handling...
         event.preventDefault();
         document.getElementById("enrollform").style.display = "none";
@@ -181,6 +220,7 @@ $conn->close();
                     <tr>
                         <th>Student ID</th>
                         <th>Student Name</th>
+                        <th>Student Email</th>
                         <th>Course Name</th>
                         <th>Units</th>
                         <th>Actions</th>
@@ -189,6 +229,7 @@ $conn->close();
                         <tr>
                             <td><?php echo $instr_handled_row['STUDENT ID']; ?></td>
                             <td><?php echo $instr_handled_row['STUDENT NAME']; ?></td>
+                            <td><?php echo $instr_handled_row['STU_EMAIL']; ?></td>
                             <td><?php echo $instr_handled_row['COURSE NAME']; ?></td>
                             <td><?php echo $instr_handled_row['UNITS']; ?></td>
 
@@ -198,13 +239,48 @@ $conn->close();
                         </tr>
                     <?php   }                                               ?>
                 </table>
+                <button onclick="openEnrollStudentToCourseForm();" class="enrollcrs-btn">Enroll New Student +</button>
             </fieldset>
         </form>
 
     </div>
 
+    <!-- same ung name dead dbale na sa ibang server nmn to mapupunta -->
+    <!-- Enroll Student to Course Form Popup -->
+    <form action="StaffServer.php" method="POST" id="enrollform" name="enrollstudenttocourseform">
+        <fieldset>
+            <legend>Students not yet enrolled to your class</legend>
+            <table>
+                <tr>
+                    <th>+</th>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Gender</th>
+                    <th>Birthday</th>
+                    <th>Contact No.</th>
+                    <th>Student Email</th>
+                    <th>Address</th>
+                </tr>
 
-
+                <?php while ($instr_not_handled_row = $instr_not_handled_result->fetch_assoc()) {            ?>
+                    <tr>
+                        <td><input name="Students[]" type="checkbox" value="<?php echo $instr_not_handled_row["STU_ID"] ?>"></td>
+                        <td><?php echo $instr_not_handled_row["STU_ID"]; ?></td>
+                        <td><?php echo $instr_not_handled_row["STUDENT NAME"]; ?></td>
+                        <td><?php echo $instr_not_handled_row["STU_GENDER"]; ?></td>
+                        <td><?php echo $instr_not_handled_row["STU_BDAY"]; ?></td>
+                        <td><?php echo $instr_not_handled_row["STU_CONTACT"]; ?></td>
+                        <td><?php echo $instr_not_handled_row["STU_EMAIL"]; ?></td>
+                        <td><?php echo $instr_not_handled_row["STU_ADDRESS"]; ?></td>
+                    </tr>
+                <?php   }                                               ?>
+            </table>
+            <div class="formBtns">
+                <button onclick="closeEnrollStudentToCourseForm()" class="enrollcrs-btn cancel">Close</button>
+                <input type="submit" name="add-stu-to-instr-course" value="Enroll Student +" class="enrollcrs-btn">
+            </div>
+        </fieldset>
+    </form>
 
     <!-- Update Info Form Popup -->
     <form action="StaffServer.php" method="POST" name="myForm" id="updateinfoform">
