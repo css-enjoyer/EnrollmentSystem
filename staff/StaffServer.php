@@ -1,6 +1,8 @@
 <?php
 require_once(__DIR__ . '/./../config.php');
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 // $INSTR_ID = $_SESSION['INSTR_ID'];
 
 // initialize variable in case of duplication
@@ -114,7 +116,10 @@ if (isset($_POST['add-stu-to-instr-course'])) {
     $INSTR_ID = $_SESSION['INSTR_ID'];
     // if instr has multiple courses assign a random course to stu
     $CRS_NUM_RESULTS = mysqli_query($db, "SELECT CRS_ID FROM course WHERE INSTR_ID = '$INSTR_ID'");
-    if (mysqli_num_rows($CRS_NUM_RESULTS) > 1) {
+    if (mysqli_num_rows($CRS_NUM_RESULTS) == 0) {
+        $_SESSION['message'] = "You don't have a course yet! Ask the admin to add you to one.";
+        header('location: StaffManagement.php');
+    } elseif (mysqli_num_rows($CRS_NUM_RESULTS) > 1) {
         $CRS_ID_RESULT = mysqli_query($db, "SELECT CRS_ID FROM course WHERE INSTR_ID = '$INSTR_ID' ORDER BY RAND() LIMIT 1;");
         $CRS_ID_ROW = mysqli_fetch_assoc($CRS_ID_RESULT);
         $CRS_ID = $CRS_ID_ROW['CRS_ID'];
