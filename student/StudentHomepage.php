@@ -133,6 +133,7 @@ $conn->close();
     }
 
     function closeInfoForm() {
+        event.preventDefault();
         document.getElementById("updateinfoform").style.display = "none";
     }
 
@@ -201,7 +202,7 @@ $conn->close();
         </fieldset>
 
         <!-- DISPLAYING STUDENT'S ENROLLMENT DETAILS -->
-        <form method="POST" name="stu-enrolled-courses">
+        <form action="StudentServer.php" method="POST" name="stu-enrolled-courses">
             <fieldset>
                 <legend>Enrolled Courses</legend>
                 <table>
@@ -227,7 +228,7 @@ $conn->close();
         </form>
 
         <!-- Enroll Course Form Popup -->
-        <form method="POST" id="enrollform" name="enrollform">
+        <form action="StudentServer.php" method="POST" id="enrollform" name="enrollform">
             <fieldset>
                 <legend>Available Courses</legend>
                 <table>
