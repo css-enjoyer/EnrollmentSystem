@@ -132,7 +132,15 @@ $conn->close();
     </div>
     <div class="mainsection">
         <h1>System Dashboard</h1>
-        <h1><?= $INSTR_NAME ?>'s Profile</h1>
+        <h2><?= $INSTR_NAME ?>'s Profile</h2>
+        <?php if (isset($_SESSION['message'])) : ?>
+            <div class="msg">
+                <?php
+                echo $_SESSION['message'];
+                unset($_SESSION['message']);
+                ?>
+            </div>
+        <?php endif ?>
         <fieldset>
             <legend>Instructor Info</legend>
             <table>

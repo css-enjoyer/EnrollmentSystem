@@ -73,29 +73,29 @@ if (isset($_POST['login-instr'])) {
     }
 }
 
-// ********** UPDATE STUDENT INFO **********
-if (isset($_POST['update-stu-info'])) {
-    $STU_ID = $_SESSION['STU_ID'];
-    $UPDATE_STU_ADDRESS = $_POST['UPDATE_STU_ADDRESS'];
-    $UPDATE_STU_CONTACT = $_POST['UPDATE_STU_CONTACT'];
+// ********** UPDATE INSTRUCTOR INFO **********
+if (isset($_POST['update-instr-info'])) {
+    $INSTR_ID = $_SESSION['INSTR_ID'];
+    $UPDATE_INSTR_ADDRESS = $_POST['UPDATE_INSTR_ADDRESS'];
+    $UPDATE_INSTR_CONTACT = $_POST['UPDATE_INSTR_CONTACT'];
 
-    echo "<br />UPDATE";
+    // echo "<br />UPDATE";
 
-    $origin = "SELECT * FROM school.student 
-                WHERE STU_ID = $STU_ID";
+    $origin = "SELECT * FROM school.instructor 
+                WHERE INSTR_ID = $INSTR_ID";
 
     $result = $db->query($origin);
     $rows = $result->fetch_assoc();
 
-    // Update student address and contact
-    if ($UPDATE_STU_ADDRESS != $rows['STU_ADDRESS'] and $UPDATE_STU_CONTACT != $rows['STU_CONTACT']) {
+    // Update instructor address and contact
+    if ($UPDATE_INSTR_ADDRESS != $rows['INSTR_ADDRESS'] and $UPDATE_INSTR_CONTACT != $rows['INSTR_CONTACT']) {
         // Update table
-        $sql = "UPDATE school.student
+        $sql = "UPDATE school.instructor
             SET 
-                STU_ADDRESS = '$UPDATE_STU_ADDRESS',
-                STU_CONTACT = '$UPDATE_STU_CONTACT'
+                INSTR_ADDRESS = '$UPDATE_INSTR_ADDRESS',
+                INSTR_CONTACT = '$UPDATE_INSTR_CONTACT'
             WHERE 
-                STU_ID = $STU_ID";
+                INSTR_ID = $INSTR_ID";
 
         // checker
         if (mysqli_query($db, $sql)) {
@@ -106,5 +106,5 @@ if (isset($_POST['update-stu-info'])) {
     }
 
     $_SESSION['message'] = "Address and contact updated!";
-    header('location: StudentHomepage.php');
+    header('location: StaffManagement.php');
 }
