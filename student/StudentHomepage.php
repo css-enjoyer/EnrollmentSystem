@@ -159,17 +159,17 @@ $conn->close();
             <li><a href="StudentHomepage.php?logout=1">Logout</a></li>
         </ul>
     </div>
-    <?php if (isset($_SESSION['message'])) : ?>
-        <div class="msg">
-            <?php
-            echo $_SESSION['message'];
-            unset($_SESSION['message']);
-            ?>
-        </div>
-    <?php endif ?>
     <!-- DISPLAYING STUDENT'S INFORMATION -->
     <div class="mainsection">
         <h1><?= $STU_NAME ?>'s Profile</h1>
+        <?php if (isset($_SESSION['message'])) : ?>
+            <div class="msg">
+                <?php
+                echo $_SESSION['message'];
+                unset($_SESSION['message']);
+                ?>
+            </div>
+        <?php endif ?>
         <fieldset>
             <legend>Student Info</legend>
             <table>

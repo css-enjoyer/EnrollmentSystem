@@ -4,10 +4,12 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+
 html {
     height: 100%;
     width: 100%;
 }
+
 body {
     background-color: black;
     background: url(images/bgblurred.jpg) no-repeat fixed center;
@@ -16,6 +18,7 @@ body {
     overflow: overlay;
     padding-bottom: 200px;
 }
+
 .navsection {
     position: fixed;
     top: 0;
@@ -28,22 +31,27 @@ body {
     justify-content: flex-end;
     padding: 0 100px;
 }
+
 .navsection a {
     text-decoration: none;
     color: white;
 }
+
 .logo-container {
     position: absolute;
     left: 100px;
     top: 5px;
 }
+
 .navsection ul {
     display: flex;
     gap: 20px;
 }
+
 .navsection li {
     list-style-type: none;
 }
+
 .loginform {
     position: fixed;
     width: 30vw;
@@ -51,46 +59,55 @@ body {
     right: 0;
     margin: auto;
     top: 20vh;
-    
+
     display: none;
     flex-direction: column;
     gap: 20px;
     padding: 60px;
     z-index: 1;
-    
+
     background-color: rgba(125, 125, 125, .5);
-    backdrop-filter: blur( 5px );
+    backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, .3);
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, .5);
 }
-.loginform input[type="number"], .loginform input[type="password"] {
-    width: 100%;    
+
+.loginform input[type="number"],
+.loginform input[type="password"] {
+    width: 100%;
     padding-left: 10px;
 }
+
 .loginform h2 {
     text-align: center;
     text-decoration: overline;
     color: rgb(255, 238, 0);
     text-shadow: -3px 0 3px 3px black;
 }
+
 .loginform .formBtns {
     display: flex;
     justify-content: space-between;
 }
-.formBtns input[type="submit"], .formBtns button {
+
+.formBtns input[type="submit"],
+.formBtns button {
     width: 60px;
     margin: 30px 0 20px 0;
 }
+
 .mainsection {
     padding: 100px 150px;
     width: 100vw;
     color: white;
 }
+
 h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
     color: rgb(255, 238, 0);
 }
+
 fieldset {
     padding: 20px;
     margin-bottom: 50px;
@@ -99,50 +116,69 @@ fieldset {
     display: flex;
     flex-direction: column;
 }
+
 fieldset legend {
-    color: white;   
+    color: white;
     font-weight: 500;
     padding: 0 20px;
 }
-fieldset input, fieldset label{
+
+fieldset input,
+fieldset label {
     outline: 0;
     margin: 0 20px 5px 20px;
     color: white;
 }
+
 fieldset select {
     outline: 0;
     margin: 0 20px 5px 20px;
 }
+
 fieldset label {
     font-weight: 300;
 }
-fieldset input[type="text"], input[type="date"], input[type="email"], 
-input[type="password"], select {
+
+fieldset input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="password"],
+select {
     float: right;
     width: 75%;
 }
-.loginform input[type="number"], .loginform input[type="password"] {
+
+.loginform input[type="number"],
+.loginform input[type="password"] {
     width: 100%;
 }
-fieldset input, select, input[type="submit"] {
+
+fieldset input,
+select,
+input[type="submit"] {
     color: black;
 }
+
 form input[type="submit"] {
     float: right;
 }
 
 /* Styling Table */
-table, td, th {
+table,
+td,
+th {
     border: 1px solid;
     border-collapse: collapse;
     padding: 3px;
     color: white;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
+
 table tbody tr:hover {
     font-weight: 500;
     background-color: rgba(255, 238, 0, .1);
 }
+
 .loginbtn {
     background-color: transparent;
     border: none;
@@ -151,6 +187,7 @@ table tbody tr:hover {
     color: white;
     cursor: pointer;
 }
+
 .btn {
     display: inline-block;
     background: rgb(255, 238, 0);
@@ -160,42 +197,49 @@ table tbody tr:hover {
     border: none;
     cursor: pointer;
 }
+
 .btn:hover {
     transform: translateX(10%);
 }
+
 .enroll-btn {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);  
+    transform: translate(-50%, -50%);
     font-size: 5rem;
 
     box-shadow: inset 0 0 0 0 rgb(255, 238, 0);
-    color: rgb(255, 238, 0);  
+    color: rgb(255, 238, 0);
     margin: 0 -.25rem;
     padding: 0 .25rem;
     transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
 }
+
 .enroll-btn:hover {
     box-shadow: inset 500px 0 0 0 rgb(255, 238, 0);
     color: black;
 }
+
 .staffcrt-btn {
     position: absolute;
     top: 60%;
     left: 50%;
-    transform: translate(-50%, -50%);  
+    transform: translate(-50%, -50%);
     font-size: 1rem;
     text-shadow: 0 2px 3px black;
 }
-.staffcrt-btn a{
+
+.staffcrt-btn a {
     color: rgb(255, 238, 0);
 }
+
 .staff-notif {
     margin: -30px 0 0 10px;
     color: rgb(255, 238, 0);
     text-shadow: 0 2px 3px black;
 }
+
 .enrollcrs-btn {
     width: 150px;
     height: 40px;
@@ -203,16 +247,21 @@ table tbody tr:hover {
     background-color: rgb(255, 238, 0);
     margin-top: 20px;
     cursor: pointer;
-    transition:.3s ease-in-out;
+    transition: .3s ease-in-out;
 }
+
 .enrollcrs-btn:hover {
     transform: scale(1.1);
     transform: translateY(-3px);
     box-shadow: 0 3px 1px 0 black;
 }
-#CS-Tracks, #IS-Tracks, #IT-Tracks {
+
+#CS-Tracks,
+#IS-Tracks,
+#IT-Tracks {
     display: none;
 }
+
 .removecrs-btn {
     width: 100%;
     border: none;
@@ -220,12 +269,14 @@ table tbody tr:hover {
     background-color: rgb(224, 18, 18);
     transition: .3s ease-in-out;
 }
-.removecrs-btn:hover { 
+
+.removecrs-btn:hover {
     transform: scale(1.1);
     transform: translateY(-3px);
     box-shadow: 0 3px 1px 0 black;
     cursor: pointer;
 }
+
 /* update info form popup */
 .updateinfo-btn {
     background-color: transparent;
@@ -236,12 +287,14 @@ table tbody tr:hover {
     font-size: 1rem;
     transition: .3s ease-in-out;
 }
+
 .updateinfo-btn:hover {
     transform: scale(1.1);
     transform: translateY(-3px);
     box-shadow: 0 3px 1px 0 black;
     cursor: pointer;
 }
+
 #updateinfoform {
     position: fixed;
     width: 60%;
@@ -254,14 +307,17 @@ table tbody tr:hover {
     gap: 20px;
     z-index: 1;
 }
+
 #updateinfoform fieldset {
     padding: 30px 20px;
     background-color: rgba(125, 125, 125, .5);
-    backdrop-filter: blur( 5px );
+    backdrop-filter: blur(5px);
 }
+
 #updateinfoform .formBtns {
     margin: 0 30px;
 }
+
 #updateinfoform .update-btn {
     width: 100px;
     height: 30px;
@@ -269,11 +325,13 @@ table tbody tr:hover {
     background-color: rgb(255, 238, 0);
     transition: .3s ease-in-out;
 }
+
 #updateinfoform .cancel {
     background-color: black;
     color: white;
 }
-#updateinfoform .update-btn:hover { 
+
+#updateinfoform .update-btn:hover {
     transform: scale(1.1);
     transform: translateY(-3px);
     box-shadow: 0 3px 1px 0 black;
@@ -289,42 +347,50 @@ table tbody tr:hover {
     right: 0;
     margin: auto;
     top: 10vh;
-    
+
     display: none;
     flex-direction: column;
     gap: 20px;
     z-index: 1;
 }
+
 #enrollform * {
     box-shadow: none;
 }
+
 #enrollform legend {
     font-size: 1rem;
 }
+
 #enrollform fieldset {
     font-size: .8rem;
     margin: 5px 20px 20px 20px;
     padding: 10px 20px;
     background-color: rgba(125, 125, 125, .5);
-    backdrop-filter: blur( 5px );
+    backdrop-filter: blur(5px);
 }
+
 #enrollform table {
     background-color: rgba(50, 50, 50);
     border: none;
 }
+
 #enrollform fieldset th {
     background-color: black;
 }
-#enrollform .enrollcrs-btn { 
+
+#enrollform .enrollcrs-btn {
     width: 150px;
     height: 30px;
-    transition:.3s ease-in-out;
+    transition: .3s ease-in-out;
 }
+
 #enrollform .cancel {
     background-color: black;
     color: white;
 }
-#enrollform .enrollcrs-btn:hover { 
+
+#enrollform .enrollcrs-btn:hover {
     transform: scale(1.1);
     transform: translateY(-3px);
     box-shadow: 0 3px 1px 0 black;
@@ -345,22 +411,54 @@ table tbody tr:hover {
     transition: .3s ease-in-out;
     white-space: nowrap;
 }
+
 .staff-table td button[title]:hover {
     background-color: rgba(94, 241, 57, 0.541);
     font-weight: 600;
-}   
+}
 
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-	width: 5px;
-	background-color: transparent;
+    width: 5px;
+    background-color: transparent;
 }
+
 ::-webkit-scrollbar-track {
-	background-color: transparent;
+    background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-	background: rgb(200, 200, 200);
+    border-radius: 10px;
+    background: rgb(200, 200, 200);
+}
+
+/* FOR ERRORS AND MESSAGES */
+.msg {
+    margin: 30px auto; 
+    padding: 10px; 
+    border-radius: 5px; 
+    color: #3c763d; 
+    background: #dff0d8; 
+    border: 1px solid #3c763d;
+    width: 50%;
+    text-align: center;
+}
+
+.error {
+    width: 92%;
+    margin: 0px auto;
+    padding: 10px;
+    border: 1px solid #a94442;
+    color: #a94442;
+    background: #f2dede;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.success {
+    color: #3c763d;
+    background: #dff0d8;
+    border: 1px solid #3c763d;
+    margin-bottom: 20px;
 }

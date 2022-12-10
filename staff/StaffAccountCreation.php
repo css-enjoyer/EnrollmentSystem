@@ -23,7 +23,7 @@ $conn->close();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
 </head>
-<script>
+<!-- <script>
     function showDiv(select) {
         if (select.value == "1") {
             document.getElementById('CS-Tracks').style.display = "block";
@@ -43,30 +43,33 @@ $conn->close();
             document.getElementById('IT-Tracks').style.display = "none";
         }
     }
-</script>
+</script> -->
 
 <body>
     <div class="navsection">
         <div class="logo-container">
-            <img src="images/ustseal.png" width="50px">
+            <img src="./../images/ustseal.png" width="50px">
         </div>
     </div>
     <div class="mainsection">
         <h1>Join the thomasian team!</h1>
-        <form action="StaffManagement.php" method="POST">
+        <form action="StaffAccountCreation.php" method="POST">
+            <?php include('StaffErrors.php'); ?>
             <fieldset>
                 <legend>Enter your personal information: </legend>
-                <label>Personal Email: <input type="email" name="EMAIL" required></label>
-                <label>First Name: <input type="text" name="FNAME" required></label>
-                <label>Middle Initial: <input type="text" name="MI" required></label>
-                <label>Last Name: <input type="text" name="LNAME" required></label>
-                <label>Gender: <select name="GENDER" required>
+                <label>Personal Email: <input type="email" name="INSTR_EMAIL" required></label>
+                <label>First Name: <input type="text" name="INSTR_FNAME" required></label>
+                <label>Middle Initial: <input type="text" name="INSTR_MI" required></label>
+                <label>Last Name: <input type="text" name="INSTR_LNAME" required></label>
+                <label>Gender: <select name="INSTR_GENDER" required>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select></label>
-                <label>Date of Birth: <input type="date" name="BDAY" required></label>
+                <label>Date of Birth: <input type="date" name="INSTR_BDAY" required></label>
+                <label>Address: <input type="text" name="INSTR_ADDRESS" required></label>
+                <label>Contact: <input type="text" name="INSTR_CONTACT" required maxlength="11"></label>
             </fieldset>
-            <fieldset>
+            <!-- <fieldset>
                 <legend>Select your assigned department: </legend>
                 <label>Department of: <select type="number" name="DEPT_ID" onchange="showDiv(this)" required>
                         <option value="">--Choose--</option>
@@ -74,13 +77,15 @@ $conn->close();
                         <option id="IT" value="2">Information Technology</option>
                         <option id="IS" value="3">Information Systems</option>
                     </select></label>
-            </fieldset>
+            </fieldset> -->
             <fieldset>
                 <legend>Enter your desired password:</legend>
-                <label>Password: <input type="password" name="PASSWORD" required></label>
+                <label>Password: <input type="password" name="INSTR_PASSWORD" required></label>
+                <label>Confirm Password: <input type="password" name="INSTR_PASSWORD_2" required></label>
             </fieldset>
+            <!-- whut para san to haha design? -->
             <p class="staff-notif">After registration, kindly wait for our system administrators to validate your account.</p>
-            <input type="submit" value="Proceed &#8594" class="btn">
+            <input type="submit" value="Proceed &#8594" class="btn" name="reg-instr">
         </form>
     </div>
 </body>
