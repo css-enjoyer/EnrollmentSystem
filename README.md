@@ -23,7 +23,7 @@
 	- [ ] Drop a student enrolled in instructor's course
 	- [ ] Ensure no duplication and catch errors
 - [ ] Finish admin
-	- [ ] Edit all tables
-	- [ ] Add all tables
-	- [ ] Drop all tables
+	- [x] Edit all tables
+	- [x] Add all tables
+	- [x] Drop all tables
 	- [ ] Ensure no duplication and catch errors

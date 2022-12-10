@@ -83,7 +83,7 @@ $conn->close();
 
                 
                 <?php while ($instr_sql_row = $instr_sql_result->fetch_assoc()) {            ?>
-                    <form action="TestFunctionality.php" id="InstrFunctionality" method="POST">
+                    <form action="AdminFunctionality.php" id="InstrFunctionality" method="POST">
                         <tr>
                             <!-- FOR DELETE -->
                             <input type="hidden" name="INSTR_ID" value="<?= $instr_sql_row['INSTR_ID'] ?>" >
@@ -98,14 +98,14 @@ $conn->close();
                             <td><?php echo $instr_sql_row['INSTR_CONTACT']; ?></td>
                             <td><?php echo $instr_sql_row['INSTR_EMAIL']; ?></td>
                             <td>
+                                <button name="updateInstr" formaction="InstructorUpdate.php" class="updateinfo-btn">Update Professor</button>
                                 <button name="removeInstr" class="removecrs-btn">Fire Professor?</button>
                             </td>
                         </tr>
                     </form>
                 <?php   }                                               ?>
-                
             </table>
-            <button form="InstrFunctionality" formaction="TestInstrUpdate.php" name="addInstr" class="enrollcrs-btn">Authorize New Staff +</button>
+            <button form="InstrFunctionality" formaction="InstructorAdd.php" name="addInstr" class="enrollcrs-btn">Authorize New Staff +</button>
         </fieldset>
         
         <!-- STUDENT TABLE -->
@@ -127,7 +127,7 @@ $conn->close();
                 </tr>
                 
                 <?php while ($stu_sql_row = $stu_sql_result->fetch_assoc()) {            ?>
-                    <form action="TestFunctionality.php" id="StuFunctionality" method="POST">
+                    <form action="AdminFunctionality.php" id="StuFunctionality" method="POST">
                         <tr>
                             <!-- FOR DELETE -->
                             <input type="hidden" name="STU_ID" value="<?= $stu_sql_row['STU_ID'] ?>" >
@@ -143,12 +143,15 @@ $conn->close();
                             <td><?php echo $stu_sql_row['STU_TYPE']; ?></td>
                             <td><?php echo $stu_sql_row['STU_EMAIL']; ?></td>
                             
-                            <td><button name="removeStu" class="removecrs-btn">Drop Student</button></td>
+                            <td>
+                                <button name="updateStu" formaction="StudentUpdate.php" class="updateinfo-btn">Update Student</button>
+                                <button name="removeStu" class="removecrs-btn">Drop Student</button>
+                            </td>
                         </tr>
                     </form>
                 <?php   }                                               ?>
             </table>
-            <button form="StuFunctionality" formaction="TestStuUpdate.php" name="addStu" class="enrollcrs-btn">Enroll New Student +</button>
+            <button form="StuFunctionality" formaction="StudentAdd.php" name="addStu" class="enrollcrs-btn">Enroll New Student +</button>
         </fieldset>
 
         <!-- COURSES TABLE -->
@@ -163,7 +166,7 @@ $conn->close();
                     <th>Actions</th>
                 </tr>
                 <?php while ($crs_sql_row = $crs_sql_result->fetch_assoc()) {            ?>
-                    <form action="TestFunctionality.php" id="CrsFunctionality" method="POST">
+                    <form action="AdminFunctionality.php" id="CrsFunctionality" method="POST">
                         <tr>
                             <!-- FOR DELETE -->
                             <input type="hidden" name="CRS_ID" value="<?= $crs_sql_row['CRS_ID'] ?>" >
@@ -172,13 +175,15 @@ $conn->close();
                             <td><?php echo $crs_sql_row['CRS_NAME']; ?></td>
                             <td><?php echo $crs_sql_row['CRS_UNIT']; ?></td>
                             <td><?php echo $crs_sql_row['INSTR_ID']; ?></td>
-
-                            <td><button name="removeCrs" class="removecrs-btn">Delete Course Entry</button></td>
+                            <td>
+                                <button name="updateCrs" formaction="CourseUpdate.php" class="updateinfo-btn">Update Course Entry</button>
+                                <button name="removeCrs" class="removecrs-btn">Delete Course Entry</button>
+                            </td>
                         </tr>
                     </form>
                 <?php   }                                               ?>
             </table>
-            <button form="CrsFunctionality" formaction="TestCrsUpdate.php" name="addCrs" class="enrollcrs-btn">Add New Course +</button>
+            <button form="CrsFunctionality" formaction="CourseAdd.php" name="addCrs" class="enrollcrs-btn">Add New Course +</button>
         </fieldset>
 
         <!-- ENROLLMENT TABLE -->
@@ -192,7 +197,7 @@ $conn->close();
                     <th>Actions</th>
                 </tr>
                 <?php while ($enrl_sql_row = $enrl_sql_result->fetch_assoc()) {            ?>
-                    <form action="TestFunctionality.php" id="EnrlFunctionality" method="POST">
+                    <form action="AdminFunctionality.php" id="EnrlFunctionality" method="POST">
                         <tr>
                             <!-- FOR DELETE -->
                             <input type="hidden" name="ENRL_ID" value="<?= $enrl_sql_row['ENRL_ID'] ?>" >
@@ -201,12 +206,15 @@ $conn->close();
                             <td><?php echo $enrl_sql_row['STU_ID']; ?></td>
                             <td><?php echo $enrl_sql_row['CRS_ID']; ?></td>
                             <!-- TODO: BUTTON NOT FUNCTIONAL -->
-                            <td><button name="removeEnrl" class="removecrs-btn">Delete Enrollment</button></td>
+                            <td>
+                                <button name="updateEnrl" formaction="EnrollmentUpdate.php" class="updateinfo-btn">Update Enrollment</button>
+                                <button name="removeEnrl" class="removecrs-btn">Delete Enrollment</button>
+                            </td>
                         </tr>
                     </form>
                 <?php   }                                               ?>
             </table>
-            <button form="EnrlFunctionality" formaction="TestEnrlUpdate.php" name="addEnrl" class="enrollcrs-btn">Enroll Student +</button>
+            <button form="EnrlFunctionality" formaction="EnrollmentAdd.php" name="addEnrl" class="enrollcrs-btn">Enroll Student +</button>
         </fieldset>
 
     </div>
