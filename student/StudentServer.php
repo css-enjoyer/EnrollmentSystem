@@ -1,6 +1,8 @@
 <?php
 require_once(__DIR__ . './../config.php');
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 // initialize variable in case of duplication
 $STU_EMAIL = "";
@@ -68,6 +70,7 @@ if (isset($_POST['login_stu'])) {
             header('location: StudentHomepage.php');
         } else {
             array_push($errors, "Wrong username/password combination");
+            header('location: ./../Landing.php');
         }
     }
 }

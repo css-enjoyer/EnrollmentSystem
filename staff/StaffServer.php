@@ -66,6 +66,7 @@ if (isset($_POST['login-instr'])) {
         if (mysqli_num_rows($results) == 1) {
             $_SESSION['INSTR_EMAIL'] = $INSTR_EMAIL;
             $_SESSION['success'] = "You are now logged in";
+            echo $INSTR_EMAIL;
             header('location: StaffManagement.php');
         } else {
             array_push($errors, "Wrong username/password combination");

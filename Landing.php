@@ -65,13 +65,12 @@
         <!-- POP-UP FORMS -->
         <form method="POST" name="myForm" id="stuform" class="loginform">
             <h2>Student Login</h2>
-            <?php // $errors = array("error lul"); include('student/StudentErrors.php'); 
-            ?>
+            <?php include(__DIR__ . '/student/StudentErrors.php'); ?>
             <label>Student Email: <input type="text" id="userName" name="STU_EMAIL" required></label>
             <label>Password: <input type="password" id="passWord" name="STU_PASSWORD" required></label>
             <div class="formBtns">
                 <button onClick="closeStudentForm()">Cancel</button>
-                <input formaction="student/StudentHomepage.php" type="submit" name="login_stu">
+                <input formaction="student/StudentServer.php" type="submit" name="login_stu">
             </div>
         </form>
 
@@ -81,7 +80,7 @@
             <label>Password: <input type="password" id="passWord" name="INSTR_PASSWORD" required></label>
             <div class="formBtns">
                 <button onClick="closeStaffForm()">Cancel</button>
-                <input formaction="staff/StaffManagement.php" type="submit" name="login-instr">
+                <input formaction="staff/StaffServer.php" type="submit" name="login-instr">
             </div>
         </form>
 
