@@ -133,6 +133,7 @@ $conn->close();
     }
 
     function closeInfoForm() {
+        event.preventDefault();
         document.getElementById("updateinfoform").style.display = "none";
     }
 

@@ -117,7 +117,7 @@ if (isset($_POST['add-stu-course'])) {
         // echo $add_enrollment_query . "<br><br><br>";
     }
     $_SESSION['message'] = "Courses enrolled!";
-    header('location: StudentHomepage.php');
+    // header('location: StudentHomepage.php');
 }
 
 // *********** DELETE STUDENT COURSE **********
@@ -127,7 +127,7 @@ if (isset($_POST['del-stu-course'])) {
     $del_enrollment_query = "DELETE FROM school.enrollment WHERE ENRL_ID = $ENRL_ID";
     mysqli_query($db, $del_enrollment_query);
     $_SESSION['message'] = "Courses dropped!";
-    header('location: StudentHomepage.php');
+    // header('location: StudentHomepage.php');
 }
 
 // add db closs maybe?
