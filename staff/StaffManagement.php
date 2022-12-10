@@ -1,5 +1,18 @@
 <?php
-require ('./../config.php');
+require(__DIR__ . './../config.php');
+// include('StaffServer.php');
+if (!isset($_SESSION)) {
+    session_start();
+}
+if (!isset($_SESSION['INSTR_EMAIL'])) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: ./../Landing.php');
+}
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['INSTR_EMAIL']);
+    header("location: ./../Landing.php");
+}
 $conn = new mysqli(DB_HOST, DB_USER, DB_PWD, DB_NAME);
 
 if ($conn->connect_error) {
@@ -67,38 +80,6 @@ $INSTR_CONTACT = $instr_profile_row['CONTACT'];
 $INSTR_EMAIL = $instr_profile_row['EMAIL'];
 $INSTR_ADDRESS = $instr_profile_row['ADDRESS'];
 
-
-/* OLD QUERIES
-$sql = "SELECT * FROM school.student";
-$result = $conn->query($sql);
-
-$info_query = "SELECT * FROM student AS s
-	INNER JOIN enrollment AS e
-		ON s.STU_ID = e.STU_ID AND s.ENRL_YEAR = e.ENRL_YEAR
-	INNER JOIN class AS c
-		ON e.CLASS_ID = c.CLASS_ID
-	INNER JOIN course AS co
-		ON c.CRS_ID = co.CRS_ID
-	INNER JOIN instructor AS i
-		ON c.INSTR_ID = i.INSTR_ID
-    INNER JOIN department AS d
-		ON s.DEPT_ID = d.DEPT_ID
-	INNER JOIN specialization AS sp
-		ON s.SPEC_ID = sp.SPEC_ID
-			WHERE i.INSTR_ID = $INSTR_ID AND i.EMPL_YEAR = $EMPL_YEAR;";
-
-$info_query_result = $conn->query($info_query);
-$info_query_row = $info_query_result->fetch_assoc();
-
-$INSTR_EMAIL = $info_query_row["INSTR_EMAIL"];
-$INSTR_FNAME = $info_query_row["INSTR_FNAME"];
-$INSTR_MI = $info_query_row["INSTR_MI"];
-$INSTR_LNAME = $info_query_row["INSTR_LNAME"];
-$INSTR_GENDER = $info_query_row["INSTR_GENDER"];
-$INSTR_BDAY = $info_query_row["INSTR_BDAY"];
-$DEPT_NAME = $info_query_row["DEPT_NAME"];
-*/
-
 $conn->close();
 ?>
 
@@ -115,6 +96,28 @@ $conn->close();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
 </head>
+<script>
+    function openInfoForm() {
+        // event.preventDefault();
+        document.getElementById("updateinfoform").style.display = "flex";
+    }
+
+    function closeInfoForm() {
+        // event.preventDefault();
+        document.getElementById("updateinfoform").style.display = "none";
+    }
+
+    function openEnrollForm() {
+        event.preventDefault();
+        document.getElementById("enrollform").style.display = "flex";
+    }
+
+    function closeEnrollForm() {
+        // prevents button from sending a postback that resets the page, idk ung update stu info di kailangan ng ganito?! related sa server handling...
+        event.preventDefault();
+        document.getElementById("enrollform").style.display = "none";
+    }
+</script>
 
 <body>
     <div class="navsection">
@@ -124,13 +127,14 @@ $conn->close();
         <ul>
             <li>Notifications</li>
             <li>Messages</li>
-            <li><a href="./../Landing.php">Logout</a></li>
+            <li><a href="StaffManagement.php?logout=1">Logout</a></li>
         </ul>
     </div>
     <div class="mainsection">
         <h1>System Dashboard</h1>
         <h1><?= $INSTR_NAME ?>'s Profile</h1>
         <fieldset>
+            <legend>Instructor Info</legend>
             <table>
                 <tr>
                     <th>Instructor ID</th>
@@ -153,7 +157,7 @@ $conn->close();
                     <td><?= $INSTR_EMAIL ?></td>
                     <td><?= $INSTR_ADDRESS ?></td>
                     <td>
-                        <button onclick="" class="updateinfo-btn">Update</button>
+                        <button onclick="openInfoForm()" class="updateinfo-btn">Update</button>
                     </td>
                 </tr>
 
@@ -188,6 +192,23 @@ $conn->close();
         </fieldset>
 
     </div>
+
+
+
+
+    <!-- Update Info Form Popup -->
+    <form action="StaffServer.php" method="POST" name="myForm" id="updateinfoform">
+        <fieldset>
+            <legend>Enter your personal information: </legend>
+            <label>Address: <input type="text" name="UPDATE_INSTR_ADDRESS" required></label>
+            <label>Contact Number: <input type="text" name="UPDATE_INSTR_CONTACT" required maxlength="11"></label>
+            <!-- SUBMIT && CLOSE -->
+            <div class="formBtns">
+                <button onclick="closeInfoForm()" class="update-btn cancel">Close</button>
+                <input type="submit" name="update-instr-info" value="Update" class="update-btn">
+            </div>
+        </fieldset>
+    </form>
 </body>
 
 </html>

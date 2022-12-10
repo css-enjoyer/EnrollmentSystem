@@ -53,7 +53,7 @@ $conn->close();
     </div>
     <div class="mainsection">
         <h1>Join the thomasian team!</h1>
-        <form action="StaffAccountCreation.php" method="POST">
+        <form action="StaffServer.php" method="POST">
             <?php include('StaffErrors.php'); ?>
             <fieldset>
                 <legend>Enter your personal information: </legend>
@@ -80,7 +80,7 @@ $conn->close();
             </fieldset> -->
             <fieldset>
                 <legend>Enter your desired password:</legend>
-                <label>Password: <input type="password" name="INSTR_PASSWORD" required></label>
+                <label>Password: <input type="password" name="INSTR_PASSWORD_1" required></label>
                 <label>Confirm Password: <input type="password" name="INSTR_PASSWORD_2" required></label>
             </fieldset>
             <!-- whut para san to haha design? -->

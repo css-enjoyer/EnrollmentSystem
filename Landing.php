@@ -35,31 +35,34 @@
     function openAdminForm() {
         document.getElementById("adminform").style.display = "flex";
     }
+
     function closeAdminForm() {
         document.getElementById("adminform").style.display = "none";
     }
-    </script>
-    <body>
-        <div class="navsection">
-            <div class="logo-container">
-                <img src="images/ustseal.png" width="50px">
-            </div>
-            <ul>
-                <li>Notifications</li>
-                <li>Messages</li>
-                <li><button onclick="openAdminForm()" class="loginbtn">Admin Login</button></li>
-                <li><button onclick="openStaffForm()" class="loginbtn">Staff Login</button></li>
-                <li><button onclick="openStudentForm()" class="loginbtn">Student Login</button></li>
-            </ul>
 </script>
+
+<body>
+    <div class="navsection">
+        <div class="logo-container">
+            <img src="images/ustseal.png" width="50px">
+        </div>
+        <ul>
+            <li>Notifications</li>
+            <li>Messages</li>
+            <li><button onclick="openAdminForm()" class="loginbtn">Admin Login</button></li>
+            <li><button onclick="openStaffForm()" class="loginbtn">Staff Login</button></li>
+            <li><button onclick="openStudentForm()" class="loginbtn">Student Login</button></li>
+        </ul>
+        </script>
     </div>
     <div class="mainsection">
         <!-- this should show errors -->
-        <?php $errors = array();
-        include('student/StudentErrors.php'); ?>
+        <?php include('student/StudentErrors.php'); ?>
+        <?php include('staff/StaffErrors.php'); ?>
         <a href="student/StudentAccountCreation.php" class="enroll-btn">Enroll_Now</a>
         <p class="staffcrt-btn">Staff member? Click <a href="staff/StaffAccountCreation.php">here</a> for the staff portal.</p>
 
+        <!-- POP-UP FORMS -->
         <form method="POST" name="myForm" id="stuform" class="loginform">
             <h2>Student Login</h2>
             <?php // $errors = array("error lul"); include('student/StudentErrors.php'); 
@@ -72,40 +75,27 @@
             </div>
         </form>
 
-
-            <!-- POP-UP FORMS -->
-            <form method="POST" name="myForm" id="stuform" class="loginform">
-            <h2>Student Login</h2>
-            <?php // $errors = array("error lul"); include('student/StudentErrors.php'); 
-            ?>
-            <label>Student Email: <input type="text" id="userName" name="STU_EMAIL" required></label>
-            <label>Password: <input type="password" id="passWord" name="STU_PASSWORD" required></label>
+        <form method="POST" name="myForm" id="stafform" class="loginform">
+            <h2>Staff Login</h2>
+            <label>Username: <input type="text" id="userName" name="INSTR_EMAIL" required></label>
+            <label>Password: <input type="password" id="passWord" name="INSTR_PASSWORD" required></label>
             <div class="formBtns">
-                <button onClick="closeStudentForm()">Cancel</button>
-                <input formaction="student/StudentHomepage.php" type="submit" name="login_stu">
+                <button onClick="closeStaffForm()">Cancel</button>
+                <input formaction="staff/StaffManagement.php" type="submit" name="login-instr">
             </div>
-            </form>
+        </form>
 
-            <form method="POST" name="myForm" id="stafform" class="loginform">
-                <h2>Staff Login</h2>
-                <label>Username: <input type="text" id="userName" name="userName" required></label>
-                <label>Password: <input type="password" id="passWord" name="passWord" required></label>
-                <div class="formBtns">
-                    <button onClick="closeStaffForm()">Cancel</button>
-                    <input formaction="staff/StaffManagement.php" type="submit">
-                </div>
-            </form>
+        <form method="POST" name="myForm" id="adminform" class="loginform">
+            <h2>Admin Login</h2>
+            <label>Username: <input type="text" id="userName" name="userName" required></label>
+            <label>Password: <input type="password" id="passWord" name="passWord" required></label>
+            <div class="formBtns">
+                <button onClick="closeAdminForm()">Cancel</button>
+                <input formaction="admin/DatabaseAdministration.php" type="submit">
+            </div>
+        </form>
 
-            <form method="POST" name="myForm" id="adminform" class="loginform">
-                <h2>Admin Login</h2>
-                <label>Username: <input type="text" id="userName" name="userName" required></label>
-                <label>Password: <input type="password" id="passWord" name="passWord" required></label>
-                <div class="formBtns">
-                    <button onClick="closeAdminForm()">Cancel</button>
-                    <input formaction="admin/DatabaseAdministration.php" type="submit">
-                </div>
-            </form>
-            
-        </div>
-    </body>
+    </div>
+</body>
+
 </html>

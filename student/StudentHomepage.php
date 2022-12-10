@@ -11,6 +11,7 @@ if (!isset($_SESSION['STU_EMAIL'])) {
 if (isset($_GET['logout'])) {
     session_destroy();
     unset($_SESSION['STU_EMAIL']);
+    unset($_SESSION['STU_ID']);
     header("location: ./../Landing.php");
 }
 
